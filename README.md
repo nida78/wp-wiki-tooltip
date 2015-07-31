@@ -1,10 +1,16 @@
 # WP Wiki Tooltip
 Contributors: nida78
+
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
+
 Requires at least: 3.0
+
 Tested up to: 4.2.3
+
 Stable tag: 0.5
+
 Donate link: http://http://n1da.net/specials/wp-wiki-preview/spenden/
+
 License: GPLv2 or later
 
 Adds explaining tooltips querying their content from a MediaWiki installation, e.g. Wikipedia.org.

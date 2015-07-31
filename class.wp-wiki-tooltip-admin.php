@@ -17,7 +17,7 @@ class WP_Wiki_Tooltip_Admin {
     public function add_action_links( $links ) {
         return array_merge(
             $links,
-            array( '<a href="' . admin_url( 'options-general.php?page=wiki-tooltip-settings' ) . '">' . __( 'Settings', 'wp-wiki-tooltip' ) . '</a>', )
+            array( '<a href="' . admin_url( 'options-general.php?page=wp-wiki-tooltip-settings' ) . '">' . __( 'Settings', 'wp-wiki-tooltip' ) . '</a>', )
         );
     }
 

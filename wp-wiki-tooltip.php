@@ -12,13 +12,19 @@ Text Domain: wp-wiki-tooltip
 */
 
 include_once('class.wp-wiki-tooltip.php');
+include_once('class.wp-wiki-tooltip-admin.php');
 
 if( array_key_exists( 'action', $_REQUEST ) && $_REQUEST[ 'action' ] == 'ajax-get' ) {
-	WP_Wiki_Tooltip::ajax_get_wiki_page();
+	$wp_wiki = new WP_Wiki_Tooltip( true );
+	$wp_wiki->ajax_get_wiki_page( ( array_key_exists( 'wid', $_REQUEST ) ) ? $_REQUEST[ 'wid' ] : -1 );
 } else {
-	if (!is_admin()) {
-		add_action('wp_enqueue_scripts', array('WP_Wiki_Tooltip', 'init'));
-		add_action('wp_footer', array('WP_Wiki_Tooltip', 'add_wiki_container'));
-		add_shortcode('wiki', array('WP_Wiki_Tooltip', 'do_wiki_shortcode'));
+	load_plugin_textdomain( 'wp-wiki-tooltip', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+	if( is_admin() ) {
+		/*** backend usage ***/
+		new WP_Wiki_Tooltip_Admin( plugin_basename( __FILE__ ) );
+	} else {
+		/*** frontend usage ***/
+		new WP_Wiki_Tooltip();
 	}
 }

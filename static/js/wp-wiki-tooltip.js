@@ -11,7 +11,7 @@ function add_wiki_box( id, wid, title ) {
 
         theme: wp_wiki_tooltip.tooltip_theme,
 
-        content: create_tooltip_message( title, "" ),
+        content: create_tooltip_message( 'init', title ),
 
         functionBefore: function( origin, continueTooltip ) {
 
@@ -23,7 +23,11 @@ function add_wiki_box( id, wid, title ) {
                     url: wp_wiki_tooltip.wiki_plugin_url + '/wp-wiki-tooltip.php?action=ajax-get&wid=' + wid,
                     success: function( data ) {
                         data = jQuery.parseJSON( data );
-                        origin.tooltipster( 'content', create_tooltip_message( data[ 'title' ], data[ 'content' ] ) ).data( 'ajax', 'cached' );
+                        if( data[ 'code' ] == -1 ) {
+                            origin.tooltipster( 'content', create_tooltip_message( 'err', wp_wiki_tooltip.error_title, wp_wiki_tooltip.page_not_found_message ) ).data( 'ajax', 'cached' );
+                        } else {
+                            origin.tooltipster( 'content', create_tooltip_message( 'ok', data[ 'title' ], data[ 'content' ] ) ).data( 'ajax', 'cached' );
+                        }
                     }
                 });
             }
@@ -31,12 +35,18 @@ function add_wiki_box( id, wid, title ) {
     });
 }
 
-function create_tooltip_message( title, message ) {
-    if( message == '' ) {
-        message = '<img src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
-        footer = '';
+function create_tooltip_message( type, title, message ) {
+    var tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head"><h1>' + title + '</h1></div>';
+
+    if( type == 'init' ) {
+        tooltip_html += '<img src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
     } else {
-        footer = wp_wiki_tooltip.footer_text;
+        tooltip_html += '<div class="content">' + message + '</div>';
     }
-    return jQuery( '<div class="wiki-tooltip-balloon"><div class="head"><h1>' + title + '</h1></div><div class="content">' + message + '</div><div class="footer">' + footer + '</div></div></span>' );
+
+    if( type == 'ok' ) {
+        tooltip_html += '<div class="footer">' + wp_wiki_tooltip.footer_text + '</div></div></span>';
+    }
+
+    return jQuery( tooltip_html );
 }

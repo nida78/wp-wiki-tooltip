@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Wiki Tooltip 0.1\n"
-"POT-Creation-Date: 2015-07-30 22:19+0200\n"
+"POT-Creation-Date: 2015-08-01 00:18+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,24 +12,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;__ngettext:1,2;_n:1,2;"
-"__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;"
-"_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
+"_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Textdomain-Support: yes\n"
 "X-Generator: Poedit 1.8.3\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../class.wp-wiki-tooltip.php:33
+#: ../class.wp-wiki-tooltip-admin.php:14 ../class.wp-wiki-tooltip-admin.php:31
+msgid "Settings for Wiki-Tooltips"
+msgstr "Einstellungen für die Wiki-Tooltips"
+
+#: ../class.wp-wiki-tooltip-admin.php:14
+msgid "Wiki-Tooltips"
+msgstr "Wiki-Tooltips"
+
+#: ../class.wp-wiki-tooltip-admin.php:20
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: ../class.wp-wiki-tooltip-admin.php:38
+msgid "URL of Wiki"
+msgstr "URL des Wiki"
+
+#: ../class.wp-wiki-tooltip.php:46
 msgid "Just click to open wiki page..."
 msgstr "Einfach klicken, um diese Wiki-Seite zu öffnen..."
 
-#: ../class.wp-wiki-tooltip.php:51
+#: ../class.wp-wiki-tooltip.php:47 ../class.wp-wiki-tooltip.php:111
 msgid "Error!"
 msgstr "Fehler!"
 
-#: ../class.wp-wiki-tooltip.php:52
+#: ../class.wp-wiki-tooltip.php:48
 msgid "Sorry, but we were not able to find this page :("
 msgstr "Leider kann diese Seite nicht gefunden werden :("
+
+#~ msgid "Settings for Wiki-Tooltip"
+#~ msgstr "Einstellungen für die Wiki-Tooltips"
 
 #~ msgid "Click to open original wiki page..."
 #~ msgstr "Einfach klicken, um die Wiki-Seite zu öffnen..."

@@ -1,0 +1,27 @@
+/**
+ * Created by nida78 on 28.07.2015.
+ */
+
+a.wiki-tooltip {
+    font-style: italic;
+}
+
+div.wiki-tooltip-balloon div.head {
+    border-bottom: 1px solid white;
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+}
+
+div.tooltipster-light div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #cccccc; }
+div.tooltipster-noir div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #2c2c2c; }
+div.tooltipster-punk div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #f71169; }
+div.tooltipster-shadow div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #808080; }
+
+div.wiki-tooltip-balloon div.content {
+}
+
+div.wiki-tooltip-balloon div.footer {
+    margin-top: 10px;
+    font-style: italic;
+    font-weight: bold;
+}

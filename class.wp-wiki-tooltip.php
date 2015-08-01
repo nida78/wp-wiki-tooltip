@@ -4,8 +4,6 @@
  */
 class WP_Wiki_Tooltip {
 
-	const WIKI_URL = 'https://en.wikipedia.org';
-
 	const WIKI_API_PATH = '/w/api.php';
 
 	const WIKI_API_INFO_QUERY = 'action=query&prop=info&inprop=url&redirects=&format=json&titles=';
@@ -26,7 +24,8 @@ class WP_Wiki_Tooltip {
 			add_shortcode( 'wiki', array( $this, 'do_wiki_shortcode' ) );
 		}
 
-		$this->wiki_url = get_option( 'wp-wiki-tooltip_wiki-url', self::WIKI_URL );
+		global $wp_wiki_tooltip_default_options;
+		$this->wiki_url = get_option( 'wp-wiki-tooltip_wiki-url', $wp_wiki_tooltip_default_options[ 'wiki-url'] );
 		$this->shortcode_count = 1;
 	}
 

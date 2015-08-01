@@ -11,6 +11,7 @@ License: GPLv2 or later
 Text Domain: wp-wiki-tooltip
 */
 
+include_once( 'config.php' );
 include_once('class.wp-wiki-tooltip.php');
 include_once('class.wp-wiki-tooltip-admin.php');
 

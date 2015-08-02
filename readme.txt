@@ -22,7 +22,11 @@ Main features of the current version are:
 
 = Can I use any Wiki installation as base for my tooltips? =
 
-Sure, as long as the used installation provides an API structured like the [API of MediaWiki](https://www.mediawiki.org/wiki/API:Main_page "see API of MediaWiki") it will work perfectly. You can use one of the public Wikipedias or setup your own Wiki URL.
+Sure, as long as the used installation provides an API structured like the [API of MediaWiki](https://www.mediawiki.org/wiki/API:Main_page "see API of MediaWiki") it will work perfectly! You can use one of the public Wikipedias or setup your own Wiki URL.
+
+= Am I able to style the links to Wiki pages in another way than all other links in the blog? =
+
+Yes, you can define extra CSS style properties that are used at all links to Wiki pages!
 
 == Installation ==
 

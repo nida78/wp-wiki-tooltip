@@ -7,7 +7,7 @@ Requires at least: 3.0
 
 Tested up to: 4.2.3
 
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Donate link: http://http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -49,14 +49,19 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 
 # Changelog
 
-## 1.0
+## 1.0.1
+*Release Date - August 5th, 2015*
+
+* Minor bug-fix due to compatibility problems with older PHP versions
+
+## 1.0.0
 *Release Date - August 3rd, 2015*
 
 * Option page for WordPress backend added
 * Graphical assets for WordPress plugin repository added
 * Complete German translation added
 
-## 0.5
+## 0.5.0
 *Release Date - July 31st, 2015*
 
 * Initial release

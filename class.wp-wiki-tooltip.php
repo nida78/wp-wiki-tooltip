@@ -99,7 +99,8 @@ class WP_Wiki_Tooltip {
 				true
 			);
 
-			$wiki_page_id = array_keys( $wiki_data[ 'query' ][ 'pages' ] )[ 0 ];
+			$wiki_pages = array_keys( $wiki_data[ 'query' ][ 'pages' ] );
+			$wiki_page_id = $wiki_pages[ 0 ];
 
 			if( $wiki_page_id > -1 ) {
 				$trans_wiki_data = array(

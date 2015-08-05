@@ -4,7 +4,7 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
 Tested up to: 4.2.3
 Stable tag: 1.0.1
-Donate link: http://http://n1da.net/specials/wp-wiki-tooltip/spenden/
+Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later
 
 Adds explaining tooltips querying their content from a MediaWiki installation, e.g. Wikipedia.org.

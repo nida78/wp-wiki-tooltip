@@ -9,7 +9,7 @@ Tested up to: 4.2.3
 
 Stable tag: 1.0.1
 
-Donate link: http://http://n1da.net/specials/wp-wiki-tooltip/spenden/
+Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
 License: GPLv2 or later
 

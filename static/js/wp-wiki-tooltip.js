@@ -18,16 +18,19 @@ function add_wiki_box( id, wid, title ) {
             continueTooltip();
 
             if( origin.data( 'ajax' ) !== 'cached' ) {
-                jQuery.ajax({
-                    type: 'GET',
-                    url: wp_wiki_tooltip.wiki_plugin_url + '/wp-wiki-tooltip.php?action=ajax-get&wid=' + wid,
-                    success: function( data ) {
-                        data = jQuery.parseJSON( data );
-                        if( data[ 'code' ] == -1 ) {
-                            origin.tooltipster( 'content', create_tooltip_message( 'err', wp_wiki_tooltip.error_title, wp_wiki_tooltip.page_not_found_message ) ).data( 'ajax', 'cached' );
-                        } else {
-                            origin.tooltipster( 'content', create_tooltip_message( 'ok', data[ 'title' ], data[ 'content' ] ) ).data( 'ajax', 'cached' );
-                        }
+
+                var request_data = {
+                    'action': 'get_wiki_page',
+                    'wid': wid,
+                    'wurl': wp_wiki_tooltip.wiki_url
+                };
+
+                jQuery.get( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {
+                    data = jQuery.parseJSON( response_data );
+                    if( data[ 'code' ] == -1 ) {
+                        origin.tooltipster( 'content', create_tooltip_message( 'err', wp_wiki_tooltip.error_title, wp_wiki_tooltip.page_not_found_message ) ).data( 'ajax', 'cached' );
+                    } else {
+                        origin.tooltipster( 'content', create_tooltip_message( 'ok', data[ 'title' ], data[ 'content' ] ) ).data( 'ajax', 'cached' );
                     }
                 });
             }

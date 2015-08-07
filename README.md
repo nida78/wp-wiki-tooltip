@@ -5,9 +5,9 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 4.2.3
+Tested up to: 4.2.4
 
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -48,6 +48,13 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 3. See nice and helpful tooltips
 
 # Changelog
+
+## 1.1.0
+*Release Date - August 7th, 2015*
+
+* refactored the AJAX call to load tooltip content due to the rules of [WordPress AJAX API](https://codex.wordpress.org/AJAX_in_Plugins)
+* added error handling if settings reset fails
+
 
 ## 1.0.1
 *Release Date - August 5th, 2015*

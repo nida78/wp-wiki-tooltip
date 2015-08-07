@@ -14,15 +14,10 @@ class WP_Wiki_Tooltip {
 
 	private $shortcode_count;
 
-	public function __construct( $ajax_call = false ) {
-		if( $ajax_call == true ) {
-			$wp_path = explode( 'wp-content', dirname( __FILE__ ) );
-			require( $wp_path[ 0 ] . 'wp-load.php' );
-		} else {
-			add_action( 'wp_enqueue_scripts', array( $this, 'init' ) );
-			add_action( 'wp_footer', array( $this, 'add_wiki_container' ) );
-			add_shortcode( 'wiki', array( $this, 'do_wiki_shortcode' ) );
-		}
+	public function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'init' ) );
+		add_action( 'wp_footer', array( $this, 'add_wiki_container' ) );
+		add_shortcode( 'wiki', array( $this, 'do_wiki_shortcode' ) );
 
 		$this->options = get_option( 'wp-wiki-tooltip-settings' );
 		if( $this->options == false ) {
@@ -38,11 +33,13 @@ class WP_Wiki_Tooltip {
 		wp_enqueue_style( 'tooltipster-noir-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-noir.css', __FILE__ ), array(), '3.0', 'all' );
 		wp_enqueue_style( 'tooltipster-punk-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-punk.css', __FILE__ ), array(), '3.0', 'all' );
 		wp_enqueue_style( 'tooltipster-shadow-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-shadow.css', __FILE__ ), array(), '3.0', 'all' );
-		wp_enqueue_style( 'wp-wiki-tooltip-css', plugins_url( 'static/css/wp-wiki-tooltip.css', __FILE__ ), array( 'tooltipster-css' ), '1.0', 'all' );
+		wp_enqueue_style( 'wp-wiki-tooltip-css', plugins_url( 'static/css/wp-wiki-tooltip.css', __FILE__ ), array( 'tooltipster-css' ), '1.1.0', 'all' );
 
 		wp_enqueue_script( 'tooltipster-js', plugins_url( 'static/external/tooltipster/js/jquery.tooltipster.min.js', __FILE__ ), array( 'jquery' ), '3.0', false );
-		wp_register_script( 'wp-wiki-tooltip-js', plugins_url( 'static/js/wp-wiki-tooltip.js', __FILE__ ), array( 'tooltipster-js' ), '1.0', false );
+		wp_register_script( 'wp-wiki-tooltip-js', plugins_url( 'static/js/wp-wiki-tooltip.js', __FILE__ ), array( 'tooltipster-js' ), '1.1.0', false );
 		wp_localize_script( 'wp-wiki-tooltip-js', 'wp_wiki_tooltip', array(
+			'wiki_url' => $this->options[ 'wiki-url' ],
+			'wp_ajax_url' => admin_url( 'admin-ajax.php' ),
 			'wiki_plugin_url' => plugin_dir_url( __FILE__ ),
 			'tooltip_theme' => 'tooltipster-' . $this->options[ 'theme' ],
 			'footer_text' => __( 'Just click to open wiki page...', 'wp-wiki-tooltip' ),
@@ -56,13 +53,17 @@ class WP_Wiki_Tooltip {
 		echo '<div id="wiki-container"></div>';
 	}
 
-	public function ajax_get_wiki_page( $wiki_id ) {
+	public static function ajax_get_wiki_page() {
+
+		$wiki_id = $_REQUEST[ 'wid' ];
+		$wiki_url = $_REQUEST[ 'wurl' ];
+
 		if( $wiki_id == -1 ) {
 			$result = array( 'code' => -1 );
 		} else {
 
 			$wiki_data = json_decode(
-				file_get_contents( $this->options[ 'wiki-url' ] . self::WIKI_API_PATH . '?' . self::WIKI_API_PAGE_QUERY . $wiki_id ),
+				file_get_contents( $wiki_url . self::WIKI_API_PATH . '?' . self::WIKI_API_PAGE_QUERY . $wiki_id ),
 				true
 			);
 
@@ -80,6 +81,7 @@ class WP_Wiki_Tooltip {
 		}
 
 		echo json_encode( $result );
+		wp_die();
 	}
 
 	public function do_wiki_shortcode( $atts, $content ) {

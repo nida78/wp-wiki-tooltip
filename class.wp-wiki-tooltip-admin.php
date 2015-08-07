@@ -6,14 +6,16 @@ class WP_Wiki_Tooltip_Admin {
 
     private $options;
 
-    public function __construct( $name='') {
+    public function __construct( $name='' ) {
         add_filter( 'plugin_action_links_' . $name, array( $this, 'add_action_links' ) );
         add_action( 'admin_menu', array( $this, 'init' ) );
         add_action( 'admin_init', array( $this, 'register_settings' ) );
+        add_action( 'wp_ajax_get_wiki_page', array( 'WP_Wiki_Tooltip', 'ajax_get_wiki_page' ) );
+        add_action( 'wp_ajax_nopriv_get_wiki_page', array( 'WP_Wiki_Tooltip', 'ajax_get_wiki_page' ) );
     }
 
     public function init() {
-        wp_enqueue_style( 'wp-wiki-tooltip-admin-css', plugins_url( 'static/css/wp-wiki-tooltip-admin.css', __FILE__ ), array(), '1.0', 'all' );
+        wp_enqueue_style( 'wp-wiki-tooltip-admin-css', plugins_url( 'static/css/wp-wiki-tooltip-admin.css', __FILE__ ), array(), '1.1.0', 'all' );
 
         add_options_page(
             __( 'Settings for Wiki-Tooltips', 'wp-wiki-tooltip' ),
@@ -26,18 +28,27 @@ class WP_Wiki_Tooltip_Admin {
         $this->options = get_option( 'wp-wiki-tooltip-settings' );
 
         if( array_key_exists( 'btn_reset', $_REQUEST ) && $_REQUEST[ 'btn_reset' ] == __( 'Reset', 'wp-wiki-tooltip' ) ) {
-            delete_option( 'wp-wiki-tooltip-settings' );
-            header( 'Location: options-general.php?page=wp-wiki-tooltip-settings&settings-updated=reset' );
+            $result = ( delete_option( 'wp-wiki-tooltip-settings' ) ) ? 'true' : 'false';
+            header( 'Location: options-general.php?page=wp-wiki-tooltip-settings&settings-updated=reset-' . $result );
             die();
         }
 
-        if( array_key_exists( 'settings-updated', $_REQUEST ) && $_REQUEST[ 'settings-updated' ] == 'reset' ) {
-            add_settings_error(
-                'wp-wiki-tooltip-settings-reset',
-                'settings_updated',
-                __( 'Settings reseted sucessfully.', 'wp-wiki-tooltip' ),
-                'updated'
-            );
+        if( array_key_exists( 'settings-updated', $_REQUEST ) ) {
+            if( $_REQUEST[ 'settings-updated' ] == 'reset-true' ) {
+                add_settings_error(
+                    'wp-wiki-tooltip-settings-reset',
+                    'settings_updated',
+                    __('Settings reseted sucessfully.', 'wp-wiki-tooltip'),
+                    'updated'
+                );
+            } else if( $_REQUEST[ 'settings-updated' ] == 'reset-false' ) {
+                add_settings_error(
+                    'wp-wiki-tooltip-settings-reset',
+                    'settings_updated',
+                    __('An error occured while resetting.', 'wp-wiki-tooltip'),
+                    'error'
+                );
+            }
         }
     }
 

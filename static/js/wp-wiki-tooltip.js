@@ -25,7 +25,7 @@ function add_wiki_box( id, wid, title ) {
                     'wurl': wp_wiki_tooltip.wiki_url
                 };
 
-                jQuery.get( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {
+                jQuery.post( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {
                     data = jQuery.parseJSON( response_data );
                     if( data[ 'code' ] == -1 ) {
                         origin.tooltipster( 'content', create_tooltip_message( 'err', wp_wiki_tooltip.error_title, wp_wiki_tooltip.page_not_found_message ) ).data( 'ajax', 'cached' );

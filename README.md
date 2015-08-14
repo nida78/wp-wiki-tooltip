@@ -7,7 +7,7 @@ Requires at least: 3.0
 
 Tested up to: 4.2.4
 
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -49,12 +49,17 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 
 # Changelog
 
+## 1.2.0
+*Release Date - August 14th, 2015*
+
+* Redesigned the requests to the WIKI API by using the [WordPress HTTP API](http://codex.wordpress.org/HTTP_API) and encapsulating them into an own class
+* A base class for all class of this plugin is introduced
+
 ## 1.1.0
 *Release Date - August 7th, 2015*
 
-* refactored the AJAX call to load tooltip content due to the rules of [WordPress AJAX API](https://codex.wordpress.org/AJAX_in_Plugins)
-* added error handling if settings reset fails
-
+* Refactored the AJAX call to load tooltip content due to the rules of [WordPress AJAX API](https://codex.wordpress.org/AJAX_in_Plugins)
+* Added error handling if settings reset fails
 
 ## 1.0.1
 *Release Date - August 5th, 2015*

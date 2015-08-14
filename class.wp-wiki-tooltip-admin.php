@@ -1,21 +1,25 @@
 <?php
+
+include_once('class.wp-wiki-tooltip-base.php');
+include_once('class.wp-wiki-tooltip-comm.php');
+
 /**
  * Class WP_Wiki_Tooltip_Admin
  */
-class WP_Wiki_Tooltip_Admin {
-
-    private $options;
+class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function __construct( $name='' ) {
         add_filter( 'plugin_action_links_' . $name, array( $this, 'add_action_links' ) );
         add_action( 'admin_menu', array( $this, 'init' ) );
         add_action( 'admin_init', array( $this, 'register_settings' ) );
-        add_action( 'wp_ajax_get_wiki_page', array( 'WP_Wiki_Tooltip', 'ajax_get_wiki_page' ) );
-        add_action( 'wp_ajax_nopriv_get_wiki_page', array( 'WP_Wiki_Tooltip', 'ajax_get_wiki_page' ) );
+
+        $comm = new WP_Wiki_Tooltip_Comm();
+        add_action( 'wp_ajax_get_wiki_page', array( $comm, 'ajax_get_wiki_page' ) );
+        add_action( 'wp_ajax_nopriv_get_wiki_page', array( $comm, 'ajax_get_wiki_page' ) );
     }
 
     public function init() {
-        wp_enqueue_style( 'wp-wiki-tooltip-admin-css', plugins_url( 'static/css/wp-wiki-tooltip-admin.css', __FILE__ ), array(), '1.1.0', 'all' );
+        wp_enqueue_style( 'wp-wiki-tooltip-admin-css', plugins_url( 'static/css/wp-wiki-tooltip-admin.css', __FILE__ ), array(), $this->version, 'all' );
 
         add_options_page(
             __( 'Settings for Wiki-Tooltips', 'wp-wiki-tooltip' ),

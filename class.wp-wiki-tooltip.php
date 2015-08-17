@@ -67,7 +67,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			set_transient( $trans_wiki_key, $trans_wiki_data, WEEK_IN_SECONDS );
 		}
 
-		$output  = '<script>jQuery( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '" ); } );</script>';
+		$output  = '<script>$wwtj( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '" ); } );</script>';
 		$output .= '<a id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data[ 'wiki-url' ] . '" target="' . $this->options[ 'a-target' ] . '" style="' . $this->options[ 'a-style' ] . '">' . $content . '</a>';
 
 		return $output;

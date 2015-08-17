@@ -3,7 +3,7 @@ Contributors: nida78
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
 Tested up to: 4.2.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later
 
@@ -42,6 +42,11 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 3. See nice and helpful tooltips
 
 == Changelog ==
+
+= 1.2.1 =
+*Release Date - August 17th, 2015*
+
+* Fixes a minor bug that occurred (seldom) when multiple jQuery plugins are used within the same WordPress installation
 
 = 1.2.0 =
 *Release Date - August 14th, 2015*

@@ -114,8 +114,35 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         );
 
         add_settings_field(
+            'tooltip-head',
+            __( 'Tooltip <em>header</em> styles', 'wp-wiki-tooltip' ),
+            array( $this, 'print_tooltip_head_field' ),
+            'wp-wiki-tooltip-settings-design',
+            'wp-wiki-tooltip-settings-design',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
+            'tooltip-body',
+            __( 'Tooltip <em>body</em> styles', 'wp-wiki-tooltip' ),
+            array( $this, 'print_tooltip_body_field' ),
+            'wp-wiki-tooltip-settings-design',
+            'wp-wiki-tooltip-settings-design',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
+            'tooltip-foot',
+            __( 'Tooltip <em>footer</em> styles', 'wp-wiki-tooltip' ),
+            array( $this, 'print_tooltip_foot_field' ),
+            'wp-wiki-tooltip-settings-design',
+            'wp-wiki-tooltip-settings-design',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
             'a-styles',
-            __( 'CSS style of Wiki links', 'wp-wiki-tooltip' ),
+            __( 'Wiki links styles', 'wp-wiki-tooltip' ),
             array( $this, 'print_a_style_field' ),
             'wp-wiki-tooltip-settings-design',
             'wp-wiki-tooltip-settings-design',
@@ -159,12 +186,36 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '</ul>';
     }
 
+    public function print_tooltip_head_field( $args ) {
+        printf(
+            '<p><input type="text" id="tooltip-head" name="wp-wiki-tooltip-settings[tooltip-head]" value="%s" class="regular-text" /></p>',
+            isset( $this->options['tooltip-head'] ) ? esc_attr( $this->options[ 'tooltip-head' ] ) : $args[ 'tooltip-head' ]
+        );
+        echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the header in the tooltip.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+
+    public function print_tooltip_body_field( $args ) {
+        printf(
+            '<p><input type="text" id="tooltip-body" name="wp-wiki-tooltip-settings[tooltip-body]" value="%s" class="regular-text" /></p>',
+            isset( $this->options['tooltip-body'] ) ? esc_attr( $this->options[ 'tooltip-body' ] ) : $args[ 'tooltip-body' ]
+        );
+        echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the body in the tooltip.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+
+    public function print_tooltip_foot_field( $args ) {
+        printf(
+            '<p><input type="text" id="tooltip-foot" name="wp-wiki-tooltip-settings[tooltip-foot]" value="%s" class="regular-text" /></p>',
+            isset( $this->options['tooltip-foot'] ) ? esc_attr( $this->options[ 'tooltip-foot' ] ) : $args[ 'tooltip-foot' ]
+        );
+        echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the footer in the tooltip.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+
     public function print_a_style_field( $args ) {
         printf(
             '<p><input type="text" id="a-style" name="wp-wiki-tooltip-settings[a-style]" value="%s" class="regular-text" /></p>',
             isset( $this->options['a-style'] ) ? esc_attr( $this->options[ 'a-style' ] ) : $args[ 'a-style' ]
         );
-        echo '<p class="description">' . __( 'All entered CSS settings will be put into the <strong>style</strong>-attribute of all links to Wiki pages.', 'wp-wiki-tooltip' ) . '</p>';
+        echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the links to Wiki pages.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
     public function sanitize( $input ) {

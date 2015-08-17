@@ -7,7 +7,7 @@ a.wiki-tooltip {
 div.wiki-tooltip-balloon div.head {
     border-bottom: 1px solid white;
     margin-bottom: 5px;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
 }
 
 div.tooltipster-light div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #cccccc; }
@@ -15,11 +15,9 @@ div.tooltipster-noir div.wiki-tooltip-balloon div.head { border-bottom: 1px soli
 div.tooltipster-punk div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #f71169; }
 div.tooltipster-shadow div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #808080; }
 
-div.wiki-tooltip-balloon div.content {
+div.wiki-tooltip-balloon div.body {
 }
 
-div.wiki-tooltip-balloon div.footer {
+div.wiki-tooltip-balloon div.foot {
     margin-top: 10px;
-    font-style: italic;
-    font-weight: bold;
 }

@@ -41,16 +41,16 @@ function add_wiki_box( id, wid, title ) {
 }
 
 function create_tooltip_message( type, title, message ) {
-    var tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head"><h1>' + title + '</h1></div>';
+    var tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head">' + title + '</div><div class="body">';
 
     if( type == 'init' ) {
         tooltip_html += '<img src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
     } else {
-        tooltip_html += '<div class="content">' + message + '</div>';
+        tooltip_html += message;
     }
 
     if( type == 'ok' ) {
-        tooltip_html += '<div class="footer">' + wp_wiki_tooltip.footer_text + '</div></div></span>';
+        tooltip_html += '</div><div class="foot">' + wp_wiki_tooltip.footer_text + '</div></div>';
     }
 
     return $wwtj( tooltip_html );

@@ -3,7 +3,7 @@ Contributors: nida78
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
 Tested up to: 4.2.4
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later
 
@@ -42,6 +42,12 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 3. See nice and helpful tooltips
 
 == Changelog ==
+
+= 1.3.0 =
+*Release Date - August 18th, 2015*
+
+* Elements of tooltips (header, body, footer) are decoupled from the standard elements of WordPress (e.g. headings) now
+* Three new fields in the backend can be used to set CSS options for every element of the tooltips
 
 = 1.2.1 =
 *Release Date - August 17th, 2015*

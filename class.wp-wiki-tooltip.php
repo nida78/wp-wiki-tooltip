@@ -41,7 +41,6 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		wp_enqueue_script( 'tooltipster-js', plugins_url( 'static/external/tooltipster/js/jquery.tooltipster.min.js', __FILE__ ), array( 'jquery' ), '3.0', false );
 		wp_register_script( 'wp-wiki-tooltip-js', plugins_url( 'static/js/wp-wiki-tooltip.js', __FILE__ ), array( 'tooltipster-js' ), $this->version, false );
 		wp_localize_script( 'wp-wiki-tooltip-js', 'wp_wiki_tooltip', array(
-			'wiki_url' => $this->options[ 'wiki-url' ],
 			'wp_ajax_url' => admin_url( 'admin-ajax.php' ),
 			'wiki_plugin_url' => plugin_dir_url( __FILE__ ),
 			'tooltip_theme' => 'tooltipster-' . $this->options[ 'theme' ],
@@ -58,23 +57,40 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 
 	public function do_wiki_shortcode( $atts, $content ) {
 		$params = shortcode_atts( array(
+			'base' => '',
 			'title' => ''
 		), $atts );
 
 		$title = ( $params[ 'title' ] == '' ) ? $content : $params[ 'title' ];
 
+		$wiki_base_id = $params[ 'base' ];
+		$wiki_urls = $this->options[ 'wiki-urls' ];
+
+		if( $wiki_base_id == '' ) {
+			$std_num = $wiki_urls[ 'standard' ];
+			$wiki_base_id = $wiki_urls[ 'data' ][ $std_num ][ 'id' ];
+		}
+
+		$wiki_url = '';
+		foreach( $wiki_urls[ 'data' ] as $num => $wiki_data ) {
+			if( $wiki_data[ 'id' ] == $wiki_base_id ) {
+				$wiki_url = $wiki_data[ 'url' ];
+			}
+		}
+
 		$cnt = $this->shortcode_count++;
 
-		$trans_wiki_key = urlencode( $this->options[ 'wiki-url' ] . '-' . $title . $this->version );
+		$trans_wiki_key = urlencode( $wiki_base_id . "-" . $wiki_url . '-' . $title . '-' . $this->version );
 		if( ( $trans_wiki_data = get_transient( $trans_wiki_key ) ) === false ) {
 
 			$comm = new WP_Wiki_Tooltip_Comm();
-			$trans_wiki_data = $comm->get_wiki_page_info( $title, $this->options[ 'wiki-url' ] );
+			$trans_wiki_data = $comm->get_wiki_page_info( $title, $wiki_url );
+			$trans_wiki_data[ 'wiki-base-url' ] = $wiki_url;
 
 			set_transient( $trans_wiki_key, $trans_wiki_data, WEEK_IN_SECONDS );
 		}
 
-		$output  = '<script>$wwtj( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '" ); } );</script>';
+		$output  = '<script>$wwtj( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '", "' . $trans_wiki_data[ 'wiki-base-url' ] . '" ); } );</script>';
 		$output .= '<a id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data[ 'wiki-url' ] . '" target="' . $this->options[ 'a-target' ] . '">' . $content . '</a>';
 
 		return $output;

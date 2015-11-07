@@ -2,7 +2,16 @@
 
 $wp_wiki_tooltip_default_options = array(
 
-    'wiki-url' => 'https://en.wikipedia.org', // standard URL of Wiki to get contents from
+    'wiki-urls' => array (
+        'standard' => 1,
+        'data' => array (
+            '1' => array ( // standard URL of Wiki to get contents from
+                'id' => 'EN',
+                'url' => 'https://en.wikipedia.org/w/api.php',
+                'sitename' => 'Wikipedia'
+            )
+        )
+    ),
 
     'cache' => array ( // NOT USED: cache settings - default "1 week"
 

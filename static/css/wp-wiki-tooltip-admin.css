@@ -1,13 +1,59 @@
 /**
  * Created by nida78 on 28.07.2015.
  */
-p#wiki-usage {
+p.wiki-usage {
     margin-bottom: 25px;
 }
 
-p#wiki-usage span.bold-teletyper {
+p.wiki-usage span.bold-teletyper {
     font-family: 'Courier', monospace;
     font-weight: bold;
+}
+
+#wiki-urls-table,
+#wiki-urls-table th,
+#wiki-urls-table td {
+    border: 1px solid #fff;
+    margin-top: 25px;
+    width: auto;
+}
+
+#wiki-urls-table tr.state-ok {
+    background-color: #090;
+}
+
+#wiki-urls-table tr.state-fail {
+    background-color: #900;
+}
+
+#wiki-urls-table th {
+    text-align: center;
+}
+
+#wiki-urls-table .row1 {
+    text-align: center;
+    width: 100px;
+}
+
+#wiki-urls-table .row5 {
+    text-align: center;
+    width: 130px;
+}
+
+#wiki-urls-table .row6 {
+    text-align: center;
+    width: 130px;
+}
+
+#wiki-urls-table tr#wiki-url-row-template {
+    background-color: blue;
+    display: none;
+}
+
+#wiki-urls-table img.loadingAnimationBar {
+    height: 20px;
+    width: 120px;
+    display: none;
 }
 
 ul#wiki-tooltip-admin-theme-list li {

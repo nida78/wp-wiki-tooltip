@@ -4,7 +4,7 @@
 
 var $wwtj = jQuery.noConflict();
 
-function add_wiki_box( id, wid, title ) {
+function add_wiki_box( id, wid, title, wurl ) {
     $wwtj( '#wiki-container' ).append( '<div id="wiki-tooltip-box-' + id + '" class="wiki-tooltip-box" wiki-id="' + wid + '" title="' + title + '"></div>' );
 
     $wwtj( '#wiki-tooltip-' + id ).tooltipster({
@@ -24,7 +24,7 @@ function add_wiki_box( id, wid, title ) {
                 var request_data = {
                     'action': 'get_wiki_page',
                     'wid': wid,
-                    'wurl': wp_wiki_tooltip.wiki_url
+                    'wurl': wurl
                 };
 
                 $wwtj.post( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {

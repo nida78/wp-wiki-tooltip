@@ -5,9 +5,9 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 4.3
+Tested up to: 4.3.1
 
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -21,7 +21,7 @@ Adds explaining tooltips querying their content from a [MediaWiki](https://www.m
 
 Main features of the current version are:
 
-* Setup the wanted Wiki base and several other options at a backend page
+* Setup at least one wanted Wiki base and several other options at a backend page
 * Integrate the Wiki tooltip using shortcodes in Posts and Pages
 
 # Frequently Asked Questions
@@ -29,6 +29,10 @@ Main features of the current version are:
 ## Can I use any Wiki installation as base for my tooltips?
 
 Sure, as long as the used installation provides an API structured like the [API of MediaWiki](https://www.mediawiki.org/wiki/API:Main_page "see API of MediaWiki") it will work perfectly. You can use one of the public Wikipedias or setup your own Wiki URL.
+
+## Can I use several Wikis at the same time within my WordPress?
+
+Since version 1.4.0 the plugin provides the opportunity to manage multiple Wiki URLs! The wanted Wiki can be chosen via an attribute in the shortcode.
 
 ## Am I able to style the links to Wiki pages in another way than all other links in the blog?
 
@@ -48,6 +52,11 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 3. See nice and helpful tooltips
 
 # Changelog
+
+## 1.4.0
+*Release Date - November 7th, 2015*
+
+* Multiple Wiki URLs can be managed in the backend. The wanted Wiki can be chosen via an attribute in the shortcode.
 
 ## 1.3.0
 *Release Date - August 18th, 2015*
@@ -91,4 +100,8 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 
 # Upgrade Notice
 
+## Upgrade to 1.4.0
+The former Wiki URL is not transfered into this version. Review the settings page after update to insert the wanted Wiki URL again!
+
+## Elder Upgrades
 Nothing special to consider.

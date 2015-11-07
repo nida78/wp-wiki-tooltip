@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Wiki Tooltip 0.1\n"
-"POT-Creation-Date: 2015-08-17 23:13+0200\n"
+"POT-Creation-Date: 2015-11-07 14:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,95 +16,163 @@ msgstr ""
 "_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../class.wp-wiki-tooltip-admin.php:25 ../class.wp-wiki-tooltip-admin.php:228
+#: ../class.wp-wiki-tooltip-admin.php:28
+msgid "Rows that is marked as \"Standard\" could not be deleted!"
+msgstr ""
+"Zeilen, die als \"Standard\" markiert sind, können nicht entfernt werden!"
+
+#: ../class.wp-wiki-tooltip-admin.php:29
+msgid "Sorry, but the test of this URL failed!"
+msgstr "Entschuldigung, aber der Test dieser URL ist fehlgeschlagen!"
+
+#: ../class.wp-wiki-tooltip-admin.php:35 ../class.wp-wiki-tooltip-admin.php:276
 msgid "Settings for Wiki-Tooltips"
 msgstr "Einstellungen für die Wiki-Tooltips"
 
-#: ../class.wp-wiki-tooltip-admin.php:26
+#: ../class.wp-wiki-tooltip-admin.php:36
 msgid "Wiki-Tooltips"
 msgstr "Wiki-Tooltips"
 
-#: ../class.wp-wiki-tooltip-admin.php:34 ../class.wp-wiki-tooltip-admin.php:237
+#: ../class.wp-wiki-tooltip-admin.php:44 ../class.wp-wiki-tooltip-admin.php:285
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: ../class.wp-wiki-tooltip-admin.php:45
+#: ../class.wp-wiki-tooltip-admin.php:55
 msgid "Settings reseted sucessfully."
 msgstr "Einstellungen erfolgreich zurückgesetzt."
 
-#: ../class.wp-wiki-tooltip-admin.php:52
+#: ../class.wp-wiki-tooltip-admin.php:62
 msgid "An error occured while resetting."
 msgstr "Beim Rücksetzen ist ein Fehler aufgetreten."
 
-#: ../class.wp-wiki-tooltip-admin.php:62
+#: ../class.wp-wiki-tooltip-admin.php:72
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: ../class.wp-wiki-tooltip-admin.php:77
+#: ../class.wp-wiki-tooltip-admin.php:87
 msgid "Base Settings"
 msgstr "Basis Einstellungen"
 
-#: ../class.wp-wiki-tooltip-admin.php:84
-msgid "ULR of Wiki"
-msgstr "URL des Wiki"
+#: ../class.wp-wiki-tooltip-admin.php:94
+msgid "URLs of Wikis"
+msgstr "URLs von Wikis"
 
-#: ../class.wp-wiki-tooltip-admin.php:93
+#: ../class.wp-wiki-tooltip-admin.php:103
 msgid "Open links to Wiki pages in"
 msgstr "Öffne Links zu Wiki Seiten in"
 
-#: ../class.wp-wiki-tooltip-admin.php:102
+#: ../class.wp-wiki-tooltip-admin.php:112
 msgid "Design Settings"
 msgstr "Design Einstellungen"
 
-#: ../class.wp-wiki-tooltip-admin.php:109
+#: ../class.wp-wiki-tooltip-admin.php:119
 msgid "Design of the tooltips"
 msgstr "Design der Tooltips"
 
-#: ../class.wp-wiki-tooltip-admin.php:118
+#: ../class.wp-wiki-tooltip-admin.php:128
 msgid "Tooltip <em>header</em> styles"
 msgstr "Tooltip <em>Kopf</em> Styles"
 
-#: ../class.wp-wiki-tooltip-admin.php:127
+#: ../class.wp-wiki-tooltip-admin.php:137
 msgid "Tooltip <em>body</em> styles"
 msgstr "Tooltip <em>Inhalt</em> Styles"
 
-#: ../class.wp-wiki-tooltip-admin.php:136
+#: ../class.wp-wiki-tooltip-admin.php:146
 msgid "Tooltip <em>footer</em> styles"
 msgstr "Tooltip <em>Fuß</em> Styles"
 
-#: ../class.wp-wiki-tooltip-admin.php:145
+#: ../class.wp-wiki-tooltip-admin.php:155
 msgid "Wiki links styles"
 msgstr "Styles der Wiki Links"
 
-#: ../class.wp-wiki-tooltip-admin.php:154
+#: ../class.wp-wiki-tooltip-admin.php:164
 msgid "Set base options below:"
 msgstr "Stelle die Basis Optionen unten ein:"
 
-#: ../class.wp-wiki-tooltip-admin.php:158
+#: ../class.wp-wiki-tooltip-admin.php:168
 msgid "Set design / style options below:"
 msgstr "Stelle die Design / Stil Optionen unten ein:"
 
-#: ../class.wp-wiki-tooltip-admin.php:166
+#: ../class.wp-wiki-tooltip-admin.php:176
 msgid ""
-"If you are not sure about the best URL take a look at <a href=\"https://"
-"wikipedia.org\" target=_\"blank\">wikipedia.org</a> to find the right one."
+"Enter as much Wiki URLs as you like. Click the button \"<strong>test</strong>"
+"\" to let the plugin check if the given URL has access to a Wiki API."
 msgstr ""
-"Wenn du dir nicht sicher bist, welches die beste URL ist, schau einfach bei "
-"<a href=\"https://wikipedia.org\" target=_\"blank\">wikipedia.org</a> nach, "
-"um die richtige zu finden."
+"Es können beliebig viele Wiki URLs eingegeben werden. Ein Klick des Buttons "
+"\"<strong>test</strong>\" prüft, ob die eingegeben URL Zugang zu einer Wiki "
+"API hat."
 
-#: ../class.wp-wiki-tooltip-admin.php:172
+#: ../class.wp-wiki-tooltip-admin.php:177
+msgid ""
+"To use one of these URLs just add an \"<strong>base</strong>\" attribute to "
+"the shortcode:"
+msgstr ""
+"Um eine dieser URLs zu nutzen, muss man einfach ein \"<strong>base</strong>"
+"\" Attribut dem Shortcode hinzufügen:"
+
+#: ../class.wp-wiki-tooltip-admin.php:177
+#: ../class.wp-wiki-tooltip-admin.php:277
+msgid "or"
+msgstr "oder"
+
+#: ../class.wp-wiki-tooltip-admin.php:178
+msgid ""
+"If you do not use the \"<strong>base</strong>\" attribute the URL that is "
+"marked as \"Standard\" is used."
+msgstr ""
+"Wenn kein \"<strong>base</strong>\" Attribut benutzt wird, wird die URL "
+"verwendet, die als \"Standard\" markiert ist."
+
+#: ../class.wp-wiki-tooltip-admin.php:183
+msgid "Standard"
+msgstr "Standard"
+
+#: ../class.wp-wiki-tooltip-admin.php:184
+msgid "Name"
+msgstr "Name"
+
+#: ../class.wp-wiki-tooltip-admin.php:185
+msgid "ID"
+msgstr "ID"
+
+#: ../class.wp-wiki-tooltip-admin.php:186
+msgid "URL"
+msgstr "URL"
+
+#: ../class.wp-wiki-tooltip-admin.php:187
+msgid "Check URL"
+msgstr "Prüfe URL"
+
+#: ../class.wp-wiki-tooltip-admin.php:188
+msgid "Remove URL"
+msgstr "Entferne URL"
+
+#: ../class.wp-wiki-tooltip-admin.php:197
+#: ../class.wp-wiki-tooltip-admin.php:207
+msgid "test"
+msgstr "prüfen"
+
+#: ../class.wp-wiki-tooltip-admin.php:198
+#: ../class.wp-wiki-tooltip-admin.php:208
+msgid "remove"
+msgstr "entfernen"
+
+#: ../class.wp-wiki-tooltip-admin.php:211
+msgid "Add new URL"
+msgstr "Neue URL hinzufügen"
+
+#: ../class.wp-wiki-tooltip-admin.php:220
 msgid "new window / tab"
 msgstr "neues Fenster / Tab"
 
-#: ../class.wp-wiki-tooltip-admin.php:173
+#: ../class.wp-wiki-tooltip-admin.php:221
 msgid "current window / tab"
 msgstr "aktuelles Fenster / Tab"
 
-#: ../class.wp-wiki-tooltip-admin.php:194
+#: ../class.wp-wiki-tooltip-admin.php:242
 msgid ""
 "All entered CSS settings will be put into the CSS class of the header in the "
 "tooltip."
@@ -112,7 +180,7 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für den Kopfbereich der "
 "Tooltips geschrieben."
 
-#: ../class.wp-wiki-tooltip-admin.php:202
+#: ../class.wp-wiki-tooltip-admin.php:250
 msgid ""
 "All entered CSS settings will be put into the CSS class of the body in the "
 "tooltip."
@@ -120,7 +188,7 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für den Inhalt der "
 "Tooltips geschrieben."
 
-#: ../class.wp-wiki-tooltip-admin.php:210
+#: ../class.wp-wiki-tooltip-admin.php:258
 msgid ""
 "All entered CSS settings will be put into the CSS class of the footer in the "
 "tooltip."
@@ -128,7 +196,7 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für die Fußzeile der "
 "Tooltips geschrieben."
 
-#: ../class.wp-wiki-tooltip-admin.php:218
+#: ../class.wp-wiki-tooltip-admin.php:266
 msgid ""
 "All entered CSS settings will be put into the CSS class of the links to Wiki "
 "pages."
@@ -136,29 +204,57 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für die Links zu den "
 "Wiki Seiten geschrieben."
 
-#: ../class.wp-wiki-tooltip-admin.php:229
+#: ../class.wp-wiki-tooltip-admin.php:277
 msgid "Use one of these shortcodes to enable Wiki-Tooltips:"
 msgstr "Benutze einen dieser Shortcodes, um Wiki-Tooltips zu ermöglichen:"
 
-#: ../class.wp-wiki-tooltip-admin.php:229
-msgid "or"
-msgstr "oder"
-
-#: ../class.wp-wiki-tooltip-admin.php:235
+#: ../class.wp-wiki-tooltip-admin.php:283
 msgid "Submit"
 msgstr "Speichern"
 
-#: ../class.wp-wiki-tooltip-comm.php:80 ../class.wp-wiki-tooltip.php:49
+#: ../class.wp-wiki-tooltip-comm.php:87 ../class.wp-wiki-tooltip.php:48
 msgid "Error!"
 msgstr "Fehler!"
 
-#: ../class.wp-wiki-tooltip.php:48
+#: ../class.wp-wiki-tooltip.php:47
 msgid "Just click to open wiki page..."
 msgstr "Einfach klicken, um diese Wiki-Seite zu öffnen..."
 
-#: ../class.wp-wiki-tooltip.php:50
+#: ../class.wp-wiki-tooltip.php:49
 msgid "Sorry, but we were not able to find this page :("
 msgstr "Leider kann diese Seite nicht gefunden werden :("
+
+#~ msgid "click button &quot;test&quot; to set this field"
+#~ msgstr "den Button &quot;prüfen&quot; klicken, um dieses Feld auszufüllen"
+
+#~ msgid "click button $quot;test$quot; to set this field"
+#~ msgstr "den Button &quot;prüfen&quot; klicken, um dieses Feld auszufüllen"
+
+#~ msgid "click button 'test' to set this field"
+#~ msgstr "den Button \\'prüfen\\' klicken, um dieses Feld auszufüllen"
+
+#~ msgid "click button \\\"test\\\" to set this field"
+#~ msgstr "den Button \\\"prüfen\\\" klicken, um dieses Feld auszufüllen"
+
+#~ msgid "click button \"test\" to set this field"
+#~ msgstr "den Button \"testen\" klicken, um dieses Feld zu beschreiben"
+
+#~ msgid "URL of Wikis"
+#~ msgstr "URL von Wikis"
+
+#~ msgid "You are not able to delete a row that is marked as \"Standard\"!"
+#~ msgstr "Sie "
+
+#~ msgid "ULR of Wiki"
+#~ msgstr "URL des Wiki"
+
+#~ msgid ""
+#~ "If you are not sure about the best URL take a look at <a href=\"https://"
+#~ "wikipedia.org\" target=_\"blank\">wikipedia.org</a> to find the right one."
+#~ msgstr ""
+#~ "Wenn du dir nicht sicher bist, welches die beste URL ist, schau einfach "
+#~ "bei <a href=\"https://wikipedia.org\" target=_\"blank\">wikipedia.org</a> "
+#~ "nach, um die richtige zu finden."
 
 #~ msgid "CSS style of Wiki links"
 #~ msgstr "CSS Stile der Wiki Links"

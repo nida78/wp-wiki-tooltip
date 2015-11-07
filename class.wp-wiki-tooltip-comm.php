@@ -29,6 +29,13 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         'pageid' => -1
     );
 
+    private $test_query_args = array(
+        'action' => 'query',
+        'meta' => 'siteinfo',
+        'format' => 'json',
+        'siprop' => 'general'
+    );
+
     public function ajax_get_wiki_page() {
 
         $wiki_id = $_REQUEST[ 'wid' ];
@@ -90,5 +97,32 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         }
 
         return $result;
+    }
+
+    public function ajax_test_wiki_url() {
+
+        $wurl = ( parse_url( $_REQUEST[ 'wurl' ], PHP_URL_SCHEME ) === null ) ? "http://" . $_REQUEST[ 'wurl' ] : $_REQUEST[ 'wurl' ];
+        $wiki_urls = array( $wurl, $wurl . '/api.php', $wurl . '/w/api.php' );
+
+        foreach( $wiki_urls as $wurl ) {
+            $response = wp_remote_get( $wurl . '?' . http_build_query( $this->test_query_args ) );
+
+            if ( is_array( $response ) && ! is_wp_error( $response ) ) {
+                $wiki_data = json_decode( $response[ 'body' ], true );
+                if( ! empty( $wiki_data[ 'query' ][ 'general' ][ 'sitename' ] ) ) {
+                    $result = array(
+                        'code' => 1,
+                        'url' => $wurl,
+                        'name' => $wiki_data['query']['general']['sitename']
+                    );
+                    echo json_encode($result);
+                    wp_die();
+                }
+            }
+        }
+
+        $result = array( 'code' => -1 );
+        echo json_encode( $result );
+        wp_die();
     }
 }

@@ -204,7 +204,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 <td class="row2"><input id="txt-site-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][###NEWID###][sitename]" value="" class="regular-text"/></td>
                 <td class="row3"><input id="txt-id-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][###NEWID###][id]" value="" class="narrow"/></td>
                 <td class="row4"><input id="txt-url-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][###NEWID###][url]" value="" class="regular-text"/></td>
-                <td class="row5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _e( 'test', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/></td>
+                <td class="row5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _e( 'test', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
                 <td class="row6"><input type="button" value="<?php _e( 'remove', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-###NEWID###' );"/></td>
             </tr>
             <tr>

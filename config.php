@@ -30,5 +30,13 @@ $wp_wiki_tooltip_default_options = array(
 
     'tooltip-foot' => 'font-style: italic; font-weight: bold;', // make the footer link somehow nicer
 
-    'a-style' => 'font-style: italic;'  // line of css for the style attribute
+    'a-style' => 'font-style: italic;',  // line of css for the style attribute
+
+    'thumb-enable' => 'off', // enable thumbnails in tooltips
+
+    'thumb-align' => 'right', // alignment of the thumbnails
+
+    'thumb-width' => '200', // standard width of the thumbnails
+
+    'thumb-style' => '', // stylesheets for thumbnail images
 );

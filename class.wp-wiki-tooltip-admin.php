@@ -82,6 +82,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             array( $this, 'sanitize' )
         );
 
+        /*** Base Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-base',
             __( 'Base Settings', 'wp-wiki-tooltip' ),
@@ -107,6 +108,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             $wp_wiki_tooltip_default_options
         );
 
+        /*** Design Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
             __( 'Design Settings', 'wp-wiki-tooltip' ),
@@ -158,6 +160,50 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             'wp-wiki-tooltip-settings-design',
             $wp_wiki_tooltip_default_options
         );
+
+        /*** Thumbnail Settings ***/
+        add_settings_section(
+            'wp-wiki-tooltip-settings-thumb',
+            __( 'Thumbnail Settings', 'wp-wiki-tooltip' ),
+            array( $this, 'print_thumb_section_info' ),
+            'wp-wiki-tooltip-settings-thumb'
+        );
+
+        add_settings_field(
+            'thumb-enable',
+            __( 'Enable thumbnails', 'wp-wiki-tooltip' ),
+            array( $this, 'print_thumb_enable_field' ),
+            'wp-wiki-tooltip-settings-thumb',
+            'wp-wiki-tooltip-settings-thumb',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
+            'thumb-align',
+            __( 'Alignment', 'wp-wiki-tooltip' ),
+            array( $this, 'print_thumb_align_field' ),
+            'wp-wiki-tooltip-settings-thumb',
+            'wp-wiki-tooltip-settings-thumb',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
+            'thumb-width',
+            __( 'Width', 'wp-wiki-tooltip' ),
+            array( $this, 'print_thumb_width_field' ),
+            'wp-wiki-tooltip-settings-thumb',
+            'wp-wiki-tooltip-settings-thumb',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
+            'thumb-style',
+            __( 'Styles', 'wp-wiki-tooltip' ),
+            array( $this, 'print_thumb_style_field' ),
+            'wp-wiki-tooltip-settings-thumb',
+            'wp-wiki-tooltip-settings-thumb',
+            $wp_wiki_tooltip_default_options
+        );
     }
 
     public function print_base_section_info() {
@@ -166,6 +212,12 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function print_design_section_info() {
         echo '<p>' . __( 'Set design / style options below:' , 'wp-wiki-tooltip' ) . '</p>';
+    }
+
+    public function print_thumb_section_info() {
+        echo '<p>' . __( 'Enable thumbnails in tooltips and set some useful options below.' , 'wp-wiki-tooltip' ) . '</p>';
+        echo '<p class="wiki-usage">' . __( 'Additionally an extra "<strong>thumbnail</strong>" attribute can be added to the shortcode:' , 'wp-wiki-tooltip' );
+        echo '&nbsp;<span class="bold-teletyper">[wiki thumbnail="on"]WordPress[/wiki]</span>&nbsp;' . __( 'or', 'wp-wiki-tooltip' ) . '&nbsp;<span class="bold-teletyper">[wiki thumbnail="off" title="WordPress"]a nice blogging software[/wiki]</span></p>';
     }
 
     public function print_wiki_url_fields( $args ) {
@@ -266,6 +318,35 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the links to Wiki pages.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
+    public function print_thumb_enable_field( $args ) {
+        $thumb_enabled = isset( $this->options[ 'thumb-enable' ] ) ? $this->options[ 'thumb-enable' ] : $args[ 'thumb-enable' ];
+
+        echo '<p><label><input type="checkbox" id="cbo-thumb-enable" name="wp-wiki-tooltip-settings[thumb-enable]" value="on"' . checked( $thumb_enabled, 'on', false ) . ' />' . __( 'enable thumbnails (if they are available for current Wiki article)', 'wp-wiki-tooltip' ) . '</label></p>';
+    }
+
+    public function print_thumb_align_field( $args ) {
+        $used_align = isset( $this->options[ 'thumb-align' ] ) ? $this->options[ 'thumb-align' ] : $args[ 'thumb-align' ];
+
+        echo '<p><label><input type="radio" id="rdo-thumb-align-left" name="wp-wiki-tooltip-settings[thumb-align]" value="left"' . checked( $used_align, 'left', false ) . ' />' . __( 'left', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<p><label><input type="radio" id="rdo-thumb-align-right" name="wp-wiki-tooltip-settings[thumb-align]" value="right" ' . checked( $used_align, 'right', false ) . ' />' . __( 'right', 'wp-wiki-tooltip' ) . '</label></p>';
+    }
+
+    public function print_thumb_width_field( $args ) {
+        printf(
+            '<p><label><input type="text" id="thumb-width" name="wp-wiki-tooltip-settings[thumb-width]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            isset( $this->options['thumb-width'] ) ? esc_attr( $this->options[ 'thumb-width' ] ) : $args[ 'thumb-width' ]
+        );
+        echo '<p class="description">' . __( 'The height of the thumbnail is calculated respecting the side-ratio of the picture.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+
+    public function print_thumb_style_field( $args ) {
+        printf(
+            '<p><input type="text" id="thumb-style" name="wp-wiki-tooltip-settings[thumb-style]" value="%s" class="regular-text" /></p>',
+            isset( $this->options['thumb-style'] ) ? esc_attr( $this->options[ 'thumb-style' ] ) : $args[ 'thumb-style' ]
+        );
+        echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the thumbnail in the tooltip.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+
     public function sanitize( $input ) {
         return $input;
     }
@@ -280,6 +361,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 settings_fields( 'wp-wiki-tooltip-settings' );
                 do_settings_sections( 'wp-wiki-tooltip-settings-base' );
                 do_settings_sections( 'wp-wiki-tooltip-settings-design' );
+                do_settings_sections( 'wp-wiki-tooltip-settings-thumb' );
                 submit_button( __( 'Submit', 'wp-wiki-tooltip' ), 'primary', 'btn_submit', false );
                 echo "&nbsp;&nbsp;&nbsp;";
                 submit_button( __( 'Reset', 'wp-wiki-tooltip' ), 'secondary', 'btn_reset', false );

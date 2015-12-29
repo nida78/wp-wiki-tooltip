@@ -7,7 +7,7 @@ Requires at least: 3.0
 
 Tested up to: 4.4
 
-Stable tag: 1.4.1
+Stable tag: 1.5.0
 
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -47,11 +47,19 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 
 # Screenshots
 
-1. Options and Settings page
-2. Integrate the plugin by shortcodes in Posts and Pages
-3. See nice and helpful tooltips
+1. Options and Settings page: manage several Wiki URLs
+2. Options and Settings page: set styling of tooltips
+3. Options and Settings page: enable and style thumbnails
+4. Integrate the plugin by shortcodes in Posts and Pages
+5. See nice and helpful tooltips
 
 # Changelog
+
+## 1.5.0
+*Release Date - December 29th, 2015*
+
+* New feature: thumbnail pictures can be enabled and styled - both, globally and by shortcode
+* Minor bug-fix that uses the complete right Wiki URL when requesting the tooltip content
 
 ## 1.4.1
 *Release Date - December 11th, 2015*

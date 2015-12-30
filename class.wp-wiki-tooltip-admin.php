@@ -321,7 +321,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     public function print_thumb_enable_field( $args ) {
         $thumb_enabled = isset( $this->options[ 'thumb-enable' ] ) ? $this->options[ 'thumb-enable' ] : $args[ 'thumb-enable' ];
 
-        echo '<p><label><input type="checkbox" id="cbo-thumb-enable" name="wp-wiki-tooltip-settings[thumb-enable]" value="on"' . checked( $thumb_enabled, 'on', false ) . ' />' . __( 'enable thumbnails (if they are available for current Wiki article)', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<p><label><input type="checkbox" id="cbo-thumb-enable" name="wp-wiki-tooltip-settings[thumb-enable]" value="on"' . checked( $thumb_enabled, 'on', false ) . ' />' . __( 'show thumbnails by default', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<p class="description">' . __( 'A thumbnails will be displayed in tooltip if the Wiki article provides at least one picture.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
     public function print_thumb_align_field( $args ) {

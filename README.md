@@ -5,9 +5,9 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 4.4
+Tested up to: 4.4.1
 
-Stable tag: 1.5.1
+Stable tag: 1.6.0
 
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -23,6 +23,7 @@ Main features of the current version are:
 
 * Setup at least one wanted Wiki base and several other options at a backend page
 * Integrate the Wiki tooltip using shortcodes in Posts and Pages
+* shortcodes can be created by a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin
 
 # Frequently Asked Questions
 
@@ -42,8 +43,9 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 
 1. Upload the Wiki tooltip plugin to your blog,
 2. Activate it,
-3. Add some shortcodes to your Posts and Pages, and
-4. See nice and helpful tooltips where ever you like
+3. Create at least one Wiki base and review the global options on the settings page
+4. Add some shortcodes to your Posts and Pages, and
+5. See nice and helpful tooltips where ever you like
 
 # Screenshots
 
@@ -51,9 +53,16 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 2. Options and Settings page: set styling of tooltips
 3. Options and Settings page: enable and style thumbnails
 4. Integrate the plugin by shortcodes in Posts and Pages
-5. See nice and helpful tooltips
+5. Use the [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin to get help by a popup form
+6. See nice and helpful tooltips
 
 # Changelog
+
+## 1.6.0
+*Release Date - January 30th, 2016*
+
+* the plugin comes with a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin that helps users creating the shortcodes
+* some new graphical assets have been added to support high-DPI displays (aka ‘retina’) and Right-to-Left languages
 
 ## 1.5.1
 *Release Date - December 30th, 2015*
@@ -120,7 +129,7 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 # Upgrade Notice
 
 ## Upgrade to 1.4.0
-The former Wiki URL is not transfered into this version. Review the settings page after update to insert the wanted Wiki URL again!
+The former Wiki URL is not transferred into this version. Review the settings page after update to insert the wanted Wiki URL again!
 
 ## Elder Upgrades
 Nothing special to consider.

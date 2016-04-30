@@ -2,7 +2,7 @@
 Contributors: nida78
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
-Tested up to: 4.4.1
+Tested up to: 4.5.1
 Stable tag: 1.6.0
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later

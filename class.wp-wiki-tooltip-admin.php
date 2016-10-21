@@ -109,6 +109,24 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             $wp_wiki_tooltip_default_options
         );
 
+        add_settings_field(
+            'trigger',
+            __( 'Tooltips are triggered on', 'wp-wiki-tooltip' ),
+            array( $this, 'print_trigger_field' ),
+            'wp-wiki-tooltip-settings-base',
+            'wp-wiki-tooltip-settings-base',
+            $wp_wiki_tooltip_default_options
+        );
+
+        add_settings_field(
+            'min-screen-width',
+            __( 'Minimum screen width', 'wp-wiki-tooltip' ),
+            array( $this, 'print_min_screen_width_field' ),
+            'wp-wiki-tooltip-settings-base',
+            'wp-wiki-tooltip-settings-base',
+            $wp_wiki_tooltip_default_options
+        );
+
         /*** Design Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
@@ -272,6 +290,21 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         echo '<p><label><input type="radio" id="rdo-a-target-blank" name="wp-wiki-tooltip-settings[a-target]" value="_blank"' . checked( $used_target, '_blank', false ) . ' />' . __( 'new window / tab', 'wp-wiki-tooltip' ) . '</label></p>';
         echo '<p><label><input type="radio" id="rdo-a-target-self" name="wp-wiki-tooltip-settings[a-target]" value="_self" ' . checked( $used_target, '_self', false ) . ' />' . __( 'current window / tab', 'wp-wiki-tooltip' ) . '</label></p>';
+    }
+
+    public function print_trigger_field( $args ) {
+        $used_trigger = isset( $this->options[ 'trigger' ] ) ? $this->options[ 'trigger' ] : $args[ 'trigger' ];
+
+        echo '<p><label><input type="radio" id="rdo-a-trigger-hover" name="wp-wiki-tooltip-settings[trigger]" value="hover"' . checked( $used_trigger, 'hover', false ) . ' />' . __( 'hover', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<p><label><input type="radio" id="rdo-a-trigger-click" name="wp-wiki-tooltip-settings[trigger]" value="click" ' . checked( $used_trigger, 'click', false ) . ' />' . __( 'click', 'wp-wiki-tooltip' ) . '</label></p>';
+    }
+
+    public function print_min_screen_width_field( $args ) {
+        printf(
+            '<p><label><input type="text" id="min-screen-width" name="wp-wiki-tooltip-settings[min-screen-width]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            isset( $this->options['min-screen-width'] ) ? esc_attr( $this->options[ 'min-screen-width' ] ) : $args[ 'min-screen-width' ]
+        );
+        echo '<p class="description">' . __( 'Enable tooltips only if the width of the used display is greater than this defined number of pixel.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
     public function print_theme_field( $args ) {

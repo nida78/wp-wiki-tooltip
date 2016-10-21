@@ -46,6 +46,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 
         $wiki_id = $_REQUEST[ 'wid' ];
         $wiki_url = $_REQUEST[ 'wurl' ];
+        $page_url = $_REQUEST[ 'purl' ];
         $thumb_enable = $_REQUEST[ 'tenable' ];
         $thumb_width = $_REQUEST[ 'twidth' ];
 
@@ -68,6 +69,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
                     'code' => '1',
                     'title' => $wiki_data['parse']['title'],
                     'content' => $content,
+                    'url' => $page_url,
                     'thumb' => '-1'
                 );
 

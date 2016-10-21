@@ -5,9 +5,9 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 4.5.2
+Tested up to: 4.6.1
 
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 
 Donate link: http://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -39,6 +39,10 @@ Since version 1.4.0 the plugin provides the opportunity to manage multiple Wiki 
 
 Yes, you can define extra CSS style properties that are used at all links to Wiki pages!
 
+## Can I disable tooltips for mobile access?
+
+Since version 1.7.0 you can define a minimum screen width that is necessary to show the tooltips!
+
 # Installation
 
 1. Upload the Wiki tooltip plugin to your blog,
@@ -50,13 +54,20 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 # Screenshots
 
 1. Options and Settings page: manage several Wiki URLs
-2. Options and Settings page: set styling of tooltips
-3. Options and Settings page: enable and style thumbnails
-4. Integrate the plugin by shortcodes in Posts and Pages
-5. Use the [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin to get help by a popup form
-6. See nice and helpful tooltips
+2. Options and Settings page: set some options how to show tooltips
+3. Options and Settings page: set styling of tooltips
+4. Options and Settings page: enable and style thumbnails
+5. Integrate the plugin by shortcodes in Posts and Pages
+6. Use the [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin to get help by a popup form
+7. See nice and helpful tooltips
 
 # Changelog
+
+## 1.7.0
+*Release Date - October 22nd, 2016*
+
+* you can set if tooltips are triggered by click or hover
+* a minimum screen width can defined that is necessary to enable tooltips
 
 ## 1.6.0
 *Release Date - January 30th, 2016*

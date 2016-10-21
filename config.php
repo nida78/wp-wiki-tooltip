@@ -22,6 +22,10 @@ $wp_wiki_tooltip_default_options = array(
 
     'a-target' => '_blank', // where to open links to wiki pages
 
+    'trigger' => 'hover', // what triggers the tooltip
+
+    'min-screen-width' => '0', // active tooltips only if screen is greater than this number of pixel
+
     'theme' => 'default', // use default theme of Tooltipster
 
     'tooltip-head' => 'font-size: 125%; font-weight: bold;', // make the head of the tooltip a little bigger

@@ -62,14 +62,14 @@
 
 * Minor bug-fix due to compatibility problems with older PHP versions
 
-## [1.0 - C3H7NO2 | Alanine]
+## [1.0.0 - C3H7NO2 | Alanine]
 *Release Date - August 3rd, 2015*
 
 * Option page for WordPress backend added
 * Graphical assets for WordPress plugin repository added
 * Complete German translation added
 
-## [0.5]
+## [0.5.0]
 *Release Date - July 31st, 2015*
 
 * Initial release
@@ -85,5 +85,5 @@
 [1.2.0 - C4H8N2O3 | Asparagine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.2.0
 [1.1.0 - C6H14N4O2 | Arginine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.1.0
 [1.0.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.0.1
-[1.0 - C3H7NO2 | Alanine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.0
-[0.5]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/0.5
+[1.0.0 - C3H7NO2 | Alanine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.0
+[0.5.0]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/0.5

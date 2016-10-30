@@ -56,6 +56,7 @@ Since version 1.7.0 you can define a minimum screen width that is necessary to s
 7. See nice and helpful tooltips
 
 == Changelog ==
+Here the last three major releases are listed, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
 = [1.7.0 - C2H5NO2 | Glycine](https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.0) =
 *Release Date - October 22nd, 2016*

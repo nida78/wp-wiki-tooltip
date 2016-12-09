@@ -5,7 +5,7 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 4.6.1
+Tested up to: 4.7
 
 Stable tag: 1.7.0
 
@@ -93,4 +93,3 @@ Nothing special to consider.
 [1.7.0 - C2H5NO2 | Glycine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.0
 [1.6.0 - C5H9NO4 | Glutamic Acid]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.6.0
 [1.5.0 - C5H10N2O3 | Glutamine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.5.0
-

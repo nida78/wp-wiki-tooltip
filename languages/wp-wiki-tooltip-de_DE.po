@@ -150,7 +150,7 @@ msgid ""
 "\" to let the plugin check if the given URL has access to a Wiki API."
 msgstr ""
 "Es können beliebig viele Wiki URLs eingegeben werden. Klicke den Button "
-"\"<strong>prüfe</strong>\" um zu testen, ob die eingegeben URL Zugang zu "
+"\"<strong>prüfen</strong>\" um zu testen, ob die eingegeben URL Zugang zu "
 "einer Wiki API hat."
 
 #: class.wp-wiki-tooltip-admin.php:248

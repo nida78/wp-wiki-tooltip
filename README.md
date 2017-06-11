@@ -7,7 +7,7 @@ Requires at least: 3.0
 
 Tested up to: 4.8
 
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 

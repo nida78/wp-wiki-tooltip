@@ -100,7 +100,8 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 
 		$output  = '<script>$wwtj( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '", "' . $trans_wiki_data[ 'wiki-base-url' ] . '", "' . $trans_wiki_data[ 'wiki-url' ] . '", "' . $params[ 'thumbnail' ] . '" ); } );</script>';
         // $output .= '<span id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip">' . $content . '</span>';
-        $output .= '<a id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data[ 'wiki-url' ] . '" target="' . $this->options[ 'a-target' ] . '" onclick="return isTooSmall();">' . $content . '</a>';
+        $relno = ( $this->options[ 'a-target' ] == '_blank' ) ? ' rel="noopener noreferrer"' : '';
+        $output .= '<a id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data[ 'wiki-url' ] . '" target="' . $this->options[ 'a-target' ] . '"' . $relno . ' onclick="return isTooSmall();">' . $content . '</a>';
 
 		return $output;
 	}

@@ -1,5 +1,10 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.7.2]
+*Release Date - June 11th, 2017*
+
+* minor bug-fix
+
 ## [1.7.1]
 *Release Date - June 11th, 2017*
 
@@ -80,6 +85,7 @@
 
 * Initial release
 
+[1.7.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.2
 [1.7.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.1
 [1.7.0 - C2H5NO2 | Glycine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.0
 [1.6.0 - C5H9NO4 | Glutamic Acid]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.6.0

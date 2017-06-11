@@ -1,5 +1,11 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.7.1]
+*Release Date - June 11th, 2017*
+
+* if target of Wiki links is set to `"_blank"` the `rel="noopener noreferrer"` attribute is set, too
+* some language improvements
+
 ## [1.7.0 - C2H5NO2 | Glycine]
 *Release Date - October 22nd, 2016*
 
@@ -74,6 +80,7 @@
 
 * Initial release
 
+[1.7.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.1
 [1.7.0 - C2H5NO2 | Glycine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.0
 [1.6.0 - C5H9NO4 | Glutamic Acid]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.6.0
 [1.5.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.5.1

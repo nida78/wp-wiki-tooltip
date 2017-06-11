@@ -70,7 +70,8 @@ function create_tooltip_message( type, title, message, url, thumb, w, h ) {
     }
 
     if( type == 'ok' ) {
-        tooltip_html += '</div><div class="foot"><a href="' + url + '" target="' + wp_wiki_tooltip.a_target + '">' + wp_wiki_tooltip.footer_text + '</a></div></div>';
+        var relno = ( wp_wiki_tooltip.a_target == "_blank" ) ? ' rel="noopener noreferrer"' : '';
+        tooltip_html += '</div><div class="foot"><a href="' + url + '" target="' + wp_wiki_tooltip.a_target + '"' + relno + '>' + wp_wiki_tooltip.footer_text + '</a></div></div>';
     }
 
     return $wwtj( tooltip_html );

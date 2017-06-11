@@ -27,7 +27,7 @@ msgstr ""
 
 #: class.wp-wiki-tooltip-admin.php:30
 msgid "Sorry, but the test of this URL failed!"
-msgstr "Entschuldige, aber der Test dieser URL ist fehlgeschlagen!"
+msgstr "Entschuldigen Sie, aber der Test dieser URL ist fehlgeschlagen!"
 
 #: class.wp-wiki-tooltip-admin.php:36 class.wp-wiki-tooltip-admin.php:392
 msgid "Settings for Wiki-Tooltips"
@@ -119,17 +119,17 @@ msgstr "Styles"
 
 #: class.wp-wiki-tooltip-admin.php:229
 msgid "Set base options below:"
-msgstr "Stelle die Basis Optionen unten ein:"
+msgstr "Stellen Sie die Basis Optionen unten ein:"
 
 #: class.wp-wiki-tooltip-admin.php:233
 msgid "Set design / style options below:"
-msgstr "Stelle die Design / Stil Optionen unten ein:"
+msgstr "Stellen Sie die Design / Stil Optionen unten ein:"
 
 #: class.wp-wiki-tooltip-admin.php:237
 msgid "Enable thumbnails in tooltips and set some useful options below."
 msgstr ""
-"Aktiviere Thumbnails in den Tooltips und stelle einige nützliche Optionen "
-"unten ein."
+"Aktivieren Sie Thumbnails in den Tooltips und stellen Sie einige nützliche "
+"Optionen unten ein."
 
 #: class.wp-wiki-tooltip-admin.php:238
 msgid ""
@@ -158,7 +158,7 @@ msgid ""
 "To use one of these URLs just add an \"<strong>base</strong>\" attribute to "
 "the shortcode:"
 msgstr ""
-"Um eine dieser URLs zu nutzen, musst du einfach ein \"<strong>base</strong>"
+"Um eine dieser URLs zu nutzen, müssen Sie einfach ein \"<strong>base</strong>"
 "\" Attribut dem Shortcode hinzufügen:"
 
 #: class.wp-wiki-tooltip-admin.php:249
@@ -166,7 +166,7 @@ msgid ""
 "If you do not use the \"<strong>base</strong>\" attribute the URL that is "
 "marked as \"Standard\" is used."
 msgstr ""
-"Wenn du kein \"<strong>base</strong>\" Attribut benutzt, wird die URL "
+"Wenn Sie kein \"<strong>base</strong>\" Attribut benutzen, wird die URL "
 "verwendet, die als \"Standard\" markiert ist."
 
 #: class.wp-wiki-tooltip-admin.php:254
@@ -303,7 +303,7 @@ msgstr ""
 
 #: class.wp-wiki-tooltip-admin.php:393
 msgid "Use one of these shortcodes to enable Wiki-Tooltips:"
-msgstr "Benutze einen dieser Shortcodes, um Wiki-Tooltips zu verwenden:"
+msgstr "Benutzen Sie einen dieser Shortcodes, um Wiki-Tooltips zu verwenden:"
 
 #: class.wp-wiki-tooltip-admin.php:400
 msgid "Submit"
@@ -315,7 +315,7 @@ msgstr "Fehler!"
 
 #: class.wp-wiki-tooltip.php:48
 msgid "Click here to open Wiki page..."
-msgstr "Klicke hier, um die Wiki-Seite zu öffnen..."
+msgstr "Klicken Sie hier, um die Wiki-Seite zu öffnen..."
 
 #: class.wp-wiki-tooltip.php:50
 msgid "Sorry, but we were not able to find this page :("
@@ -332,7 +332,8 @@ msgstr "Text des Links"
 
 #: wp-wiki-tooltip-mce-langs.php:13
 msgid "Set the text that will be the link to the Wiki page."
-msgstr "Gib hier den Text ein, der mit der Wiki-Seite verlinkt werden soll."
+msgstr ""
+"Geben Sie hier den Text ein, der mit der Wiki-Seite verlinkt werden soll."
 
 #: wp-wiki-tooltip-mce-langs.php:14
 msgid "Wiki page title"
@@ -340,7 +341,7 @@ msgstr "Titel der Wiki-Seite"
 
 #: wp-wiki-tooltip-mce-langs.php:15
 msgid "Set the title of the requested Wiki page."
-msgstr "Gib hier den Titel der gewünschten Wiki-Seite ein."
+msgstr "Geben Sie hier den Titel der gewünschten Wiki-Seite ein."
 
 #: wp-wiki-tooltip-mce-langs.php:16
 msgid "Standard base"
@@ -355,8 +356,8 @@ msgid ""
 "Select one of the defined Wiki bases. Visit the settings page to create a "
 "new one."
 msgstr ""
-"Wähle eine der Wiki-Basen aus. Gehe auf die Einstellungsseite, um eine neue "
-"Basis anzulegen."
+"Wählen Sie eine der Wiki-Basen aus. Gehen Sie auf die Einstellungsseite, um "
+"eine neue Basis anzulegen."
 
 #: wp-wiki-tooltip-mce-langs.php:19
 msgid "use plugin default value"
@@ -408,9 +409,9 @@ msgstr "http://n1da.net"
 #~ "href=\"https://www.wikipedia.org\" target=\"_blank\">Wikipedia.org</a>."
 #~ msgstr ""
 #~ "Erzeugt erklärende Tooltips, deren Inhalt von einer <a href=\"https://www."
-#~ "mediawiki.org\" target=\"_blank\">MediaWiki</a> Installation, z.B. <a "
-#~ "href=\"https://www.wikipedia.org\" target=\"_blank\">Wikipedia.org</a>, "
-#~ "geladen werden."
+#~ "mediawiki.org\" target=\"_blank\" rel=\"noopener noreferrer\">MediaWiki</"
+#~ "a> Installation, z.B. <a href=\"https://www.wikipedia.org\" target="
+#~ "\"_blank\">Wikipedia.org</a>, geladen werden."
 
 #~ msgid "Just click to open wiki page..."
 #~ msgstr "Einfach klicken, um diese Wiki-Seite zu öffnen..."
@@ -420,7 +421,7 @@ msgstr "http://n1da.net"
 
 #~ msgid "enable thumbnails (if they are available for current Wiki article)"
 #~ msgstr ""
-#~ "Thumbnails aktiviere (wenn eins in dem aktuellen Wiki Artikel enthalten "
+#~ "Thumbnails aktivieren (wenn eins in dem aktuellen Wiki Artikel enthalten "
 #~ "ist)"
 
 #~ msgid "click button &quot;test&quot; to set this field"

@@ -63,7 +63,7 @@ function create_tooltip_message( type, title, message, url, thumb, w, h ) {
     if( type == 'init' ) {
         tooltip_html += '<img src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
     } else {
-        if( thumb != -1 ) {
+        if( ( type != 'err' ) && ( thumb != -1 ) ) {
             tooltip_html += '<img src="' + thumb + '" align="' + wp_wiki_tooltip.thumb_align + '" class="thumb" width="' + w + '" height="' + h + '" />';
         }
         tooltip_html += message;
@@ -72,6 +72,8 @@ function create_tooltip_message( type, title, message, url, thumb, w, h ) {
     if( type == 'ok' ) {
         var relno = ( wp_wiki_tooltip.a_target == '_blank' ) ? ' rel="noopener noreferrer"' : '';
         tooltip_html += '</div><div class="foot"><a href="' + url + '" target="' + wp_wiki_tooltip.a_target + '"' + relno + '>' + wp_wiki_tooltip.footer_text + '</a></div></div>';
+    } else {
+        tooltip_html += '</div><div class="foot"></div></div>';
     }
 
     return $wwtj( tooltip_html );

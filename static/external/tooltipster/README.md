@@ -1,65 +1,114 @@
 Tooltipster
 ===========
 
-A jQuery tooltip plugin by Caleb Jacob under MIT license.  
-Compatible with Mozilla Firefox, Google Chrome, IE8+ and others. Requires jQuery 1.7+
+A flexible and extensible jQuery plugin for modern tooltips by Caleb Jacob and Louis Ameline under MIT license.  
+Compatible with Mozilla Firefox, Google Chrome, IE6+ and others.  
+Requires jQuery 1.10+ (or less, see the compatibility note in the doc).  
+Default css + js files = 10Kb gzipped.
 
 A reminder of options/methods lies below. For detailed documentation, visit http://iamceege.github.io/tooltipster/
 
-Options
--------------------------
+Standard options
+----------------
 
 animation  
-arrow  
-arrowColor  
-autoClose  
+animationDuration  
 content  
 contentAsHTML  
 contentCloning  
 debug  
 delay  
-minWidth  
-maxWidth  
+delayTouch  
 functionInit  
 functionBefore  
 functionReady  
 functionAfter  
-hideOnClick  
-icon  
-iconCloning  
-iconDesktop  
-iconTheme  
-iconTouch  
+functionFormat  
+IEmin  
 interactive  
-interactiveTolerance  
 multiple  
-offsetX  
-offsetY  
-onlyOne  
-position  
-positionTracker  
-positionTrackerCallback  
+plugins  
+repositionOnScroll  
 restoration  
-speed  
+selfDestruction  
 timer  
 theme  
-touchDevices  
+trackerInterval  
+trackOrigin  
+trackTooltip  
 trigger  
+triggerClose  
+triggerOpen  
 updateAnimation  
+zIndex  
 
-Methods
--------------------------
+Other options
+-------------
 
-$.fn.tooltipster('setDefaults', {})  
-$(...).tooltipster('show' [, callback])  
-$(...).tooltipster('hide' [, callback])  
-$(...).tooltipster('disable')  
-$(...).tooltipster('enable')  
-$(...).tooltipster('destroy')  
-$(...).tooltipster('content')  
-$(...).tooltipster('content', myNewContent)  
-$(...).tooltipster('option', optionName)  
-$(...).tooltipster('option', optionName, optionValue)  
-$(...).tooltipster('reposition')  
-$(...).tooltipster('elementTooltip')  
-$(...).tooltipster('elementIcon')  
+(these are available when you use sideTip, the default plugin)
+
+arrow  
+distance  
+functionPosition  
+maxWidth  
+minIntersection  
+minWidth  
+side  
+viewportAware  
+
+Instance methods
+----------------
+
+close([callback])  
+content([myNewContent])  
+destroy()  
+disable()  
+elementOrigin()  
+elementTooltip()  
+enable()  
+instance()  
+on, one, off, triggerHandler  
+open([callback])  
+option(optionName [, optionValue])  
+reposition()   
+status()   
+
+Core methods
+------------
+
+instances([selector || element])  
+instancesLatest()  
+on, one, off, triggerHandler  
+origins()  
+setDefaults({})  
+
+Events
+------
+
+after  
+before  
+close  
+closing  
+created  
+destroy  
+destroyed  
+dismissable  
+format  
+geometry  
+init  
+state  
+ready  
+reposition  
+repositioned  
+scroll  
+start  
+startcancel  
+startend  
+updated
+
+sideTip events
+--------------
+
+position  
+positionTest  
+positionTested

@@ -24,11 +24,11 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 	}
 
 	public function init() {
-		wp_enqueue_style( 'tooltipster-css', plugins_url( 'static/external/tooltipster/css/tooltipster.css', __FILE__ ), array(), '3.0', 'all' );
-		wp_enqueue_style( 'tooltipster-light-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-light.css', __FILE__ ), array(), '3.0', 'all' );
-		wp_enqueue_style( 'tooltipster-noir-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-noir.css', __FILE__ ), array(), '3.0', 'all' );
-		wp_enqueue_style( 'tooltipster-punk-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-punk.css', __FILE__ ), array(), '3.0', 'all' );
-		wp_enqueue_style( 'tooltipster-shadow-css', plugins_url( 'static/external/tooltipster/css/themes/tooltipster-shadow.css', __FILE__ ), array(), '3.0', 'all' );
+		wp_enqueue_style( 'tooltipster-css', plugins_url( 'static/external/tooltipster/dist/css/tooltipster.bundle.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+		wp_enqueue_style( 'tooltipster-light-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+		wp_enqueue_style( 'tooltipster-noir-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+		wp_enqueue_style( 'tooltipster-punk-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+		wp_enqueue_style( 'tooltipster-shadow-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css', __FILE__ ), array(), '4.2.5', 'all' );
 		wp_enqueue_style( 'wp-wiki-tooltip-css', plugins_url( 'static/css/wp-wiki-tooltip.css', __FILE__ ), array( 'tooltipster-css' ), $this->version, 'all' );
 		wp_add_inline_style(
 			'wp-wiki-tooltip-css',
@@ -39,21 +39,25 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			'div.wiki-tooltip-balloon img.thumb { ' . $this->options[ 'thumb-style' ] . ' }'
 		);
 
-		wp_enqueue_script( 'tooltipster-js', plugins_url( 'static/external/tooltipster/js/jquery.tooltipster.min.js', __FILE__ ), array( 'jquery' ), '3.0', false );
+		wp_enqueue_script( 'tooltipster-js', plugins_url( 'static/external/tooltipster/dist/js/tooltipster.bundle.min.js', __FILE__ ), array( 'jquery' ), '3.0', false );
 		wp_register_script( 'wp-wiki-tooltip-js', plugins_url( 'static/js/wp-wiki-tooltip.js', __FILE__ ), array( 'tooltipster-js' ), $this->version, false );
 		wp_localize_script( 'wp-wiki-tooltip-js', 'wp_wiki_tooltip', array(
 			'wp_ajax_url' => admin_url( 'admin-ajax.php' ),
 			'wiki_plugin_url' => plugin_dir_url( __FILE__ ),
 			'tooltip_theme' => 'tooltipster-' . $this->options[ 'theme' ],
 			'footer_text' => __( 'Click here to open Wiki page...', 'wp-wiki-tooltip' ),
-			'error_title' => __( 'Error!', 'wp-wiki-tooltip' ),
-			'page_not_found_message' => __( 'Sorry, but we were not able to find this page :(', 'wp-wiki-tooltip' ),
 			'thumb_enable' => ( $this->options[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off',
 			'thumb_width' => $this->options[ 'thumb-width' ],
             'thumb_align' => $this->options[ 'thumb-align' ],
-            'trigger' => $this->options[ 'trigger' ],
+			'trigger' => $this->options[ 'trigger' ],
+			'trigger_hover_action' => $this->options[ 'trigger-hover-action' ],
             'a_target' => $this->options[ 'a-target' ],
-            'min_screen_width' => $this->options[ 'min-screen-width' ]
+			'min_screen_width' => $this->options[ 'min-screen-width' ],
+			'error_handling' => $this->options[ 'error-handling' ],
+			'default_error_title' => __( 'Error!', 'wp-wiki-tooltip' ),
+			'default_error_message' => __( 'Sorry, but we were not able to find this page :(', 'wp-wiki-tooltip' ),
+			'own_error_title' => $this->options[ 'own-error-title' ],
+			'own_error_message' => $this->options[ 'own-error-message' ]
 		));
 		wp_enqueue_script( 'wp-wiki-tooltip-js' );
 	}
@@ -99,9 +103,13 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		}
 
 		$output  = '<script>$wwtj( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '", "' . $trans_wiki_data[ 'wiki-base-url' ] . '", "' . $trans_wiki_data[ 'wiki-url' ] . '", "' . $params[ 'thumbnail' ] . '" ); } );</script>';
-        // $output .= '<span id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip">' . $content . '</span>';
         $relno = ( $this->options[ 'a-target' ] == '_blank' ) ? ' rel="noopener noreferrer"' : '';
-        $output .= '<a id="wiki-tooltip-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data[ 'wiki-url' ] . '" target="' . $this->options[ 'a-target' ] . '"' . $relno . ' onclick="return isTooSmall();">' . $content . '</a>';
+
+        if( ( $trans_wiki_data[ 'wiki-id' ] == '-1' ) && ( $this->options[ 'error-handling' ] == 'remove-link' ) ) {
+	        $output .= $content;
+        } else {
+	        $output .= '<a id="wiki-tooltip-' . $cnt . '" data-tooltip-content="wiki-tooltip-box-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . '" target="' . $this->options['a-target'] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options['trigger'] . '\', \'' . $this->options['trigger-hover-action'] . '\' );">' . $content . '</a>';
+        }
 
 		return $output;
 	}

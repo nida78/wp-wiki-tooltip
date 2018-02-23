@@ -8,6 +8,18 @@ function isTooSmall() {
     return ( $wwtj( window ).width() < wp_wiki_tooltip.min_screen_width ) ? true : false;
 }
 
+function isClickEnabled( trig, trighovact ) {
+    if( isTooSmall() ) {
+        return true;
+    }
+
+    if( trig == 'hover' && trighovact == 'open' ) {
+        return true;
+    }
+
+    return false;
+}
+
 function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
     $wwtj( '#wiki-container' ).append( '<div id="wiki-tooltip-box-' + id + '" class="wiki-tooltip-box" wiki-id="' + wid + '" title="' + title + '"></div>' );
 
@@ -23,17 +35,21 @@ function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
 
         interactive: true,
 
+        repositionOnScroll: true,
+
+        trackTooltip: true,
+
         content: create_tooltip_message( 'init', title ),
 
-        functionBefore: function( origin, continueTooltip ) {
+        functionBefore: function( instance, helper ) {
 
             if( isTooSmall() ) {
                 return false;
             }
 
-            continueTooltip();
+            var $origin = $wwtj( helper.origin );
 
-            if( origin.data( 'ajax' ) !== 'cached' ) {
+            if( $origin.data( 'loaded' ) !== true ) {
 
                 var request_data = {
                     'action': 'get_wiki_page',
@@ -41,17 +57,21 @@ function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
                     'wurl': wurl,
                     'purl': purl,
                     'tenable': ( thumb == 'default' ) ? wp_wiki_tooltip.thumb_enable : thumb,
-                    'twidth': wp_wiki_tooltip.thumb_width
+                    'twidth': wp_wiki_tooltip.thumb_width,
+                    'errtit': ( wp_wiki_tooltip.error_handling == 'show-own' ) ? wp_wiki_tooltip.own_error_title : wp_wiki_tooltip.default_error_title,
+                    'errmsg': ( wp_wiki_tooltip.error_handling == 'show-own' ) ? wp_wiki_tooltip.own_error_message : wp_wiki_tooltip.default_error_message
                 };
 
                 $wwtj.post( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {
                     data = $wwtj.parseJSON( response_data );
                     if( data[ 'code' ] == -1 ) {
-                        origin.tooltipster( 'content', create_tooltip_message( 'err', wp_wiki_tooltip.error_title, wp_wiki_tooltip.page_not_found_message ) ).data( 'ajax', 'cached' );
+                        instance.content( create_tooltip_message( 'err', data[ 'title' ], data[ 'content' ] ) );
                     } else {
-                        origin.tooltipster( 'content', create_tooltip_message( 'ok', data[ 'title' ], data[ 'content' ], data[ 'url' ], data[ 'thumb' ], data[ 'thumb-width' ], data[ 'thumb-height' ] ) ).data( 'ajax', 'cached' );
+                        instance.content( create_tooltip_message( 'ok', data[ 'title' ], data[ 'content' ], data[ 'url' ], data[ 'thumb' ], data[ 'thumb-width' ], data[ 'thumb-height' ] ) );
                     }
                 });
+
+                $origin.data( 'loaded', true );
             }
         }
     });

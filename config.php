@@ -24,7 +24,15 @@ $wp_wiki_tooltip_default_options = array(
 
     'trigger' => 'hover', // what triggers the tooltip
 
-    'min-screen-width' => '0', // active tooltips only if screen is greater than this number of pixel
+    'trigger-hover-action' => 'none', // how does the link work if trigger is "hover"
+
+    'min-screen-width' => '0', // activate tooltips only if screen is greater than this number of pixel
+
+    'error-handling' => 'show-default', // how should errors be handled
+
+    'own-error-title' => '', // the self-defined title of the error message
+
+    'own-error-message' => '', // the self-defined message of the error message
 
     'theme' => 'default', // use default theme of Tooltipster
 

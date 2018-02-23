@@ -67,3 +67,21 @@ function test_wiki_url_row( RowId ) {
         }
     });
 }
+
+function disable_trigger_hover_action( swt ) {
+    $wwtj( '#rdo-a-trigger-hover-action-none' ).prop( 'disabled', swt );
+    $wwtj( '#rdo-a-trigger-hover-action-open' ).prop( 'disabled', swt );
+}
+
+function disable_error_handling_fields( swt1, swt2 ) {
+    $wwtj( '#own-error-title' ).prop( 'disabled', swt1 );
+    $wwtj( '#own-error-message' ).prop( 'disabled', swt1 );
+    $wwtj( '#error-wiki-page-title' ).prop( 'disabled', swt2 );
+}
+
+function enable_tooltip_demo( theme ) {
+    $wwtj( '#tooltipster-' + theme + '-preview' ).tooltipster( {
+        trigger: 'hover',
+        theme: 'tooltipster-' + theme,
+    } );
+}

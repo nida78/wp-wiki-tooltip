@@ -48,10 +48,18 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         $wiki_url = $_REQUEST[ 'wurl' ];
         $page_url = $_REQUEST[ 'purl' ];
         $thumb_enable = $_REQUEST[ 'tenable' ];
-        $thumb_width = $_REQUEST[ 'twidth' ];
+	    $thumb_width = $_REQUEST[ 'twidth' ];
+	    $error_title = $_REQUEST[ 'errtit' ];
+	    $error_message = $_REQUEST[ 'errmsg' ];
+
+	    $error_result = array(
+	    	'code' => -1,
+            'title' => $error_title,
+            'content' => $error_message
+	    );
 
         if( $wiki_id == -1 ) {
-            $result = array( 'code' => -1 );
+            $result = $error_result;
         } else {
             $this->page_query_args[ 'pageid' ] = $wiki_id;
             $response = wp_remote_get( $wiki_url . '?' . http_build_query( $this->page_query_args ) );
@@ -90,7 +98,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
                 }
 
             } else {
-                $result = array( 'code' => -1 );
+	            $result = $error_result;
             }
         }
 
@@ -112,7 +120,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 
         $result = array(
             'wiki-id' => -1,
-            'wiki-title' => __( 'Error!', 'wp-wiki-tooltip' ),
+            'wiki-title' => '',
             'wiki-url' => ''
         );
 

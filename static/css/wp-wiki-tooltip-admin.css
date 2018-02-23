@@ -56,6 +56,35 @@ p.wiki-usage span.bold-teletyper {
     display: none;
 }
 
+.wiki-form-indent-left {
+    padding-left: 25px;
+}
+
+.wiki-form-indent-left.description {
+    font-weight: bold;
+    margin-bottom: -5px;
+}
+
+.wiki-error-handling-list label {
+    display: block;
+    float: left;
+    width: 110px;
+    text-align: right;
+    margin: 6px 6px 0 0;
+}
+
+.wiki-error-handling-list textarea {
+    height: 130px;
+}
+
+span#own-error-message-desc {
+    margin-left: 120px;
+}
+
+ul#wiki-tooltip-admin-theme-list li {
+    margin-bottom: -5px;
+}
+
 ul#wiki-tooltip-admin-theme-list li {
     display: inline-block;
     margin-left: 5px;
@@ -74,64 +103,53 @@ ul#wiki-tooltip-admin-theme-list li label span {
     opacity: 0.8;
 }
 
-.tooltipster-default-preview {
-    border-radius: 5px;
-    border: 2px solid #000;
-    background: #4c4c4c;
-    color: #fff;
-    font-family: Arial, sans-serif;
+.tooltipster-preview {
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
+    font-weight: 300;
     line-height: 16px;
-    padding: 8px 10px;
-    font-weight: 400;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    text-align: center;
+    width: 70px;
 }
 
-.tooltipster-light-preview {
+#tooltipster-default-preview {
+    border-radius: 5px;
+    border: 2px solid #000;
+    background: #565656;
+    color: #fff;
+}
+
+#tooltipster-light-preview {
     border-radius: 5px;
     border: 1px solid #cccccc;
     background: #ededed;
     color: #666666;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 8px 10px;
-    font-weight: 400;
 }
 
-.tooltipster-punk-preview {
+#tooltipster-borderless-preview {
+    border-radius: 5px;
+    border: 0px;
+    background: rgba(10,10,10,0.90);
+    color: #fff;
+}
+
+#tooltipster-punk-preview {
     border-radius: 5px;
     border-bottom: 3px solid #f71169;
     background: #2a2a2a;
     color: #fff;
-    font-family: 'Courier', monospace;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 8px 10px;
-    font-weight: 400;
 }
 
-.tooltipster-noir-preview {
+#tooltipster-noir-preview {
     border-radius: 0px;
-    border: 3px solid #2c2c2c;
+    border: 3px solid #000;
     background: #fff;
-    color: #2c2c2c;
-    font-family: 'Georgia', serif;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 8px 10px;
-    font-weight: 400;
+    color: #000;
 }
 
-.tooltipster-shadow-preview {
+#tooltipster-shadow-preview {
     border-radius: 5px;
     background: #fff;
     box-shadow: 0px 0px 14px rgba(0,0,0,0.3);
-    color: #2c2c2c;
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 8px 10px;
-    font-weight: 400;
+    color: #8d8d8d;
 }

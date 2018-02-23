@@ -21,8 +21,16 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function init() {
+	    wp_enqueue_style( 'tooltipster-css', plugins_url( 'static/external/tooltipster/dist/css/tooltipster.bundle.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+	    wp_enqueue_style( 'tooltipster-light-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+	    wp_enqueue_style( 'tooltipster-noir-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+	    wp_enqueue_style( 'tooltipster-punk-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+	    wp_enqueue_style( 'tooltipster-shadow-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css', __FILE__ ), array(), '4.2.5', 'all' );
+
         wp_enqueue_style( 'wp-wiki-tooltip-admin-css', plugins_url( 'static/css/wp-wiki-tooltip-admin.css', __FILE__ ), array(), $this->version, 'all' );
         wp_enqueue_style( 'wp-wiki-tooltip-mce-css', plugins_url( 'static/css/wp-wiki-tooltip-mce.css', __FILE__ ), array(), $this->version, 'all' );
+
+	    wp_enqueue_script( 'tooltipster-js', plugins_url( 'static/external/tooltipster/dist/js/tooltipster.bundle.min.js', __FILE__ ), array( 'jquery' ), '3.0', false );
 
         wp_register_script( 'wp-wiki-tooltip-admin-js', plugins_url( 'static/js/wp-wiki-tooltip-admin.js', __FILE__ ), array( 'jquery' ), $this->version, false );
         wp_localize_script( 'wp-wiki-tooltip-admin-js', 'wp_wiki_tooltip_admin', array(
@@ -112,22 +120,31 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         add_settings_field(
             'trigger',
             __( 'Tooltips are triggered on', 'wp-wiki-tooltip' ),
-            array( $this, 'print_trigger_field' ),
+            array( $this, 'print_trigger_fields' ),
             'wp-wiki-tooltip-settings-base',
             'wp-wiki-tooltip-settings-base',
             $wp_wiki_tooltip_default_options
         );
 
-        add_settings_field(
-            'min-screen-width',
-            __( 'Minimum screen width', 'wp-wiki-tooltip' ),
-            array( $this, 'print_min_screen_width_field' ),
-            'wp-wiki-tooltip-settings-base',
-            'wp-wiki-tooltip-settings-base',
-            $wp_wiki_tooltip_default_options
-        );
+	    add_settings_field(
+		    'min-screen-width',
+		    __( 'Minimum screen width', 'wp-wiki-tooltip' ),
+		    array( $this, 'print_min_screen_width_field' ),
+		    'wp-wiki-tooltip-settings-base',
+		    'wp-wiki-tooltip-settings-base',
+		    $wp_wiki_tooltip_default_options
+	    );
 
-        /*** Design Settings ***/
+	    add_settings_field(
+		    'error-handling',
+		    __( 'Error handling', 'wp-wiki-tooltip' ),
+		    array( $this, 'print_error_handling_fields' ),
+		    'wp-wiki-tooltip-settings-base',
+		    'wp-wiki-tooltip-settings-base',
+		    $wp_wiki_tooltip_default_options
+	    );
+
+	    /*** Design Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
             __( 'Design Settings', 'wp-wiki-tooltip' ),
@@ -292,11 +309,19 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<p><label><input type="radio" id="rdo-a-target-self" name="wp-wiki-tooltip-settings[a-target]" value="_self" ' . checked( $used_target, '_self', false ) . ' />' . __( 'current window / tab', 'wp-wiki-tooltip' ) . '</label></p>';
     }
 
-    public function print_trigger_field( $args ) {
-        $used_trigger = isset( $this->options[ 'trigger' ] ) ? $this->options[ 'trigger' ] : $args[ 'trigger' ];
+    public function print_trigger_fields( $args ) {
+	    $used_trigger = isset( $this->options[ 'trigger' ] ) ? $this->options[ 'trigger' ] : $args[ 'trigger' ];
+	    $used_action = isset( $this->options[ 'trigger-hover-action' ] ) ? $this->options[ 'trigger-hover-action' ] : $args[ 'trigger-hover-action' ];
 
-        echo '<p><label><input type="radio" id="rdo-a-trigger-hover" name="wp-wiki-tooltip-settings[trigger]" value="hover"' . checked( $used_trigger, 'hover', false ) . ' />' . __( 'hover', 'wp-wiki-tooltip' ) . '</label></p>';
-        echo '<p><label><input type="radio" id="rdo-a-trigger-click" name="wp-wiki-tooltip-settings[trigger]" value="click" ' . checked( $used_trigger, 'click', false ) . ' />' . __( 'click', 'wp-wiki-tooltip' ) . '</label></p>';
+	    echo '<p><label><input type="radio" id="rdo-a-trigger-click" name="wp-wiki-tooltip-settings[trigger]" value="click" ' . checked( $used_trigger, 'click', false ) . ' onclick="disable_trigger_hover_action( true );" />' . __( 'click', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<p><label><input type="radio" id="rdo-a-trigger-hover" name="wp-wiki-tooltip-settings[trigger]" value="hover"' . checked( $used_trigger, 'hover', false ) . ' onclick="disable_trigger_hover_action( false );" />' . __( 'hover', 'wp-wiki-tooltip' ) . '</label></p>';
+?>
+        <p class="wiki-form-indent-left description"><?php _e( 'What happens by clicking the link, too?', 'wp-wiki-tooltip' ); ?></p>
+        <ul class="wiki-form-indent-left">
+            <li><label><input type="radio" id="rdo-a-trigger-hover-action-none" name="wp-wiki-tooltip-settings[trigger-hover-action]" value="none" <?php checked( $used_action, 'none', true ) ?> <?php disabled( $used_trigger, 'click', true ) ?> /><?php _e( 'Nothing! The link has no further function.', 'wp-wiki-tooltip' ); ?></label></li>
+            <li><label><input type="radio" id="rdo-a-trigger-hover-action-open" name="wp-wiki-tooltip-settings[trigger-hover-action]" value="open" <?php checked( $used_action, 'open', true ) ?> <?php disabled( $used_trigger, 'click', true ) ?> /><?php _e( 'The linked Wiki page will be opened!', 'wp-wiki-tooltip' ); ?></label></li>
+        </ul>
+<?php
     }
 
     public function print_min_screen_width_field( $args ) {
@@ -307,17 +332,43 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<p class="description">' . __( 'Enable tooltips only if the width of the used display is greater than this defined number of pixel.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
+    public function print_error_handling_fields( $args ) {
+	    $used_error_handling = isset( $this->options[ 'error-handling' ] ) ? $this->options[ 'error-handling' ] : $args[ 'error-handling' ];
+	    $not_used_show_own = ( $used_error_handling === 'show-own' ) ? false : true;
+	    $not_used_show_page = ( $used_error_handling === 'show-page' ) ? false : true;
+
+        echo '<p>' . __( 'What should happen if the linked Wiki page is not available, e.g. if the Wiki is under construction?', 'wp-wiki-tooltip' ) . '</p>';
+	    echo '<p><label><input type="radio" id="rdo-error-handling-show-default" name="wp-wiki-tooltip-settings[error-handling]" value="show-default" ' . checked( $used_error_handling, 'show-default', false ) . ' onclick="disable_error_handling_fields( true, true );" />' . __( 'show default error title and message in tooltip', 'wp-wiki-tooltip' ) . '</label></p>';
+	    echo '<p><label><input type="radio" id="rdo-error-handling-show-own" name="wp-wiki-tooltip-settings[error-handling]" value="show-own" ' . checked( $used_error_handling, 'show-own', false ) . ' onclick="disable_error_handling_fields( false, true );" />' . __( 'show your own error title and message in tooltip', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<ul class="wiki-form-indent-left wiki-error-handling-list">';
+	    printf(
+		    '<li><label for="own-error-title">' . __( 'Title:', 'wp-wiki-tooltip' ) . '</label><input type="text" id="own-error-title" name="wp-wiki-tooltip-settings[own-error-title]" value="%s" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' /></li>',
+		    isset( $this->options['own-error-title'] ) ? esc_attr( $this->options[ 'own-error-title' ] ) : $args[ 'own-error-title' ]
+	    );
+	    printf(
+		    '<li><label for="own-error-message">' . __( 'Message:', 'wp-wiki-tooltip' ) . '</label><textarea id="own-error-message" name="wp-wiki-tooltip-settings[own-error-message]" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' >%s</textarea><br /><span id="own-error-message-desc" class="description">' . __( 'You can enter HTML here!', 'wp-wiki-tooltip' ) . '</span></span></li>',
+		    isset( $this->options['own-error-message'] ) ? esc_attr( $this->options[ 'own-error-message' ] ) : $args[ 'own-error-message' ]
+	    );
+        echo '</ul>';
+	    echo '<p><label><input type="radio" id="rdo-error-handling-remove-link" name="wp-wiki-tooltip-settings[error-handling]" value="remove-link" ' . checked( $used_error_handling, 'remove-link', false ) . ' onclick="disable_error_handling_fields( true, true );" />' . __( 'remove the link completely', 'wp-wiki-tooltip' ) . '</label></p>';
+    }
+
     public function print_theme_field( $args ) {
         $used_theme = isset( $this->options[ 'theme' ] ) ? $this->options[ 'theme' ] : $args[ 'theme' ];
 
         echo '<ul id="wiki-tooltip-admin-theme-list">';
-        foreach( array( 'default', 'light', 'noir', 'punk', 'shadow' ) as $theme ) {
-            echo '<li><label>';
-            echo '<input type="radio" id="rdo-theme-' . $theme . '" name="wp-wiki-tooltip-settings[theme]" value="' . $theme . '"' . checked($used_theme, $theme, false) . ' />';
-            echo '<span class="tooltipster-' . $theme . '-preview">' . $theme . '</span>';
-            echo '</label></li>';
+        foreach( array( 'default', 'light', 'borderless', 'noir', 'punk', 'shadow' ) as $theme ) {
+?>          <li>
+                <label>
+                    <input type="radio" id="rdo-theme-<?php echo $theme; ?>" name="wp-wiki-tooltip-settings[theme]" value="<?php echo $theme; ?>" <?php checked( $used_theme, $theme, true ); ?> />
+                    <span id="tooltipster-<?php echo $theme; ?>-preview" class="tooltipster-preview" title="<?php printf(__( 'This is a tooltip demo with &raquo;%s&laquo; theme...', 'wp-wiki-tooltip' ), $theme ); ?>"><?php echo $theme; ?></span>
+                </label>
+                <script>$wwtj( document ).ready( function() { enable_tooltip_demo( '<?php echo $theme; ?>' ); } );</script>
+            </li>
+<?php
         }
         echo '</ul>';
+	    echo '<p class="description">' . __( 'Hover over the icons to see a tooltip preview!', 'wp-wiki-tooltip' ) . '</p>';
     }
 
     public function print_tooltip_head_field( $args ) {

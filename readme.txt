@@ -2,8 +2,8 @@
 Contributors: nida78
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
-Tested up to: 4.8
-Stable tag: 1.7.4
+Tested up to: 4.9.4
+Stable tag: 1.8.0
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later
 
@@ -58,6 +58,14 @@ Since version 1.7.0 you can define a minimum screen width that is necessary to s
 == Changelog ==
 Here the last three major releases are listed, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
+= 1.8.0 - C6H9N3O2 | Histidine =
+*Release Date - February 23rd, 2018*
+
+* if tooltip trigger 'hover' is selected you can set explicitly how the link has to work
+* special options for handling errors are available
+* a new version of Tooltipster plugin was released that leads to some programmatic and design changes
+* a preview for every tooltip designs is available at options page now
+
 = 1.7.0 - C2H5NO2 | Glycine =
 *Release Date - October 22nd, 2016*
 
@@ -69,12 +77,6 @@ Here the last three major releases are listed, only. Find complete log of all ch
 
 * the plugin comes with a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin that helps users creating the shortcodes
 * some new graphical assets have been added to support high-DPI displays (aka ‘retina’) and Right-to-Left languages
-
-= 1.5.0 - C5H10N2O3 | Glutamine =
-*Release Date - December 29th, 2015*
-
-* New feature: thumbnail pictures can be enabled and styled - both, globally and by shortcode
-* Minor bug-fix that uses the complete right Wiki URL when requesting the tooltip content
 
 == Upgrade Notice ==
 

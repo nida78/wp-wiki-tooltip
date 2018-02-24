@@ -23,13 +23,29 @@ function isClickEnabled( trig, trighovact ) {
 function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
     $wwtj( '#wiki-container' ).append( '<div id="wiki-tooltip-box-' + id + '" class="wiki-tooltip-box" wiki-id="' + wid + '" title="' + title + '"></div>' );
 
+    var open_options, close_options;
+
+    if( wp_wiki_tooltip.trigger == 'hover' ) {
+        open_options = { mouseenter: true, touchstart: true };
+        close_options = { mouseleave: true, originClick: true, tap: true };
+    }
+
+    if( wp_wiki_tooltip.trigger == 'click' ) {
+        open_options = { click: true, tap: true };
+        close_options = { click: true, tap: true };
+    }
+
     $wwtj( '#wiki-tooltip-' + id ).tooltipster({
 
         maxWidth: 500,
 
         theme: wp_wiki_tooltip.tooltip_theme,
 
-        trigger: wp_wiki_tooltip.trigger,
+        trigger: 'custon',
+
+        triggerOpen: open_options,
+
+        triggerClose: close_options,
 
         contentAsHTML: true,
 

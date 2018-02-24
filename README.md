@@ -62,7 +62,7 @@ Since version 1.7.0 you can define a minimum screen width that is necessary to s
 7. See nice and helpful tooltips
 
 # Changelog
-Here the last three major releases are listed, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
+The last three major releases are listed here, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
 ## [1.8.0 - C6H9N3O2 | Histidine]
 *Release Date - February 23rd, 2018*

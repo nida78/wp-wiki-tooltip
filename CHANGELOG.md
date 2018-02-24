@@ -1,5 +1,10 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.8.1]
+*Release Date - February 24th, 2018*
+
+* bug-fix to handle trigger 'hover' on devices with touchscreen right
+
 ## [1.8.0 - C6H9N3O2 | Histidine]
 *Release Date - February 23rd, 2018*
 
@@ -103,6 +108,7 @@
 
 * Initial release
 
+[1.8.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.1
 [1.8.0 - C6H9N3O2 | Histidine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.0
 [1.7.4]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.4
 [1.7.3]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.3

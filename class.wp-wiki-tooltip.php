@@ -108,7 +108,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
         if( ( $trans_wiki_data[ 'wiki-id' ] == '-1' ) && ( $this->options[ 'error-handling' ] == 'remove-link' ) ) {
 	        $output .= $content;
         } else {
-	        $output .= '<a id="wiki-tooltip-' . $cnt . '" data-tooltip-content="wiki-tooltip-box-' . $cnt . '" class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . '" target="' . $this->options['a-target'] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options['trigger'] . '\', \'' . $this->options['trigger-hover-action'] . '\' );">' . $content . '</a>';
+	        $output .= '<span id="wiki-tooltip-' . $cnt . '" data-tooltip-content="wiki-tooltip-box-' . $cnt . '"><a class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . '" target="' . $this->options['a-target'] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options['trigger'] . '\', \'' . $this->options['trigger-hover-action'] . '\' );">' . $content . '</a></span>';
         }
 
 		return $output;

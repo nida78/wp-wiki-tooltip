@@ -4,7 +4,7 @@
 Plugin Name: WP Wiki Tooltip
 Plugin URI: https://n1da.net/specials/wp-wiki-tooltip/
 Description: Adds explaining tooltips querying their content from a <a href="https://www.mediawiki.org" target="_blank" rel="noopener noreferrer">MediaWiki</a> installation, e.g. <a href="https://www.wikipedia.org" target="_blank" rel="noopener noreferrer">Wikipedia.org</a>.
-Version: 1.8.1
+Version: 1.9.0
 Author: Nico Danneberg
 Author URI: https://n1da.net
 License: GPLv2 or later

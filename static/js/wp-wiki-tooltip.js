@@ -20,7 +20,7 @@ function isClickEnabled( trig, trighovact ) {
     return false;
 }
 
-function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
+function add_wiki_box( id, wid, title, section, wurl, purl, thumb ) {
     $wwtj( '#wiki-container' ).append( '<div id="wiki-tooltip-box-' + id + '" class="wiki-tooltip-box" wiki-id="' + wid + '" title="' + title + '"></div>' );
 
     var open_options, close_options;
@@ -37,25 +37,29 @@ function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
 
     $wwtj( '#wiki-tooltip-' + id ).tooltipster({
 
-        maxWidth: 500,
+        animation: wp_wiki_tooltip.animation,
 
-        theme: wp_wiki_tooltip.tooltip_theme,
-
-        trigger: 'custon',
-
-        triggerOpen: open_options,
-
-        triggerClose: close_options,
+        content: create_tooltip_message( 'init', title, section ),
 
         contentAsHTML: true,
 
         interactive: true,
 
+        maxWidth: 500,
+
         repositionOnScroll: true,
+
+        theme: wp_wiki_tooltip.tooltip_theme,
+
+        trigger: 'custom',
+
+        triggerOpen: open_options,
+
+        triggerClose: close_options,
 
         trackTooltip: true,
 
-        content: create_tooltip_message( 'init', title ),
+        updateAnimation: null,
 
         functionBefore: function( instance, helper ) {
 
@@ -70,6 +74,8 @@ function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
                 var request_data = {
                     'action': 'get_wiki_page',
                     'wid': wid,
+                    'section': section,
+                    'serrhdl': wp_wiki_tooltip.section_error_handling,
                     'wurl': wurl,
                     'purl': purl,
                     'tenable': ( thumb == 'default' ) ? wp_wiki_tooltip.thumb_enable : thumb,
@@ -81,9 +87,9 @@ function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
                 $wwtj.post( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {
                     data = $wwtj.parseJSON( response_data );
                     if( data[ 'code' ] == -1 ) {
-                        instance.content( create_tooltip_message( 'err', data[ 'title' ], data[ 'content' ] ) );
+                        instance.content( create_tooltip_message( 'err', data[ 'title' ], data[ 'section' ], data[ 'content' ] ) );
                     } else {
-                        instance.content( create_tooltip_message( 'ok', data[ 'title' ], data[ 'content' ], data[ 'url' ], data[ 'thumb' ], data[ 'thumb-width' ], data[ 'thumb-height' ] ) );
+                        instance.content( create_tooltip_message( 'ok', data[ 'title' ], data[ 'section' ], data[ 'content' ], data[ 'url' ], data[ 'thumb' ], data[ 'thumb-width' ], data[ 'thumb-height' ] ) );
                     }
                 });
 
@@ -93,8 +99,10 @@ function add_wiki_box( id, wid, title, wurl, purl, thumb ) {
     });
 }
 
-function create_tooltip_message( type, title, message, url, thumb, w, h ) {
-    var tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head">' + title + '</div><div class="body">';
+function create_tooltip_message( type, title, section, message, url, thumb, w, h ) {
+    var tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head">' + title;
+    tooltip_html += ( section != '' ) ? ( ' &raquo; ' + section ) : '';
+    tooltip_html += '</div><div class="body">';
 
     if( type == 'init' ) {
         tooltip_html += '<img src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
@@ -107,7 +115,7 @@ function create_tooltip_message( type, title, message, url, thumb, w, h ) {
 
     if( type == 'ok' ) {
         var relno = ( wp_wiki_tooltip.a_target == '_blank' ) ? ' rel="noopener noreferrer"' : '';
-        tooltip_html += '</div><div class="foot"><a href="' + url + '" target="' + wp_wiki_tooltip.a_target + '"' + relno + '>' + wp_wiki_tooltip.footer_text + '</a></div></div>';
+        tooltip_html += '</div><div class="foot"><a href="' + url + ( ( section != '' ) ? ( '#' + section ) : '' ) + '" target="' + wp_wiki_tooltip.a_target + '"' + relno + '>' + wp_wiki_tooltip.footer_text + '</a></div></div>';
     } else {
         tooltip_html += '</div><div class="foot"></div></div>';
     }

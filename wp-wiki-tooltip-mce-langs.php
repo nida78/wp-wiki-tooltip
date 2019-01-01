@@ -13,6 +13,8 @@ function wp_wiki_tooltip_mce_translation() {
         'link_tooltip' => __( 'Set the text that will be the link to the Wiki page.', 'wp-wiki-tooltip' ),
         'title_label' => __( 'Wiki page title', 'wp-wiki-tooltip' ),
         'title_tooltip' => __( 'Set the title of the requested Wiki page.', 'wp-wiki-tooltip' ),
+        'section_label' => __( 'Section title', 'wp-wiki-tooltip' ),
+        'section_tooltip' => __( 'Set the title (anchor) of the requested section in Wiki page.', 'wp-wiki-tooltip' ),
         'base_standard' => __( 'Standard base', 'wp-wiki-tooltip' ),
         'base_label' => __( 'Wiki base', 'wp-wiki-tooltip' ),
         'base_tooltip' => __( 'Select one of the defined Wiki bases. Visit the settings page to create a new one.', 'wp-wiki-tooltip' ),

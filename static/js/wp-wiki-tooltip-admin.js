@@ -73,15 +73,23 @@ function disable_trigger_hover_action( swt ) {
     $wwtj( '#rdo-a-trigger-hover-action-open' ).prop( 'disabled', swt );
 }
 
-function disable_error_handling_fields( swt1, swt2 ) {
+function disable_page_error_handling_fields( swt1, swt2 ) {
     $wwtj( '#own-error-title' ).prop( 'disabled', swt1 );
     $wwtj( '#own-error-message' ).prop( 'disabled', swt1 );
     $wwtj( '#error-wiki-page-title' ).prop( 'disabled', swt2 );
 }
 
-function enable_tooltip_demo( theme ) {
-    $wwtj( '#tooltipster-' + theme + '-preview' ).tooltipster( {
+function enable_tooltip_theme_demo( theme ) {
+    $wwtj( '#tooltipster-theme-' + theme + '-preview' ).tooltipster( {
         trigger: 'hover',
         theme: 'tooltipster-' + theme,
+    } );
+}
+
+function enable_tooltip_animation_demo( theme, animation ) {
+    $wwtj( '#tooltipster-animation-' + animation + '-preview' ).tooltipster( {
+        trigger: 'hover',
+        theme: 'tooltipster-' + theme,
+        animation: animation,
     } );
 }

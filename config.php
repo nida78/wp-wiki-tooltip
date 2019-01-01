@@ -28,13 +28,17 @@ $wp_wiki_tooltip_default_options = array(
 
     'min-screen-width' => '0', // activate tooltips only if screen is greater than this number of pixel
 
-    'error-handling' => 'show-default', // how should errors be handled
+    'page-error-handling' => 'show-default', // how should errors of pages be handled
 
     'own-error-title' => '', // the self-defined title of the error message
 
     'own-error-message' => '', // the self-defined message of the error message
 
+    'section-error-handling' => 'show-page', // how should errors of sections be handled
+
     'theme' => 'default', // use default theme of Tooltipster
+
+    'animation' => 'fade', // use standard animation when a tooltip appears
 
     'tooltip-head' => 'font-size: 125%; font-weight: bold;', // make the head of the tooltip a little bigger
 

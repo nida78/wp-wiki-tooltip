@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Wiki Tooltip 0.1\n"
-"POT-Creation-Date: 2018-02-23 00:12+0100\n"
+"POT-Creation-Date: 2018-12-30 21:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Nico Danneberg <nico@danneberg.de>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-WPHeader: wp-wiki-tooltip.php\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Sorry, but the test of this URL failed!"
 msgstr "Entschuldige, aber der Test dieser URL ist fehlgeschlagen!"
 
-#: class.wp-wiki-tooltip-admin.php:44 class.wp-wiki-tooltip-admin.php:443
+#: class.wp-wiki-tooltip-admin.php:44 class.wp-wiki-tooltip-admin.php:499
 msgid "Settings for Wiki-Tooltips"
 msgstr "Einstellungen für die Wiki-Tooltips"
 
@@ -37,7 +37,7 @@ msgstr "Einstellungen für die Wiki-Tooltips"
 msgid "Wiki-Tooltips"
 msgstr "Wiki-Tooltips"
 
-#: class.wp-wiki-tooltip-admin.php:53 class.wp-wiki-tooltip-admin.php:453
+#: class.wp-wiki-tooltip-admin.php:53 class.wp-wiki-tooltip-admin.php:507
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -73,69 +73,85 @@ msgstr "Tooltips werden ausgelöst durch"
 msgid "Minimum screen width"
 msgstr "Kleinste Bildschirmbreite"
 
-#: class.wp-wiki-tooltip-admin.php:140
+#: class.wp-wiki-tooltip-admin.php:141
 msgid "Error handling"
 msgstr "Fehlerbehandlung"
 
-#: class.wp-wiki-tooltip-admin.php:150
+#: class.wp-wiki-tooltip-admin.php:148
+msgid "Page errors"
+msgstr "Seitenfehler"
+
+#: class.wp-wiki-tooltip-admin.php:157
+msgid "Section errors"
+msgstr "Kapitelfehler"
+
+#: class.wp-wiki-tooltip-admin.php:167
 msgid "Design Settings"
 msgstr "Design Einstellungen"
 
-#: class.wp-wiki-tooltip-admin.php:157
+#: class.wp-wiki-tooltip-admin.php:174
 msgid "Design of the tooltips"
 msgstr "Design der Tooltips"
 
-#: class.wp-wiki-tooltip-admin.php:166
+#: class.wp-wiki-tooltip-admin.php:183
+msgid "Animation"
+msgstr "Animation"
+
+#: class.wp-wiki-tooltip-admin.php:192
 msgid "Tooltip <em>header</em> styles"
 msgstr "Tooltip <em>Kopf</em> Styles"
 
-#: class.wp-wiki-tooltip-admin.php:175
+#: class.wp-wiki-tooltip-admin.php:201
 msgid "Tooltip <em>body</em> styles"
 msgstr "Tooltip <em>Inhalt</em> Styles"
 
-#: class.wp-wiki-tooltip-admin.php:184
+#: class.wp-wiki-tooltip-admin.php:210
 msgid "Tooltip <em>footer</em> styles"
 msgstr "Tooltip <em>Fuß</em> Styles"
 
-#: class.wp-wiki-tooltip-admin.php:193
+#: class.wp-wiki-tooltip-admin.php:219
 msgid "Wiki links styles"
 msgstr "Styles der Wiki Links"
 
-#: class.wp-wiki-tooltip-admin.php:203
+#: class.wp-wiki-tooltip-admin.php:229
 msgid "Thumbnail Settings"
 msgstr "Thumbnail Einstellungen"
 
-#: class.wp-wiki-tooltip-admin.php:210
+#: class.wp-wiki-tooltip-admin.php:236
 msgid "Enable thumbnails"
 msgstr "Thumbnails aktivieren"
 
-#: class.wp-wiki-tooltip-admin.php:219
+#: class.wp-wiki-tooltip-admin.php:245
 msgid "Alignment"
 msgstr "Ausrichtung"
 
-#: class.wp-wiki-tooltip-admin.php:228
+#: class.wp-wiki-tooltip-admin.php:254
 msgid "Width"
 msgstr "Breite"
 
-#: class.wp-wiki-tooltip-admin.php:237
+#: class.wp-wiki-tooltip-admin.php:263
 msgid "Styles"
 msgstr "Styles"
 
-#: class.wp-wiki-tooltip-admin.php:246
+#: class.wp-wiki-tooltip-admin.php:272
 msgid "Set base options below:"
-msgstr "Stelle die Basis Optionen unten ein:"
+msgstr "Stelle die Basis-Optionen unten ein:"
 
-#: class.wp-wiki-tooltip-admin.php:250
+#: class.wp-wiki-tooltip-admin.php:276
+msgid "Set error handling options below:"
+msgstr "Stelle die Fehler-Optionen unten ein:"
+
+#: class.wp-wiki-tooltip-admin.php:280
 msgid "Set design / style options below:"
-msgstr "Stelle die Design / Stil Optionen unten ein:"
+msgstr "Stelle die Design- / Stil-Optionen unten ein:"
 
-#: class.wp-wiki-tooltip-admin.php:254
+#: class.wp-wiki-tooltip-admin.php:284
 msgid "Enable thumbnails in tooltips and set some useful options below."
 msgstr ""
 "Aktiviere Thumbnails in den Tooltips und stelle einige nützliche Optionen "
 "unten ein."
 
-#: class.wp-wiki-tooltip-admin.php:255
+#: class.wp-wiki-tooltip-admin.php:285
 msgid ""
 "Additionally an extra \"<strong>thumbnail</strong>\" attribute can be added "
 "to the shortcode:"
@@ -143,12 +159,12 @@ msgstr ""
 "Zusätzlich kann ein extra \"<strong>thumbnail</strong>\" Attribut einem "
 "Shortcode hinzugefügt werden:"
 
-#: class.wp-wiki-tooltip-admin.php:256 class.wp-wiki-tooltip-admin.php:265
-#: class.wp-wiki-tooltip-admin.php:444
+#: class.wp-wiki-tooltip-admin.php:286 class.wp-wiki-tooltip-admin.php:295
+#: class.wp-wiki-tooltip-admin.php:500
 msgid "or"
 msgstr "oder"
 
-#: class.wp-wiki-tooltip-admin.php:264
+#: class.wp-wiki-tooltip-admin.php:294
 msgid ""
 "Enter as much Wiki URLs as you like. Click the button \"<strong>test</strong>"
 "\" to let the plugin check if the given URL has access to a Wiki API."
@@ -157,7 +173,7 @@ msgstr ""
 "\"<strong>prüfen</strong>\" um zu testen, ob die eingegeben URL Zugang zu "
 "einer Wiki API hat."
 
-#: class.wp-wiki-tooltip-admin.php:265
+#: class.wp-wiki-tooltip-admin.php:295
 msgid ""
 "To use one of these URLs just add an \"<strong>base</strong>\" attribute to "
 "the shortcode:"
@@ -165,7 +181,7 @@ msgstr ""
 "Um eine dieser URLs zu nutzen, musst du einfach ein \"<strong>base</strong>"
 "\" Attribut dem Shortcode hinzufügen:"
 
-#: class.wp-wiki-tooltip-admin.php:266
+#: class.wp-wiki-tooltip-admin.php:296
 msgid ""
 "If you do not use the \"<strong>base</strong>\" attribute the URL that is "
 "marked as \"Standard\" is used."
@@ -173,75 +189,75 @@ msgstr ""
 "Wenn du kein \"<strong>base</strong>\" Attribut benutzt, wird die URL "
 "verwendet, die als \"Standard\" markiert ist."
 
-#: class.wp-wiki-tooltip-admin.php:271
+#: class.wp-wiki-tooltip-admin.php:301
 msgid "Standard"
 msgstr "Standard"
 
-#: class.wp-wiki-tooltip-admin.php:272
+#: class.wp-wiki-tooltip-admin.php:302
 msgid "Name"
 msgstr "Name"
 
-#: class.wp-wiki-tooltip-admin.php:273
+#: class.wp-wiki-tooltip-admin.php:303
 msgid "ID"
 msgstr "ID"
 
-#: class.wp-wiki-tooltip-admin.php:274
+#: class.wp-wiki-tooltip-admin.php:304
 msgid "URL"
 msgstr "URL"
 
-#: class.wp-wiki-tooltip-admin.php:275
+#: class.wp-wiki-tooltip-admin.php:305
 msgid "Check URL"
 msgstr "Prüfe URL"
 
-#: class.wp-wiki-tooltip-admin.php:276
+#: class.wp-wiki-tooltip-admin.php:306
 msgid "Remove URL"
 msgstr "Entferne URL"
 
-#: class.wp-wiki-tooltip-admin.php:285 class.wp-wiki-tooltip-admin.php:295
+#: class.wp-wiki-tooltip-admin.php:315 class.wp-wiki-tooltip-admin.php:325
 msgid "test"
 msgstr "prüfen"
 
-#: class.wp-wiki-tooltip-admin.php:286 class.wp-wiki-tooltip-admin.php:296
+#: class.wp-wiki-tooltip-admin.php:316 class.wp-wiki-tooltip-admin.php:326
 msgid "remove"
 msgstr "entfernen"
 
-#: class.wp-wiki-tooltip-admin.php:299
+#: class.wp-wiki-tooltip-admin.php:329
 msgid "Add new URL"
 msgstr "Neue URL hinzufügen"
 
-#: class.wp-wiki-tooltip-admin.php:308
+#: class.wp-wiki-tooltip-admin.php:338
 msgid "new window / tab"
 msgstr "neues Fenster / Tab"
 
-#: class.wp-wiki-tooltip-admin.php:309
+#: class.wp-wiki-tooltip-admin.php:339
 msgid "current window / tab"
 msgstr "aktuelles Fenster / Tab"
 
-#: class.wp-wiki-tooltip-admin.php:316
+#: class.wp-wiki-tooltip-admin.php:346
 msgid "click"
 msgstr "einen Klick"
 
-#: class.wp-wiki-tooltip-admin.php:317
+#: class.wp-wiki-tooltip-admin.php:347
 msgid "hover"
 msgstr "das Überfahren mit der Maus"
 
-#: class.wp-wiki-tooltip-admin.php:319
+#: class.wp-wiki-tooltip-admin.php:349
 msgid "What happens by clicking the link, too?"
 msgstr "Was passiert, wenn dann der Link auch geklickt wird?"
 
-#: class.wp-wiki-tooltip-admin.php:321
+#: class.wp-wiki-tooltip-admin.php:351
 msgid "Nothing! The link has no further function."
 msgstr "Nichts, der Link hat keine weitere Funktion!"
 
-#: class.wp-wiki-tooltip-admin.php:322
+#: class.wp-wiki-tooltip-admin.php:352
 msgid "The linked Wiki page will be opened!"
 msgstr "Die verlinkte Wiki-Seite wird geöffnet!"
 
-#: class.wp-wiki-tooltip-admin.php:329 class.wp-wiki-tooltip-admin.php:422
+#: class.wp-wiki-tooltip-admin.php:359 class.wp-wiki-tooltip-admin.php:478
 msgid "px"
 msgstr "px"
 
-#: class.wp-wiki-tooltip-admin.php:332
+#: class.wp-wiki-tooltip-admin.php:362
 msgid ""
 "Enable tooltips only if the width of the used display is greater than this "
 "defined number of pixel."
@@ -249,7 +265,7 @@ msgstr ""
 "Tooltips werden nur angezeigt, wenn das benutzte Display breiter als diese "
 "Anzahl von Pixeln ist."
 
-#: class.wp-wiki-tooltip-admin.php:340
+#: class.wp-wiki-tooltip-admin.php:370
 msgid ""
 "What should happen if the linked Wiki page is not available, e.g. if the "
 "Wiki is under construction?"
@@ -257,43 +273,71 @@ msgstr ""
 "Was soll passieren, wenn die verlinkte Wiki Seite nicht verfügbare ist, weil "
 "z.B. das Wiki gewartet wird?"
 
-#: class.wp-wiki-tooltip-admin.php:341
+#: class.wp-wiki-tooltip-admin.php:371
 msgid "show default error title and message in tooltip"
 msgstr ""
 "der Standardtitel und -text für einen Fehlerfall wird im Tooltip angezeigt"
 
-#: class.wp-wiki-tooltip-admin.php:342
+#: class.wp-wiki-tooltip-admin.php:372
 msgid "show your own error title and message in tooltip"
 msgstr ""
 "ein eigener Titel und Text für einen Fehlerfall wird im Tooltip angezeigt"
 
-#: class.wp-wiki-tooltip-admin.php:345
+#: class.wp-wiki-tooltip-admin.php:375
 msgid "Title:"
 msgstr "Titel:"
 
-#: class.wp-wiki-tooltip-admin.php:349
+#: class.wp-wiki-tooltip-admin.php:379
 msgid "Message:"
 msgstr "Nachricht:"
 
-#: class.wp-wiki-tooltip-admin.php:349
+#: class.wp-wiki-tooltip-admin.php:379
 msgid "You can enter HTML here!"
 msgstr "Hier kannst du HTML eingegeben!"
 
-#: class.wp-wiki-tooltip-admin.php:353
+#: class.wp-wiki-tooltip-admin.php:383
 msgid "remove the link completely"
 msgstr "der Link wird vollständig entfernt"
 
-#: class.wp-wiki-tooltip-admin.php:364
+#: class.wp-wiki-tooltip-admin.php:383
+msgid "does not work for section errors"
+msgstr "funktioniert nicht für Kapitelfehler"
+
+#: class.wp-wiki-tooltip-admin.php:388
+msgid ""
+"What should happen if a wanted section could not be found within Wiki page?"
+msgstr ""
+"Was soll passieren, wenn das gewünschte Kapitel auf der Seite nicht gefunden "
+"werden kann?"
+
+#: class.wp-wiki-tooltip-admin.php:389
+msgid "show content of page"
+msgstr "zeige den Inhalt der Seite"
+
+#: class.wp-wiki-tooltip-admin.php:390
+msgid "use error handling of pages (see above)"
+msgstr "wende die Einstellung für Seitenfehler an (siehe oben)"
+
+#: class.wp-wiki-tooltip-admin.php:401
 #, php-format
 msgid "This is a tooltip demo with &raquo;%s&laquo; theme..."
 msgstr "Das ist ein Tooltip-Demo im &raquo;%s&laquo; Design..."
 
-#: class.wp-wiki-tooltip-admin.php:371
+#: class.wp-wiki-tooltip-admin.php:408
 msgid "Hover over the icons to see a tooltip preview!"
 msgstr ""
 "Fahre mit der Maus über die Icons, um eine Vorschau der Tooltips zu sehen!"
 
-#: class.wp-wiki-tooltip-admin.php:379
+#: class.wp-wiki-tooltip-admin.php:420
+#, php-format
+msgid "This is a tooltip demo with &raquo;%s&laquo; animation..."
+msgstr "Das ist ein Tooltip-Demo mit der &raquo;%s&laquo; Animation..."
+
+#: class.wp-wiki-tooltip-admin.php:427
+msgid "Determines how the tooltip will animate in and out."
+msgstr "Legt fest, wie die Tooltips ein- und ausblenden sollen."
+
+#: class.wp-wiki-tooltip-admin.php:435
 msgid ""
 "All entered CSS settings will be put into the CSS class of the header in the "
 "tooltip."
@@ -301,7 +345,7 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für den Kopfbereich der "
 "Tooltips geschrieben."
 
-#: class.wp-wiki-tooltip-admin.php:387
+#: class.wp-wiki-tooltip-admin.php:443
 msgid ""
 "All entered CSS settings will be put into the CSS class of the body in the "
 "tooltip."
@@ -309,7 +353,7 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für den Inhalt der "
 "Tooltips geschrieben."
 
-#: class.wp-wiki-tooltip-admin.php:395
+#: class.wp-wiki-tooltip-admin.php:451
 msgid ""
 "All entered CSS settings will be put into the CSS class of the footer in the "
 "tooltip."
@@ -317,7 +361,7 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für die Fußzeile der "
 "Tooltips geschrieben."
 
-#: class.wp-wiki-tooltip-admin.php:403
+#: class.wp-wiki-tooltip-admin.php:459
 msgid ""
 "All entered CSS settings will be put into the CSS class of the links to Wiki "
 "pages."
@@ -325,11 +369,11 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für die Links zu den "
 "Wiki Seiten geschrieben."
 
-#: class.wp-wiki-tooltip-admin.php:409
+#: class.wp-wiki-tooltip-admin.php:465
 msgid "show thumbnails by default"
 msgstr "zeige standardmäßig Thumbnails an"
 
-#: class.wp-wiki-tooltip-admin.php:410
+#: class.wp-wiki-tooltip-admin.php:466
 msgid ""
 "A thumbnails will be displayed in tooltip if the Wiki article provides at "
 "least one picture."
@@ -337,15 +381,15 @@ msgstr ""
 "Ein Thumbnail wird im Tooltip angezeigt, wenn ein Wiki-Artikel mindestens "
 "ein Bild bereitstellt."
 
-#: class.wp-wiki-tooltip-admin.php:416
+#: class.wp-wiki-tooltip-admin.php:472
 msgid "left"
 msgstr "links"
 
-#: class.wp-wiki-tooltip-admin.php:417
+#: class.wp-wiki-tooltip-admin.php:473
 msgid "right"
 msgstr "rechts"
 
-#: class.wp-wiki-tooltip-admin.php:425
+#: class.wp-wiki-tooltip-admin.php:481
 msgid ""
 "The height of the thumbnail is calculated respecting the side-ratio of the "
 "picture."
@@ -353,7 +397,7 @@ msgstr ""
 "Die Höhe des Thumbnails wird automatisch in Abhängigkeit vom "
 "Seitenverhältnis des Bildes berechnet."
 
-#: class.wp-wiki-tooltip-admin.php:433
+#: class.wp-wiki-tooltip-admin.php:489
 msgid ""
 "All entered CSS settings will be put into the CSS class of the thumbnail in "
 "the tooltip."
@@ -361,25 +405,33 @@ msgstr ""
 "Alle eingegebenen CSS Optionen werden in die Klasse für die Thumbnails in "
 "den Tooltips geschrieben."
 
-#: class.wp-wiki-tooltip-admin.php:444
+#: class.wp-wiki-tooltip-admin.php:500
 msgid "Use one of these shortcodes to enable Wiki-Tooltips:"
 msgstr "Benutze einen dieser Shortcodes, um Wiki-Tooltips zu verwenden:"
 
-#: class.wp-wiki-tooltip-admin.php:451
+#: class.wp-wiki-tooltip-admin.php:505
 msgid "Submit"
 msgstr "Speichern"
 
-#: class.wp-wiki-tooltip.php:48
+#: class.wp-wiki-tooltip.php:49
 msgid "Click here to open Wiki page..."
 msgstr "Klicke hier, um die Wiki-Seite zu öffnen..."
 
-#: class.wp-wiki-tooltip.php:57
+#: class.wp-wiki-tooltip.php:58
 msgid "Error!"
 msgstr "Fehler!"
 
-#: class.wp-wiki-tooltip.php:58
+#: class.wp-wiki-tooltip.php:59
 msgid "Sorry, but we were not able to find this page :("
 msgstr "Leider kann diese Seite nicht gefunden werden :("
+
+#: static/js/wp-wiki-tooltip-mce-lang.js:4
+msgid "1st Example in JS"
+msgstr "1. Beispiel in JS"
+
+#: static/js/wp-wiki-tooltip-mce-lang.js:5 wp-wiki-tooltip-mce-langs.php:13
+msgid "Set the text that will be the link to the Wiki page."
+msgstr "Gib hier den Text ein, der mit der Wiki-Seite verlinkt werden soll."
 
 #. Plugin Name of the plugin/theme
 #: wp-wiki-tooltip-mce-langs.php:11
@@ -390,10 +442,6 @@ msgstr "WP Wiki Tooltip"
 msgid "Link text"
 msgstr "Text des Links"
 
-#: wp-wiki-tooltip-mce-langs.php:13
-msgid "Set the text that will be the link to the Wiki page."
-msgstr "Gib hier den Text ein, der mit der Wiki-Seite verlinkt werden soll."
-
 #: wp-wiki-tooltip-mce-langs.php:14
 msgid "Wiki page title"
 msgstr "Titel der Wiki-Seite"
@@ -403,14 +451,22 @@ msgid "Set the title of the requested Wiki page."
 msgstr "Gib hier den Titel der gewünschten Wiki-Seite ein."
 
 #: wp-wiki-tooltip-mce-langs.php:16
+msgid "Section title"
+msgstr "Titel des Kapitels"
+
+#: wp-wiki-tooltip-mce-langs.php:17
+msgid "Set the title (anchor) of the requested section in Wiki page."
+msgstr "Trage den Titel (Anker) des gewünschten Kapitels ein."
+
+#: wp-wiki-tooltip-mce-langs.php:18
 msgid "Standard base"
 msgstr "Standard-Wiki-Basis"
 
-#: wp-wiki-tooltip-mce-langs.php:17
+#: wp-wiki-tooltip-mce-langs.php:19
 msgid "Wiki base"
 msgstr "Wiki-Basis"
 
-#: wp-wiki-tooltip-mce-langs.php:18
+#: wp-wiki-tooltip-mce-langs.php:20
 msgid ""
 "Select one of the defined Wiki bases. Visit the settings page to create a "
 "new one."
@@ -418,23 +474,23 @@ msgstr ""
 "Wähle eine der Wiki-Basen aus. Gehe auf die Einstellungsseite, um eine neue "
 "Basis anzulegen."
 
-#: wp-wiki-tooltip-mce-langs.php:19
+#: wp-wiki-tooltip-mce-langs.php:21
 msgid "use plugin default value"
 msgstr "verwende die Standardwerte des Plugins"
 
-#: wp-wiki-tooltip-mce-langs.php:20
+#: wp-wiki-tooltip-mce-langs.php:22
 msgid "Show thumbnail"
 msgstr "Thumbnail anzeigen"
 
-#: wp-wiki-tooltip-mce-langs.php:21
+#: wp-wiki-tooltip-mce-langs.php:23
 msgid "Show a thumbnail in the tooltip?"
 msgstr "Soll ein Thumbnail im Tooltip angezeigt werden?"
 
-#: wp-wiki-tooltip-mce-langs.php:22
+#: wp-wiki-tooltip-mce-langs.php:24
 msgid "yes"
 msgstr "ja"
 
-#: wp-wiki-tooltip-mce-langs.php:23
+#: wp-wiki-tooltip-mce-langs.php:25
 msgid "no"
 msgstr "nein"
 

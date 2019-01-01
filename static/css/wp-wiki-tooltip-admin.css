@@ -65,7 +65,7 @@ p.wiki-usage span.bold-teletyper {
     margin-bottom: -5px;
 }
 
-.wiki-error-handling-list label {
+.wiki-page-error-handling-list label {
     display: block;
     float: left;
     width: 110px;
@@ -73,7 +73,7 @@ p.wiki-usage span.bold-teletyper {
     margin: 6px 6px 0 0;
 }
 
-.wiki-error-handling-list textarea {
+.wiki-page-error-handling-list textarea {
     height: 130px;
 }
 
@@ -81,17 +81,20 @@ span#own-error-message-desc {
     margin-left: 120px;
 }
 
-ul#wiki-tooltip-admin-theme-list li {
+ul#wiki-tooltip-admin-theme-list li,
+ul#wiki-tooltip-admin-animation-list li {
     margin-bottom: -5px;
 }
 
-ul#wiki-tooltip-admin-theme-list li {
+ul#wiki-tooltip-admin-theme-list li,
+ul#wiki-tooltip-admin-animation-list li {
     display: inline-block;
     margin-left: 5px;
     margin-right: 10px;
 }
 
-ul#wiki-tooltip-admin-theme-list li label input {
+ul#wiki-tooltip-admin-theme-list li label input,
+ul#wiki-tooltip-admin-animation-list li label input {
     margin-top: -5px;
 }
 
@@ -100,6 +103,14 @@ ul#wiki-tooltip-admin-theme-list li label span {
     padding: 1em;
     margin-right: 1em;
     margin-bottom: 1em;
+    opacity: 0.8;
+}
+
+ul#wiki-tooltip-admin-animation-list li label span {
+    display: inline-block;
+    padding: 0.25em;
+    margin-right: 1em;
+    margin-bottom: 0.25em;
     opacity: 0.8;
 }
 
@@ -112,42 +123,42 @@ ul#wiki-tooltip-admin-theme-list li label span {
     width: 70px;
 }
 
-#tooltipster-default-preview {
+#tooltipster-theme-default-preview {
     border-radius: 5px;
     border: 2px solid #000;
     background: #565656;
     color: #fff;
 }
 
-#tooltipster-light-preview {
+#tooltipster-theme-light-preview {
     border-radius: 5px;
     border: 1px solid #cccccc;
     background: #ededed;
     color: #666666;
 }
 
-#tooltipster-borderless-preview {
+#tooltipster-theme-borderless-preview {
     border-radius: 5px;
     border: 0px;
     background: rgba(10,10,10,0.90);
     color: #fff;
 }
 
-#tooltipster-punk-preview {
+#tooltipster-theme-punk-preview {
     border-radius: 5px;
     border-bottom: 3px solid #f71169;
     background: #2a2a2a;
     color: #fff;
 }
 
-#tooltipster-noir-preview {
+#tooltipster-theme-noir-preview {
     border-radius: 0px;
     border: 3px solid #000;
     background: #fff;
     color: #000;
 }
 
-#tooltipster-shadow-preview {
+#tooltipster-theme-shadow-preview {
     border-radius: 5px;
     background: #fff;
     box-shadow: 0px 0px 14px rgba(0,0,0,0.3);

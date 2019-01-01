@@ -1,5 +1,14 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.9.0 - C6H13NO2 | Isoleucine ]
+*Release Date - January 1st, 2019*
+
+* sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="ancor-of-section"```)
+* the used Tooltipster plugin is updated to its version 4.2.6
+* a new option is available to set the animation how the tooltip appears
+* the new JavaScript I18N Support was implemented for the Classic-Block of Gutenberg
+
+
 ## [1.8.1]
 *Release Date - February 24th, 2018*
 
@@ -108,6 +117,7 @@
 
 * Initial release
 
+[1.9.0 - C6H13NO2 | Isoleucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0
 [1.8.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.1
 [1.8.0 - C6H9N3O2 | Histidine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.0
 [1.7.4]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.4

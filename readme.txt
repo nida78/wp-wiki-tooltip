@@ -49,7 +49,7 @@ Since version 1.7.0 you can define a minimum screen width that is necessary to s
 
 1. Options and Settings page: manage several Wiki URLs
 2. Options and Settings page: set some options how to show tooltips
-3. Options and Settings page: error handling
+3. Options and Settings page: set some Error Handling options
 4. Options and Settings page: set styling of tooltips
 5. Options and Settings page: enable and style thumbnails
 6. Integrate the plugin by shortcodes in Posts and Pages

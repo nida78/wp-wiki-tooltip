@@ -23,7 +23,7 @@ Main features of the current version are:
 
 * Setup at least one wanted Wiki base and several other options at a backend page
 * Integrate the Wiki tooltip using shortcodes in Posts and Pages
-* shortcodes can be created by a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin
+* Shortcodes can be created by a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin
 
 # Frequently Asked Questions
 
@@ -42,6 +42,10 @@ Yes, you can define extra CSS style properties that are used at all links to Wik
 ## Can I disable tooltips for mobile access?
 
 Since version 1.7.0 you can define a minimum screen width that is necessary to show the tooltips!
+
+## Can I use the content of a certain section instead the complete Wiki page?
+
+Since version 1.9.0 you can request a section by its title (anchor) using an extra attribute of the shortcode (```section="anchor-of-section"```)!
 
 # Installation
 
@@ -68,7 +72,7 @@ The last three major releases are listed here, only. Find complete log of all ch
 ## [1.9.0 - C6H13NO2 | Isoleucine ]
 *Release Date - January 1st, 2019*
 
-* sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="ancor-of-section"```)
+* sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="anchor-of-section"```)
 * the used Tooltipster plugin is updated to its version 4.2.6
 * a new option is available to set the animation how the tooltip appears
 * the new JavaScript I18N Support was implemented for the Classic-Block of Gutenberg

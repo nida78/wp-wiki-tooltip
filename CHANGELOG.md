@@ -3,7 +3,7 @@
 ## [1.9.0 - C6H13NO2 | Isoleucine ]
 *Release Date - January 1st, 2019*
 
-* sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="ancor-of-section"```)
+* sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="anchor-of-section"```)
 * the used Tooltipster plugin is updated to its version 4.2.6
 * a new option is available to set the animation how the tooltip appears
 * the new JavaScript I18N Support was implemented for the Classic-Block of Gutenberg

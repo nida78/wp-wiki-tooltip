@@ -34,7 +34,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         wp_register_script( 'wp-wiki-tooltip-admin-js', plugins_url( 'static/js/wp-wiki-tooltip-admin.js', __FILE__ ), array( 'jquery' ), $this->version, false );
         wp_localize_script( 'wp-wiki-tooltip-admin-js', 'wp_wiki_tooltip_admin', array(
-            'alert_remove' => __( 'Rows that is marked as "Standard" could not be deleted!', '' ),
+            'alert_remove' => __( 'Rows that are marked as "Standard" could not be deleted!', '' ),
             'alert_test_failed' => __( 'Sorry, but the test of this URL failed!', 'wp-wiki-tooltip' ),
             'wp_ajax_url' => admin_url( 'admin-ajax.php' )
         ));
@@ -189,8 +189,11 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
 	    add_settings_field(
             'tooltip-head',
-            /* translators: parameters are used for opening and closing <em> HTML tag */
-            sprintf ( _x( 'Tooltip %1$sheader%2$s styles', 'settings field label', 'wp-wiki-tooltip' ), '<em>', '</em>' ),
+            sprintf ( /* translators: parameters are used for opening and closing <em> HTML tag */
+                _x( 'Tooltip %1$sheader%2$s styles', 'settings field label', 'wp-wiki-tooltip' ),
+                '<em>',
+                '</em>'
+            ),
             array( $this, 'print_tooltip_head_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
@@ -199,8 +202,11 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'tooltip-body',
-            /* translators: parameters are used for opening and closing <em> HTML tag */
-            sprintf ( _x( 'Tooltip %1$sbody%2$s styles', 'settings field label', 'wp-wiki-tooltip' ), '<em>', '</em>' ),
+            sprintf ( /* translators: parameters are used for opening and closing <em> HTML tag */
+                _x( 'Tooltip %1$sbody%2$s styles', 'settings field label', 'wp-wiki-tooltip' ),
+                '<em>',
+                '</em>'
+            ),
             array( $this, 'print_tooltip_body_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
@@ -209,8 +215,11 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'tooltip-foot',
-            /* translators: parameters are used for opening and closing <em> HTML tag */
-            sprintf ( _x( 'Tooltip %1$sfooter%2$s styles', 'settings field label', 'wp-wiki-tooltip' ), '<em>', '</em>' ),
+            sprintf ( /* translators: parameters are used for opening and closing <em> HTML tag */
+                _x( 'Tooltip %1$sfooter%2$s styles', 'settings field label', 'wp-wiki-tooltip' ),
+                '<em>',
+                '</em>'
+            ),
             array( $this, 'print_tooltip_foot_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',

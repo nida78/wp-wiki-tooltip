@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Wiki Tooltip 0.1\n"
-"POT-Creation-Date: 2019-07-12 20:16+0200\n"
+"POT-Creation-Date: 2019-07-12 21:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Nico Danneberg <nico@danneberg.de>\n"
 "Language-Team: \n"
@@ -21,9 +21,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: class.wp-wiki-tooltip-admin.php:37
-msgid "Rows that is marked as \"Standard\" could not be deleted!"
-msgstr ""
-"Zeilen, die als \"Standard\" markiert sind, können nicht entfernt werden!"
+msgid "Rows that are marked as \"Standard\" could not be deleted!"
+msgstr "Zeilen, die als \"Standard\" markiert sind, kannst du nicht entfernen!"
 
 #: class.wp-wiki-tooltip-admin.php:38
 msgid "Sorry, but the test of this URL failed!"
@@ -181,8 +180,8 @@ msgid ""
 "Additionally an extra \"%1$sthumbnail%2$s\" attribute can be added to the "
 "shortcode:"
 msgstr ""
-"Zusätzlich kann ein extra \"%1$sthumbnail%2$s\" Attribut einem Shortcode "
-"hinzugefügt werden:"
+"Zusätzlich kannst du ein extra \"%1$sthumbnail%2$s\" Attribut einem "
+"Shortcode hinzugefügen:"
 
 #: class.wp-wiki-tooltip-admin.php:294 class.wp-wiki-tooltip-admin.php:315
 #: class.wp-wiki-tooltip-admin.php:552

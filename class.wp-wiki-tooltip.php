@@ -46,7 +46,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			'wiki_plugin_url' => plugin_dir_url( __FILE__ ),
 			'tooltip_theme' => 'tooltipster-' . $this->options[ 'theme' ],
 			'animation' => $this->options[ 'animation' ],
-			'footer_text' => __( 'Click here to open Wiki page...', 'wp-wiki-tooltip' ),
+			'footer_text' => __( 'Click here to open Wiki page&hellip;', 'wp-wiki-tooltip' ),
 			'thumb_enable' => ( $this->options[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off',
 			'thumb_width' => $this->options[ 'thumb-width' ],
             'thumb_align' => $this->options[ 'thumb-align' ],

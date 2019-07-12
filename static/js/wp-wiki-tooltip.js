@@ -102,7 +102,7 @@ function add_wiki_box( id, wid, title, section, wurl, purl, thumb ) {
 function create_tooltip_message( type, title, section, message, url, thumb, w, h ) {
     var tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head">' + title;
     tooltip_html += ( section != '' ) ? ( ' &raquo; ' + section ) : '';
-    tooltip_html += '</div><div class="body">';
+    tooltip_html += '</div><div class="body"><p>';
 
     if( type == 'init' ) {
         tooltip_html += '<img src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
@@ -115,9 +115,9 @@ function create_tooltip_message( type, title, section, message, url, thumb, w, h
 
     if( type == 'ok' ) {
         var relno = ( wp_wiki_tooltip.a_target == '_blank' ) ? ' rel="noopener noreferrer"' : '';
-        tooltip_html += '</div><div class="foot"><a href="' + url + ( ( section != '' ) ? ( '#' + section ) : '' ) + '" target="' + wp_wiki_tooltip.a_target + '"' + relno + '>' + wp_wiki_tooltip.footer_text + '</a></div></div>';
+        tooltip_html += '</p></div><div class="foot"><a href="' + url + ( ( section != '' ) ? ( '#' + section ) : '' ) + '" target="' + wp_wiki_tooltip.a_target + '"' + relno + '>' + wp_wiki_tooltip.footer_text + '</a></div></div>';
     } else {
-        tooltip_html += '</div><div class="foot"></div></div>';
+        tooltip_html += '</p></div><div class="foot"></div></div>';
     }
 
     return $wwtj( tooltip_html );

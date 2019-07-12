@@ -1,5 +1,11 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.9.1]
+*Release Date - July 12th, 2019*
+
+* small fixes for the content parser to handle tables and other HTML tags better
+* improved language support
+
 ## [1.9.0 - C6H13NO2 | Isoleucine ]
 *Release Date - January 1st, 2019*
 
@@ -117,6 +123,7 @@
 
 * Initial release
 
+[1.9.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.1
 [1.9.0 - C6H13NO2 | Isoleucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0
 [1.8.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.1
 [1.8.0 - C6H9N3O2 | Histidine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.0

@@ -68,7 +68,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 add_settings_error(
                     'wp-wiki-tooltip-settings-reset',
                     'settings_updated',
-                    __('An error occured while resetting.', 'wp-wiki-tooltip'),
+                    __('An error occurred while resetting.', 'wp-wiki-tooltip'),
                     'error'
                 );
             }
@@ -94,14 +94,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         /*** Base Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-base',
-            __( 'Base Settings', 'wp-wiki-tooltip' ),
+            _x( 'Base Settings', 'settings section headline', 'wp-wiki-tooltip' ),
             array( $this, 'print_base_section_info' ),
             'wp-wiki-tooltip-settings'
         );
 
         add_settings_field(
             'wiki-urls',
-            __( 'URLs of Wikis', 'wp-wiki-tooltip' ),
+            _x( 'URLs of Wikis', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_wiki_url_fields' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-base',
@@ -110,7 +110,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'a-target',
-            __( 'Open links to Wiki pages in', 'wp-wiki-tooltip' ),
+            _x( 'Open links to Wiki pages in', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_a_target_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-base',
@@ -119,7 +119,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'trigger',
-            __( 'Tooltips are triggered on', 'wp-wiki-tooltip' ),
+            _x( 'Tooltips are triggered by', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_trigger_fields' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-base',
@@ -128,7 +128,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
 	    add_settings_field(
 		    'min-screen-width',
-		    __( 'Minimum screen width', 'wp-wiki-tooltip' ),
+		    _x( 'Minimum screen width', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_min_screen_width_field' ),
 		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-base',
@@ -138,14 +138,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 	    /*** Error Handling Settings ***/
 	    add_settings_section(
 		    'wp-wiki-tooltip-settings-error-handling',
-		    __( 'Error handling', 'wp-wiki-tooltip' ),
+		    _x( 'Error handling', 'settings section headline', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_error_handling_section_info' ),
 		    'wp-wiki-tooltip-settings'
 	    );
 
 	    add_settings_field(
 		    'page-error-handling',
-		    __( 'Page errors', 'wp-wiki-tooltip' ),
+		    _x( 'Page errors', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_page_error_handling_fields' ),
 		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-error-handling',
@@ -154,7 +154,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
 	    add_settings_field(
 		    'section-error-handling',
-		    __( 'Section errors', 'wp-wiki-tooltip' ),
+		    _x( 'Section errors', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_section_error_handling_fields' ),
 		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-error-handling',
@@ -164,14 +164,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 	    /*** Design Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
-            __( 'Design Settings', 'wp-wiki-tooltip' ),
+            _x( 'Design Settings', 'settings section headline', 'wp-wiki-tooltip' ),
             array( $this, 'print_design_section_info' ),
             'wp-wiki-tooltip-settings'
         );
 
 	    add_settings_field(
 		    'theme',
-		    __( 'Design of the tooltips', 'wp-wiki-tooltip' ),
+		    _x( 'Design of the tooltips', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_theme_field' ),
 		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-design',
@@ -180,7 +180,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
 	    add_settings_field(
 		    'animation',
-		    __( 'Animation', 'wp-wiki-tooltip' ),
+		    _x( 'Animation', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_animation_field' ),
 		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-design',
@@ -189,7 +189,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
 	    add_settings_field(
             'tooltip-head',
-            __( 'Tooltip <em>header</em> styles', 'wp-wiki-tooltip' ),
+            /* translators: parameters are used for opening and closing <em> HTML tag */
+            sprintf ( _x( 'Tooltip %1$sheader%2$s styles', 'settings field label', 'wp-wiki-tooltip' ), '<em>', '</em>' ),
             array( $this, 'print_tooltip_head_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
@@ -198,7 +199,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'tooltip-body',
-            __( 'Tooltip <em>body</em> styles', 'wp-wiki-tooltip' ),
+            /* translators: parameters are used for opening and closing <em> HTML tag */
+            sprintf ( _x( 'Tooltip %1$sbody%2$s styles', 'settings field label', 'wp-wiki-tooltip' ), '<em>', '</em>' ),
             array( $this, 'print_tooltip_body_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
@@ -207,7 +209,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'tooltip-foot',
-            __( 'Tooltip <em>footer</em> styles', 'wp-wiki-tooltip' ),
+            /* translators: parameters are used for opening and closing <em> HTML tag */
+            sprintf ( _x( 'Tooltip %1$sfooter%2$s styles', 'settings field label', 'wp-wiki-tooltip' ), '<em>', '</em>' ),
             array( $this, 'print_tooltip_foot_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
@@ -216,7 +219,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'a-styles',
-            __( 'Wiki links styles', 'wp-wiki-tooltip' ),
+            _x( 'Wiki links styles', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_a_style_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
@@ -226,14 +229,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         /*** Thumbnail Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-thumb',
-            __( 'Thumbnail Settings', 'wp-wiki-tooltip' ),
+            _x( 'Thumbnail Settings', 'settings section headline', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_section_info' ),
             'wp-wiki-tooltip-settings'
         );
 
         add_settings_field(
             'thumb-enable',
-            __( 'Enable thumbnails', 'wp-wiki-tooltip' ),
+            _x( 'Enable thumbnails', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_enable_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-thumb',
@@ -242,7 +245,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'thumb-align',
-            __( 'Alignment', 'wp-wiki-tooltip' ),
+            _x( 'Alignment', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_align_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-thumb',
@@ -251,7 +254,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'thumb-width',
-            __( 'Width', 'wp-wiki-tooltip' ),
+            _x( 'Width', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_width_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-thumb',
@@ -260,7 +263,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_field(
             'thumb-style',
-            __( 'Styles', 'wp-wiki-tooltip' ),
+            _x( 'Styles', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_style_field' ),
             'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-thumb',
@@ -282,7 +285,12 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function print_thumb_section_info() {
         echo '<p>' . __( 'Enable thumbnails in tooltips and set some useful options below.' , 'wp-wiki-tooltip' ) . '</p>';
-        echo '<p class="wiki-usage">' . __( 'Additionally an extra "<strong>thumbnail</strong>" attribute can be added to the shortcode:' , 'wp-wiki-tooltip' );
+        echo '<p class="wiki-usage">';
+        printf( /* translators: parameters are used for opening and closing <strong> HTML tag */
+            __( 'Additionally an extra "%1$sthumbnail%2$s" attribute can be added to the shortcode:' , 'wp-wiki-tooltip' ),
+            '<strong>',
+            '</strong>'
+        );
         echo '&nbsp;<span class="bold-teletyper">[wiki thumbnail="on"]WordPress[/wiki]</span>&nbsp;' . __( 'or', 'wp-wiki-tooltip' ) . '&nbsp;<span class="bold-teletyper">[wiki thumbnail="off" title="WordPress"]a nice blogging software[/wiki]</span></p>';
     }
 
@@ -291,19 +299,36 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         $urls =  isset( $this->options[ 'wiki-urls' ][ 'data' ] ) ? $this->options[ 'wiki-urls' ][ 'data' ] : $args[ 'wiki-urls' ][ 'data' ];
         ?>
 
-        <p><?php _e( 'Enter as much Wiki URLs as you like. Click the button "<strong>test</strong>" to let the plugin check if the given URL has access to a Wiki API.' , 'wp-wiki-tooltip' ); ?></p>
-        <p class="wiki-usage"><?php _e( 'To use one of these URLs just add an "<strong>base</strong>" attribute to the shortcode:', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki base="ID"]WordPress[/wiki]</span>&nbsp;<?php _e( 'or', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki base="ID" title="WordPress"]a nice blogging software[/wiki]</span></p>
-        <p class="wiki-usage"><?php _e( 'If you do not use the "<strong>base</strong>" attribute the URL that is marked as "Standard" is used.' , 'wp-wiki-tooltip' ) ?></p>
+        <p><?php
+            printf( /* translators: parameters are used for opening and closing <strong> HTML tag */
+                __( 'Enter as much Wiki URLs as you like. Click the button "%1$stest%2$s" to let the plugin check if the given URL has access to a Wiki API.' , 'wp-wiki-tooltip' ),
+                '<strong>',
+                '</strong>'
+            );
+        ?></p>
+        <p class="wiki-usage"><?php
+            printf( /* translators: parameters are used for opening and closing <strong> HTML tag */
+                __( 'To use one of these URLs just add an "%1$sbase%2$s" attribute to the shortcode:', 'wp-wiki-tooltip' ),
+                '<strong>',
+                '</strong>'
+            );
+        ?>&nbsp;<span class="bold-teletyper">[wiki base="ID"]WordPress[/wiki]</span>&nbsp;<?php _e( 'or', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki base="ID" title="WordPress"]a nice blogging software[/wiki]</span></p>
+        <p class="wiki-usage"><?php
+            printf( /* translators: parameters are used for opening and closing <strong> HTML tag */
+                __( 'If you do not use the "%1$sbase%2$s" attribute the URL that is marked as "Standard" is used.' , 'wp-wiki-tooltip' ),
+                '<strong>',
+                '</strong>'
+            );
+        ?></p>
 
         <input type="hidden" id="wp-wiki-tooltip-url-count" name="wp-wiki-tooltip-url-count" value="<?php echo sizeof( $urls ); ?>" />
         <table id="wiki-urls-table">
             <tr>
-                <th class="row1"><?php _e( 'Standard', 'wp-wiki-tooltip' ); ?></th>
-                <th class="row2"><?php _e( 'Name', 'wp-wiki-tooltip' ); ?></th>
-                <th class="row3"><?php _e( 'ID', 'wp-wiki-tooltip' ); ?></th>
-                <th class="row4"><?php _e( 'URL', 'wp-wiki-tooltip' ); ?></th>
-                <th class="row5"><?php _e( 'Check URL', 'wp-wiki-tooltip' ); ?></th>
-                <th class="row6"><?php _e( 'Remove URL', 'wp-wiki-tooltip' ); ?></th>
+                <th class="row1"><?php _ex( 'Standard', 'column header','wp-wiki-tooltip' ); ?></th>
+                <th class="row2"><?php _ex( 'Name','column header', 'wp-wiki-tooltip' ); ?></th>
+                <th class="row3"><?php _ex( 'ID','column header', 'wp-wiki-tooltip' ); ?></th>
+                <th class="row4"><?php _ex( 'URL', 'column header', 'wp-wiki-tooltip' ); ?></th>
+                <th class="row5" colspan="2"><?php _ex( 'Actions', 'column header', 'wp-wiki-tooltip' ); ?></th>
             </tr>
 
             <?php foreach( $urls as $num => $url ) : if( $num != '###NEWID###' ) : ?>
@@ -312,8 +337,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                     <td class="row2"><input id="txt-site-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][<?php echo $num; ?>][sitename]" value="<?php echo $url[ 'sitename' ]; ?>" class="regular-text"/></td>
                     <td class="row3"><input id="txt-id-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][<?php echo $num; ?>][id]" value="<?php echo $url[ 'id' ]; ?>" class="narrow"/></td>
                     <td class="row4"><input id="txt-url-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][<?php echo $num; ?>][url]" value="<?php echo $url[ 'url' ]; ?>" class="regular-text"/></td>
-                    <td class="row5"><input id="btn-test-wiki-url-row-<?php echo $num; ?>" type="button" value="<?php _e( 'test', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
-                    <td class="row6"><input type="button" value="<?php _e( 'remove', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/></td>
+                    <td class="row5"><input id="btn-test-wiki-url-row-<?php echo $num; ?>" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
+                    <td class="row6"><input type="button" value="<?php _ex( 'remove', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/></td>
                 </tr>
             <?php endif; endforeach; ?>
 
@@ -322,11 +347,11 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 <td class="row2"><input id="txt-site-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][###NEWID###][sitename]" value="" class="regular-text"/></td>
                 <td class="row3"><input id="txt-id-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][###NEWID###][id]" value="" class="narrow"/></td>
                 <td class="row4"><input id="txt-url-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings[wiki-urls][data][###NEWID###][url]" value="" class="regular-text"/></td>
-                <td class="row5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _e( 'test', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
-                <td class="row6"><input type="button" value="<?php _e( 'remove', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-###NEWID###' );"/></td>
+                <td class="row5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
+                <td class="row6"><input type="button" value="<?php _ex( 'remove', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-###NEWID###' );"/></td>
             </tr>
             <tr>
-                <td colspan="6"><input type="button" value="<?php _e( 'Add new URL', 'wp-wiki-tooltip' ); ?>" class="button" onclick="add_wiki_url_row();" /></td>
+                <td colspan="6"><input type="button" value="<?php _ex( 'Add new URL', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="add_wiki_url_row();" /></td>
             </tr>
         </table>
         <?php
@@ -343,8 +368,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 	    $used_trigger = isset( $this->options[ 'trigger' ] ) ? $this->options[ 'trigger' ] : $args[ 'trigger' ];
 	    $used_action = isset( $this->options[ 'trigger-hover-action' ] ) ? $this->options[ 'trigger-hover-action' ] : $args[ 'trigger-hover-action' ];
 
-	    echo '<p><label><input type="radio" id="rdo-a-trigger-click" name="wp-wiki-tooltip-settings[trigger]" value="click" ' . checked( $used_trigger, 'click', false ) . ' onclick="disable_trigger_hover_action( true );" />' . __( 'click', 'wp-wiki-tooltip' ) . '</label></p>';
-        echo '<p><label><input type="radio" id="rdo-a-trigger-hover" name="wp-wiki-tooltip-settings[trigger]" value="hover"' . checked( $used_trigger, 'hover', false ) . ' onclick="disable_trigger_hover_action( false );" />' . __( 'hover', 'wp-wiki-tooltip' ) . '</label></p>';
+	    echo '<p><label><input type="radio" id="rdo-a-trigger-click" name="wp-wiki-tooltip-settings[trigger]" value="click" ' . checked( $used_trigger, 'click', false ) . ' onclick="disable_trigger_hover_action( true );" />' . _x( 'click', 'option trigger', 'wp-wiki-tooltip' ) . '</label></p>';
+        echo '<p><label><input type="radio" id="rdo-a-trigger-hover" name="wp-wiki-tooltip-settings[trigger]" value="hover"' . checked( $used_trigger, 'hover', false ) . ' onclick="disable_trigger_hover_action( false );" />' . _x( 'hover', 'option trigger', 'wp-wiki-tooltip' ) . '</label></p>';
 ?>
         <p class="wiki-form-indent-left description"><?php _e( 'What happens by clicking the link, too?', 'wp-wiki-tooltip' ); ?></p>
         <ul class="wiki-form-indent-left">
@@ -372,11 +397,11 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 	    echo '<p><label><input type="radio" id="rdo-page-error-handling-show-own" name="wp-wiki-tooltip-settings[page-error-handling]" value="show-own" ' . checked( $used_error_handling, 'show-own', false ) . ' onclick="disable_page_error_handling_fields( false, true );" />' . __( 'show your own error title and message in tooltip', 'wp-wiki-tooltip' ) . '</label></p>';
         echo '<ul class="wiki-form-indent-left wiki-page-error-handling-list">';
 	    printf(
-		    '<li><label for="own-error-title">' . __( 'Title:', 'wp-wiki-tooltip' ) . '</label><input type="text" id="own-error-title" name="wp-wiki-tooltip-settings[own-error-title]" value="%s" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' /></li>',
+		    '<li><label for="own-error-title">' . _x( 'Title:', 'error message', 'wp-wiki-tooltip' ) . '</label><input type="text" id="own-error-title" name="wp-wiki-tooltip-settings[own-error-title]" value="%s" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' /></li>',
 		    isset( $this->options['own-error-title'] ) ? esc_attr( $this->options[ 'own-error-title' ] ) : $args[ 'own-error-title' ]
 	    );
 	    printf(
-		    '<li><label for="own-error-message">' . __( 'Message:', 'wp-wiki-tooltip' ) . '</label><textarea id="own-error-message" name="wp-wiki-tooltip-settings[own-error-message]" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' >%s</textarea><br /><span id="own-error-message-desc" class="description">' . __( 'You can enter HTML here!', 'wp-wiki-tooltip' ) . '</span></span></li>',
+		    '<li><label for="own-error-message">' . _x( 'Message:', 'error message', 'wp-wiki-tooltip' ) . '</label><textarea id="own-error-message" name="wp-wiki-tooltip-settings[own-error-message]" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' >%s</textarea><br /><span id="own-error-message-desc" class="description">' . __( 'You can enter HTML here!', 'wp-wiki-tooltip' ) . '</span></span></li>',
 		    isset( $this->options['own-error-message'] ) ? esc_attr( $this->options[ 'own-error-message' ] ) : $args[ 'own-error-message' ]
 	    );
         echo '</ul>';
@@ -393,12 +418,26 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 	public function print_theme_field( $args ) {
         $used_theme = isset( $this->options[ 'theme' ] ) ? $this->options[ 'theme' ] : $args[ 'theme' ];
 
+        $themes = array(
+            'default' => _x( 'Default', 'tooltip theme name', 'wp-wiki-tooltip' ),
+            'light' => _x( 'Light', 'tooltip theme name', 'wp-wiki-tooltip' ),
+            'borderless' => _x( 'Borderless', 'tooltip theme name', 'wp-wiki-tooltip' ),
+            'noir' => _x( 'Noir', 'tooltip theme name', 'wp-wiki-tooltip' ),
+            'punk' => _x( 'Punk', 'tooltip theme name', 'wp-wiki-tooltip' ),
+            'shadow' => _x( 'Shadow', 'tooltip theme name', 'wp-wiki-tooltip' )
+        );
+
         echo '<ul id="wiki-tooltip-admin-theme-list">';
-        foreach( array( 'default', 'light', 'borderless', 'noir', 'punk', 'shadow' ) as $theme ) {
+        foreach( $themes as $theme => $theme_label ) {
 ?>          <li>
                 <label>
                     <input type="radio" id="rdo-theme-<?php echo $theme; ?>" name="wp-wiki-tooltip-settings[theme]" value="<?php echo $theme; ?>" <?php checked( $used_theme, $theme, true ); ?> />
-                    <span id="tooltipster-theme-<?php echo $theme; ?>-preview" class="tooltipster-preview" title="<?php printf(__( 'This is a tooltip demo with &raquo;%s&laquo; theme...', 'wp-wiki-tooltip' ), $theme ); ?>"><?php echo $theme; ?></span>
+                    <span id="tooltipster-theme-<?php echo $theme; ?>-preview" class="tooltipster-preview" title="<?php
+                        printf( /* translators: parameter is used for the name of the tooltip themes */
+                            __( 'This is a tooltip demo with &raquo;%s&laquo; theme&hellip;', 'wp-wiki-tooltip' ),
+                            $theme_label
+                        );
+                    ?>"><?php echo $theme_label ?></span>
                 </label>
                 <script>$wwtj( document ).ready( function() { enable_tooltip_theme_demo( '<?php echo $theme; ?>' ); } );</script>
             </li>

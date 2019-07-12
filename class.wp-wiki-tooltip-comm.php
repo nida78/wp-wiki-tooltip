@@ -93,11 +93,18 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
             if ( is_array( $response ) && ! is_wp_error( $response ) && ! $section_error ) {
                 $wiki_data = json_decode( $response['body'], true );
 
+                // parse the content of wiki page
                 $content = $wiki_data['parse']['text']['*'];
-                $content = substr($content, stripos($content, '<p>'));
+
+                // remove all html tables because there can be paragraphs in
+                $content = preg_replace('/<table.*<\/table>/is', '', $content);
+
+                // find the content of the first paragraph
+                $content = substr($content, stripos($content, '<p>') + 3);
                 $content = substr($content, 0, stripos($content, '</p>'));
-                $content = preg_replace('/<\/?[^>]+>/', '', $content);
-                $content = preg_replace('/\[[^\]]+\]/', '', $content);
+
+                // delete all links (<a> tags) to avoid useless links in the tooltip
+                $content = preg_replace('/<\/?a[^>]*>/', '', $content);
 
                 $result = array(
                     'code' => '1',

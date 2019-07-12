@@ -5,9 +5,9 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 5.0.2
+Tested up to: 5.2.2
 
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -23,7 +23,7 @@ Main features of the current version are:
 
 * Setup at least one wanted Wiki base and several other options at a backend page
 * Integrate the Wiki tooltip using shortcodes in Posts and Pages
-* Shortcodes can be created by a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin
+* Shortcodes can be created by a [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin - within Gutenberg's Classic-Block, too
 
 # Frequently Asked Questions
 

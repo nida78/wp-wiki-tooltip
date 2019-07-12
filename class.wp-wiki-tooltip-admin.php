@@ -451,12 +451,25 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 		$used_theme = isset( $this->options[ 'theme' ] ) ? $this->options[ 'theme' ] : $args[ 'theme' ];
 		$used_animation = isset( $this->options[ 'animation' ] ) ? $this->options[ 'animation' ] : $args[ 'animation' ];
 
-		echo '<ul id="wiki-tooltip-admin-animation-list">';
-		foreach( array( 'fade', 'grow', 'swing', 'slide', 'fall' ) as $animation ) {
+        $animations = array(
+            'fade' => _x( 'Fade', 'tooltip animation name', 'wp-wiki-tooltip' ),
+            'grow' => _x( 'Grow', 'tooltip animation name', 'wp-wiki-tooltip' ),
+            'swing' => _x( 'Swing', 'tooltip animation name', 'wp-wiki-tooltip' ),
+            'slide' => _x( 'Slide', 'tooltip animation name', 'wp-wiki-tooltip' ),
+            'fall' => _x( 'Fall', 'tooltip animation name', 'wp-wiki-tooltip' ),
+        );
+
+        echo '<ul id="wiki-tooltip-admin-animation-list">';
+        foreach( $animations as $animation => $animation_label ) {
 ?>          <li>
                 <label>
                     <input type="radio" id="rdo-animation-<?php echo $animation; ?>" name="wp-wiki-tooltip-settings[animation]" value="<?php echo $animation; ?>" <?php checked( $used_animation, $animation, true ); ?> />
-                    <span id="tooltipster-animation-<?php echo $animation; ?>-preview" class="tooltipster-animation-preview" title="<?php printf(__( 'This is a tooltip demo with &raquo;%s&laquo; animation...', 'wp-wiki-tooltip' ), $animation ); ?>"><?php echo $animation; ?></span>
+                    <span id="tooltipster-animation-<?php echo $animation; ?>-preview" class="tooltipster-animation-preview" title="<?php
+                        printf( /* translators: parameter is used for the name of the tooltip animation */
+                            __( 'This is a tooltip demo with &raquo;%s&laquo; animation...', 'wp-wiki-tooltip' ),
+                            $animation
+                        );
+                    ?>"><?php echo $animation_label; ?></span>
                 </label>
                 <script>$wwtj( document ).ready( function() { enable_tooltip_animation_demo( '<?php echo $used_theme; ?>', '<?php echo $animation; ?>' ); } );</script>
             </li>

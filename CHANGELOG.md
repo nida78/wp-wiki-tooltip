@@ -1,5 +1,10 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.9.2]
+*Release Date - March 8th, 2020*
+
+* small bug-fix for several warnings when WP_DEBUG is on
+
 ## [1.9.1]
 *Release Date - July 12th, 2019*
 
@@ -123,6 +128,7 @@
 
 * Initial release
 
+[1.9.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.2
 [1.9.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.1
 [1.9.0 - C6H13NO2 | Isoleucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0
 [1.8.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.1

@@ -57,8 +57,8 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			'error_handling' => $this->options[ 'page-error-handling' ],
 			'default_error_title' => __( 'Error!', 'wp-wiki-tooltip' ),
 			'default_error_message' => __( 'Sorry, but we were not able to find this page :(', 'wp-wiki-tooltip' ),
-			'own_error_title' => $this->options[ 'own-error-title' ],
-			'own_error_message' => $this->options[ 'own-error-message' ],
+            'own_error_title' => ( $this->options[ 'page-error-handling' ] == 'show-own' ) ? $this->options[ 'own-error-title' ] : '',
+            'own_error_message' => ( $this->options[ 'page-error-handling' ] == 'show-own' ) ? $this->options[ 'own-error-message' ] : '',
 			'section_error_handling' => $this->options[ 'section-error-handling' ]
 		));
 		wp_enqueue_script( 'wp-wiki-tooltip-js' );
@@ -108,7 +108,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		$output  = '<script>$wwtj( document ).ready( function() { add_wiki_box( ' . $cnt . ', "' . $trans_wiki_data[ 'wiki-id' ] . '", "' . $trans_wiki_data[ 'wiki-title' ] . '", "' . $params[ 'section' ] . '", "' . $trans_wiki_data[ 'wiki-base-url' ] . '", "' . $trans_wiki_data[ 'wiki-url' ] . '", "' . $params[ 'thumbnail' ] . '" ); } );</script>';
         $relno = ( $this->options[ 'a-target' ] == '_blank' ) ? ' rel="noopener noreferrer"' : '';
 
-        if( ( $trans_wiki_data[ 'wiki-id' ] == '-1' ) && ( $this->options[ 'error-handling' ] == 'remove-link' ) ) {
+        if( ( $trans_wiki_data[ 'wiki-id' ] == '-1' ) && ( $this->options[ 'page-error-handling' ] == 'remove-link' ) ) {
 	        $output .= $content;
         } else {
 	        $output .= '<span id="wiki-tooltip-' . $cnt . '" data-tooltip-content="wiki-tooltip-box-' . $cnt . '"><a class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . ( ( $params[ 'section' ] != '' ) ? ( '#' . $params[ 'section' ] ) : '' ) . '" target="' . $this->options['a-target'] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options['trigger'] . '\', \'' . $this->options['trigger-hover-action'] . '\' );">' . $content . '</a></span>';

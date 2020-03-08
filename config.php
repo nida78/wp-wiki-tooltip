@@ -1,24 +1,24 @@
 <?php
 
-$wp_wiki_tooltip_default_options = array(
+$wp_wiki_tooltip_default_options = [
 
-    'wiki-urls' => array (
+    'wiki-urls' => [
         'standard' => 1,
-        'data' => array (
-            '1' => array ( // standard URL of Wiki to get contents from
+        'data' => [
+            '1' => [ // standard URL of Wiki to get contents from
                 'id' => 'EN',
                 'url' => 'https://en.wikipedia.org/w/api.php',
                 'sitename' => 'Wikipedia'
-            )
-        )
-    ),
+            ]
+        ]
+    ],
 
-    'cache' => array ( // NOT USED: cache settings - default "1 week"
+    'cache' => [ // NOT USED: cache settings - default "1 week"
 
         'count' => 1, // how many
 
         'unit' => 'week' // what
-    ),
+    ],
 
     'a-target' => '_blank', // where to open links to wiki pages
 
@@ -55,4 +55,4 @@ $wp_wiki_tooltip_default_options = array(
     'thumb-width' => '200', // standard width of the thumbnails
 
     'thumb-style' => '', // stylesheets for thumbnail images
-);
+];

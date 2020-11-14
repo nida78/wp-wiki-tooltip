@@ -1,5 +1,11 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.10.0 - C6H13NO2 | Leucine ]
+*Release Date -  April 15th, 2020*
+
+* all dynamic JavaScript that was printed in HTML is moved into static JS files to avoid problems with other plugins
+* the used Tooltipster plugin is updated to its version 4.2.7
+
 ## [1.9.2]
 *Release Date - March 8th, 2020*
 
@@ -128,6 +134,7 @@
 
 * Initial release
 
+[1.10.0 - C6H13NO2 | Leucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.0
 [1.9.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.2
 [1.9.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.1
 [1.9.0 - C6H13NO2 | Isoleucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0

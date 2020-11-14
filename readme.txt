@@ -2,8 +2,8 @@
 Contributors: nida78
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
-Tested up to: 5.3.2
-Stable tag: 1.9.2
+Tested up to: 5.5.3
+Stable tag: 1.10.0
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later
 
@@ -11,7 +11,7 @@ Adds explaining tooltips querying their content from a MediaWiki installation, e
 
 == Description ==
 
-Adds explaining tooltips querying their content from a [MediaWiki](https://www.mediawiki.org "see MediaWiki docs") installation, e.g. [Wikipedia.org](https://www.wikipedia.org "see the well-known Wikipedia"). Therefore shortcodes can be used in Posts and Pages to mark keywords and link them to public Wiki pages. The well-known package of [Tooltipster](http://iamceege.github.io/tooltipster/ "Tooltipster rocks :)") is used to create the nice and themable tooltips.
+Adds explaining tooltips querying their content from a [MediaWiki](https://www.mediawiki.org "see MediaWiki docs") installation, e.g. [Wikipedia.org](https://www.wikipedia.org "see the well-known Wikipedia"). Therefore shortcodes can be used in Posts and Pages to mark keywords and link them to public Wiki pages. The well-known package of [Tooltipster](https://calebjacob.github.io/tooltipster/ "Tooltipster rocks :)") is used to create the nice and themable tooltips.
 
 Main features of the current version are:
 
@@ -63,6 +63,14 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 == Changelog ==
 The last three major releases are listed here, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
+= 1.10.0 - C6H13NO2 | Leucine =
+*Release Date - November 15th, 2020*
+
+* all dynamic JavaScript code that was printed in HTML is moved into static JS files to avoid problems with other plugins
+* all JavaScript is improved by removing small mistakes and minor hitches
+* the used Tooltipster plugin is updated to its version 4.2.8
+* some improvements for binding external resources
+
 = 1.9.0 - C6H13NO2 | Isoleucine =
 *Release Date - January 1st, 2019*
 
@@ -78,12 +86,6 @@ The last three major releases are listed here, only. Find complete log of all ch
 * special options for handling errors are available
 * a new version of Tooltipster plugin was released that leads to some programmatic and design changes
 * a preview for every tooltip designs is available at options page now
-
-= 1.7.0 - C2H5NO2 | Glycine =
-*Release Date - October 22nd, 2016*
-
-* you can set if tooltips are triggered by click or hover
-* a minimum screen width can defined that is necessary to enable tooltips
 
 == Upgrade Notice ==
 

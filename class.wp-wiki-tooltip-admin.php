@@ -21,16 +21,18 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function init() {
-	    wp_enqueue_style( 'tooltipster-css', plugins_url( 'static/external/tooltipster/dist/css/tooltipster.bundle.min.css', __FILE__ ), array(), '4.2.6', 'all' );
-	    wp_enqueue_style( 'tooltipster-light-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css', __FILE__ ), array(), '4.2.6', 'all' );
-	    wp_enqueue_style( 'tooltipster-noir-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css', __FILE__ ), array(), '4.2.6', 'all' );
-	    wp_enqueue_style( 'tooltipster-punk-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css', __FILE__ ), array(), '4.2.6', 'all' );
-	    wp_enqueue_style( 'tooltipster-shadow-css', plugins_url( 'static/external/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css', __FILE__ ), array(), '4.2.6', 'all' );
+        $tooltipster_base_dir = sprintf( 'static/external/tooltipster/%1$s/dist', $this->tooltipster_version );
+
+	    wp_enqueue_style( 'tooltipster-css', plugins_url( $tooltipster_base_dir . '/css/tooltipster.bundle.min.css', __FILE__ ), array(), $this->tooltipster_version, 'all' );
+	    wp_enqueue_style( 'tooltipster-light-css', plugins_url( $tooltipster_base_dir . '/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css', __FILE__ ), array(), $this->tooltipster_version, 'all' );
+	    wp_enqueue_style( 'tooltipster-noir-css', plugins_url( $tooltipster_base_dir . '/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css', __FILE__ ), array(), $this->tooltipster_version, 'all' );
+	    wp_enqueue_style( 'tooltipster-punk-css', plugins_url( $tooltipster_base_dir . '/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css', __FILE__ ), array(), $this->tooltipster_version, 'all' );
+	    wp_enqueue_style( 'tooltipster-shadow-css', plugins_url( $tooltipster_base_dir . '/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css', __FILE__ ), array(), $this->tooltipster_version, 'all' );
 
         wp_enqueue_style( 'wp-wiki-tooltip-admin-css', plugins_url( 'static/css/wp-wiki-tooltip-admin.css', __FILE__ ), array(), $this->version, 'all' );
         wp_enqueue_style( 'wp-wiki-tooltip-mce-css', plugins_url( 'static/css/wp-wiki-tooltip-mce.css', __FILE__ ), array(), $this->version, 'all' );
 
-	    wp_enqueue_script( 'tooltipster-js', plugins_url( 'static/external/tooltipster/dist/js/tooltipster.bundle.min.js', __FILE__ ), array( 'jquery' ), '4.2.6', false );
+	    wp_enqueue_script( 'tooltipster-js', plugins_url( $tooltipster_base_dir. '/js/tooltipster.bundle.min.js', __FILE__ ), array( 'jquery' ), $this->tooltipster_version, false );
 
         wp_register_script( 'wp-wiki-tooltip-admin-js', plugins_url( 'static/js/wp-wiki-tooltip-admin.js', __FILE__ ), array( 'jquery' ), $this->version, false );
         wp_localize_script( 'wp-wiki-tooltip-admin-js', 'wp_wiki_tooltip_admin', array(
@@ -559,6 +561,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         <div class="wrap">
             <h2><?php _e( 'Settings for Wiki-Tooltips', 'wp-wiki-tooltip' ) ?></h2>
             <p class="wiki-usage"><?php _e( 'Use one of these shortcodes to enable Wiki-Tooltips:', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki]WordPress[/wiki]</span>&nbsp;<?php _e( 'or', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki title="WordPress"]a nice blogging software[/wiki]</span></p>
+
             <form method="post" action="options.php">
                 <?php
                 settings_fields( 'wp-wiki-tooltip-settings' );

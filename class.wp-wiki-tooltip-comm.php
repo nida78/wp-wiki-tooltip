@@ -94,7 +94,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
                 $wiki_data = json_decode( $response['body'], true );
 
                 // parse the content of wiki page
-                $content = $wiki_data['parse']['text']['*'];
+                $content = $wiki_data[ 'parse' ][ 'text' ][ '*' ];
 
                 // remove all html tables because there can be paragraphs in
                 $content = preg_replace('/<table.*<\/table>/is', '', $content);

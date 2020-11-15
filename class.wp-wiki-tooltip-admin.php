@@ -43,14 +43,58 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         wp_enqueue_script( 'wp-wiki-tooltip-admin-js' );
 
         add_options_page(
-            __( 'Settings for Wiki-Tooltips', 'wp-wiki-tooltip' ),
+            __( 'Settings &gt; Wiki-Tooltips', 'wp-wiki-tooltip' ),
             __( 'Wiki-Tooltips', 'wp-wiki-tooltip' ),
             'manage_options',
             'wp-wiki-tooltip-settings',
             array( $this, 'settings_page' )
         );
 
-        $this->options = get_option( 'wp-wiki-tooltip-settings' );
+        // TODO: translations
+        add_submenu_page(
+            'wp-wiki-tooltip-settings',
+            'Error',
+            'Error',
+            'manage_options',
+            'wp-wiki-tooltip-settings-error',
+            array( $this, 'settings_page_error' )
+        );
+
+        // TODO: translations
+        add_submenu_page(
+            'wp-wiki-tooltip-settings',
+            'Design',
+            'Design',
+            'manage_options',
+            'wp-wiki-tooltip-settings-design',
+            array( $this, 'settings_page_design' )
+        );
+
+        // TODO: translations
+        add_submenu_page(
+            'wp-wiki-tooltip-settings',
+            'Thumb',
+            'Thumb',
+            'manage_options',
+            'wp-wiki-tooltip-settings-thumb',
+            array( $this, 'settings_page_thumb' )
+        );
+
+
+        // TODO: full implementation
+        $this->options_base = get_option( 'wp-wiki-tooltip-settings-base' );
+        if( $this->options_base == false ) {
+            global $wp_wiki_tooltip_default_options;
+            $this->options_base = $wp_wiki_tooltip_default_options[ 'base' ];
+        }
+
+        $this->options_error = get_option( 'wp-wiki-tooltip-settings-error' );
+        $this->options_design = get_option( 'wp-wiki-tooltip-settings-design' );
+        $this->options_thumb = get_option( 'wp-wiki-tooltip-settings-thumb' );
+        /*		if( $this->options == false ) {
+                    global $wp_wiki_tooltip_default_options;
+                    $this->options = $wp_wiki_tooltip_default_options;
+                }*/
 
         if( array_key_exists( 'btn_reset', $_REQUEST ) && $_REQUEST[ 'btn_reset' ] == __( 'Reset', 'wp-wiki-tooltip' ) ) {
             $result = ( delete_option( 'wp-wiki-tooltip-settings' ) ) ? 'true' : 'false';
@@ -87,106 +131,104 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     public function register_settings() {
         global $wp_wiki_tooltip_default_options;
 
-        register_setting(
-            'wp-wiki-tooltip-settings',
-            'wp-wiki-tooltip-settings',
-            array( $this, 'sanitize' )
-        );
-
         /*** Base Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-base',
             _x( 'Base Settings', 'settings section headline', 'wp-wiki-tooltip' ),
             array( $this, 'print_base_section_info' ),
-            'wp-wiki-tooltip-settings'
+            'wp-wiki-tooltip-settings-base'
         );
 
         add_settings_field(
             'wiki-urls',
             _x( 'URLs of Wikis', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_wiki_url_fields' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-base',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-base'
         );
 
         add_settings_field(
             'a-target',
             _x( 'Open links to Wiki pages in', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_a_target_field' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-base',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-base'
         );
 
         add_settings_field(
             'trigger',
             _x( 'Tooltips are triggered by', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_trigger_fields' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-base',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-base'
         );
 
 	    add_settings_field(
 		    'min-screen-width',
 		    _x( 'Minimum screen width', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_min_screen_width_field' ),
-		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-base',
-		    $wp_wiki_tooltip_default_options
+		    'wp-wiki-tooltip-settings-base'
 	    );
 
-	    /*** Error Handling Settings ***/
+        register_setting(
+            'wp-wiki-tooltip-settings-base',
+            'wp-wiki-tooltip-settings-base',
+            array( $this, 'sanitize' )
+        );
+
+        /*** Error Handling Settings ***/
 	    add_settings_section(
-		    'wp-wiki-tooltip-settings-error-handling',
+		    'wp-wiki-tooltip-settings-error',
 		    _x( 'Error handling', 'settings section headline', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_error_handling_section_info' ),
-		    'wp-wiki-tooltip-settings'
+		    'wp-wiki-tooltip-settings-error'
 	    );
 
 	    add_settings_field(
 		    'page-error-handling',
 		    _x( 'Page errors', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_page_error_handling_fields' ),
-		    'wp-wiki-tooltip-settings',
-		    'wp-wiki-tooltip-settings-error-handling',
-		    $wp_wiki_tooltip_default_options
+		    'wp-wiki-tooltip-settings-error',
+		    'wp-wiki-tooltip-settings-error'
 	    );
 
 	    add_settings_field(
 		    'section-error-handling',
 		    _x( 'Section errors', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_section_error_handling_fields' ),
-		    'wp-wiki-tooltip-settings',
-		    'wp-wiki-tooltip-settings-error-handling',
-		    $wp_wiki_tooltip_default_options
+		    'wp-wiki-tooltip-settings-error',
+		    'wp-wiki-tooltip-settings-error'
 	    );
 
-	    /*** Design Settings ***/
+        register_setting(
+            'wp-wiki-tooltip-settings-error',
+            'wp-wiki-tooltip-settings-error',
+            array( $this, 'sanitize' )
+        );
+
+        /*** Design Settings ***/
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
             _x( 'Design Settings', 'settings section headline', 'wp-wiki-tooltip' ),
             array( $this, 'print_design_section_info' ),
-            'wp-wiki-tooltip-settings'
+            'wp-wiki-tooltip-settings-design'
         );
 
 	    add_settings_field(
 		    'theme',
 		    _x( 'Design of the tooltips', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_theme_field' ),
-		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-design',
-		    $wp_wiki_tooltip_default_options
+		    'wp-wiki-tooltip-settings-design'
 	    );
 
 	    add_settings_field(
 		    'animation',
 		    _x( 'Animation', 'settings field label', 'wp-wiki-tooltip' ),
 		    array( $this, 'print_animation_field' ),
-		    'wp-wiki-tooltip-settings',
 		    'wp-wiki-tooltip-settings-design',
-		    $wp_wiki_tooltip_default_options
+		    'wp-wiki-tooltip-settings-design'
 	    );
 
 	    add_settings_field(
@@ -197,9 +239,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 '</em>'
             ),
             array( $this, 'print_tooltip_head_field' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-design'
         );
 
         add_settings_field(
@@ -210,9 +251,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 '</em>'
             ),
             array( $this, 'print_tooltip_body_field' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-design'
         );
 
         add_settings_field(
@@ -223,18 +263,22 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 '</em>'
             ),
             array( $this, 'print_tooltip_foot_field' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-design'
         );
 
         add_settings_field(
             'a-styles',
             _x( 'Wiki links styles', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_a_style_field' ),
-            'wp-wiki-tooltip-settings',
             'wp-wiki-tooltip-settings-design',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-design'
+        );
+
+        register_setting(
+            'wp-wiki-tooltip-settings-design',
+            'wp-wiki-tooltip-settings-design',
+            array( $this, 'sanitize' )
         );
 
         /*** Thumbnail Settings ***/
@@ -250,8 +294,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             _x( 'Enable thumbnails', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_enable_field' ),
             'wp-wiki-tooltip-settings',
-            'wp-wiki-tooltip-settings-thumb',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-thumb'
         );
 
         add_settings_field(
@@ -259,8 +302,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             _x( 'Alignment', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_align_field' ),
             'wp-wiki-tooltip-settings',
-            'wp-wiki-tooltip-settings-thumb',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-thumb'
         );
 
         add_settings_field(
@@ -268,8 +310,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             _x( 'Width', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_width_field' ),
             'wp-wiki-tooltip-settings',
-            'wp-wiki-tooltip-settings-thumb',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-thumb'
         );
 
         add_settings_field(
@@ -277,8 +318,13 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             _x( 'Styles', 'settings field label', 'wp-wiki-tooltip' ),
             array( $this, 'print_thumb_style_field' ),
             'wp-wiki-tooltip-settings',
+            'wp-wiki-tooltip-settings-thumb'
+        );
+
+        register_setting(
             'wp-wiki-tooltip-settings-thumb',
-            $wp_wiki_tooltip_default_options
+            'wp-wiki-tooltip-settings-thumb',
+            array( $this, 'sanitize' )
         );
     }
 
@@ -392,8 +438,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function print_min_screen_width_field( $args ) {
         printf(
-            '<p><label><input type="text" id="min-screen-width" name="wp-wiki-tooltip-settings[min-screen-width]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
-            isset( $this->options['min-screen-width'] ) ? esc_attr( $this->options[ 'min-screen-width' ] ) : $args[ 'min-screen-width' ]
+            '<p><label><input type="text" id="min-screen-width" name="wp-wiki-tooltip-settings-base[min-screen-width]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            isset( $this->options_base['min-screen-width'] ) ? esc_attr( $this->options_base[ 'min-screen-width' ] ) : $args[ 'min-screen-width' ]
         );
         echo '<p class="description">' . __( 'Enable tooltips only if the width of the used display is greater than this defined number of pixel.', 'wp-wiki-tooltip' ) . '</p>';
     }
@@ -556,16 +602,52 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         return $input;
     }
 
-    public function settings_page() {
+    public function settings_page( $active_tab = '' ) {
+
+        if( isset( $_GET[ 'tab' ] ) ) {
+            $active_tab = $_GET['tab'];
+        }
+
+        if( ! in_array( $active_tab, array( 'base', 'error', 'design', 'thumb' ) ) ) {
+            $active_tab = 'base';
+        }
+
         ?>
         <div class="wrap">
-            <h2><?php _e( 'Settings for Wiki-Tooltips', 'wp-wiki-tooltip' ) ?></h2>
+            <h2><?php _e( 'Settings &gt; Wiki-Tooltips', 'wp-wiki-tooltip' ) ?></h2>
             <p class="wiki-usage"><?php _e( 'Use one of these shortcodes to enable Wiki-Tooltips:', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki]WordPress[/wiki]</span>&nbsp;<?php _e( 'or', 'wp-wiki-tooltip' ); ?>&nbsp;<span class="bold-teletyper">[wiki title="WordPress"]a nice blogging software[/wiki]</span></p>
+
+            <h2 class="nav-tab-wrapper">
+                <a href="?page=wp-wiki-tooltip-settings&tab=base" class="nav-tab <?php echo $active_tab == 'base' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Base Settings', 'settings section headline', 'wp-wiki-tooltip' ); ?></a>
+                <a href="?page=wp-wiki-tooltip-settings&tab=error" class="nav-tab <?php echo $active_tab == 'error' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Error handling', 'settings section headline', 'wp-wiki-tooltip' ); ?></a>
+                <a href="?page=wp-wiki-tooltip-settings&tab=design" class="nav-tab <?php echo $active_tab == 'design' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Design Settings', 'settings section headline', 'wp-wiki-tooltip' ); ?></a>
+                <a href="?page=wp-wiki-tooltip-settings&tab=thumb" class="nav-tab <?php echo $active_tab == 'thumb' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Thumbnail Settings', 'settings section headline', 'wp-wiki-tooltip' ); ?></a>
+            </h2>
 
             <form method="post" action="options.php">
                 <?php
-                settings_fields( 'wp-wiki-tooltip-settings' );
-                do_settings_sections( 'wp-wiki-tooltip-settings' );
+                if( $active_tab == 'error' ) {
+
+                    settings_fields( 'wp-wiki-tooltip-settings-error' );
+                    do_settings_sections( 'wp-wiki-tooltip-settings-error' );
+
+                } elseif( $active_tab == 'design' ) {
+
+                    settings_fields( 'wp-wiki-tooltip-settings-design' );
+                    do_settings_sections( 'wp-wiki-tooltip-settings-design' );
+
+                } elseif( $active_tab == 'thumb' ) {
+
+                    settings_fields('wp-wiki-tooltip-settings-thumb');
+                    do_settings_sections('wp-wiki-tooltip-settings-thumb');
+
+                } else {
+
+                    settings_fields( 'wp-wiki-tooltip-settings-base' );
+                    do_settings_sections( 'wp-wiki-tooltip-settings-base' );
+
+                }
+
                 submit_button( __( 'Submit', 'wp-wiki-tooltip' ), 'primary', 'btn_submit', false );
                 echo "&nbsp;&nbsp;&nbsp;";
                 submit_button( __( 'Reset', 'wp-wiki-tooltip' ), 'secondary', 'btn_reset', false );
@@ -573,5 +655,17 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             </form>
         </div>
         <?php
+    }
+
+    public function settings_page_error() {
+        $this->settings_page( 'error' );
+    }
+
+    public function settings_page_design() {
+        $this->settings_page( 'design' );
+    }
+
+    public function settings_page_thumb() {
+        $this->settings_page( 'thumb' );
     }
 }

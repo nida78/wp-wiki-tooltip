@@ -2,31 +2,34 @@
 
 $wp_wiki_tooltip_default_options = [
 
-    'wiki-urls' => [
-        'standard' => 1,
-        'data' => [
-            '1' => [ // standard URL of Wiki to get contents from
-                'id' => 'EN',
-                'url' => 'https://en.wikipedia.org/w/api.php',
-                'sitename' => 'Wikipedia'
+    'base' => [
+
+        'wiki-urls' => [
+            'standard' => 1,
+            'data' => [
+                '1' => [ // standard URL of Wiki to get contents from
+                    'id' => 'EN',
+                    'url' => 'https://en.wikipedia.org/w/api.php',
+                    'sitename' => 'Wikipedia'
+                ]
             ]
-        ]
+        ],
+
+        'cache' => [ // NOT USED: cache settings - default "1 week"
+
+            'count' => 1, // how many
+
+            'unit' => 'week' // what
+        ],
+
+        'a-target' => '_blank', // where to open links to wiki pages
+
+        'trigger' => 'hover', // what triggers the tooltip
+
+        'trigger-hover-action' => 'none', // how does the link work if trigger is "hover"
+
+        'min-screen-width' => '0', // activate tooltips only if screen is greater than this number of pixel
     ],
-
-    'cache' => [ // NOT USED: cache settings - default "1 week"
-
-        'count' => 1, // how many
-
-        'unit' => 'week' // what
-    ],
-
-    'a-target' => '_blank', // where to open links to wiki pages
-
-    'trigger' => 'hover', // what triggers the tooltip
-
-    'trigger-hover-action' => 'none', // how does the link work if trigger is "hover"
-
-    'min-screen-width' => '0', // activate tooltips only if screen is greater than this number of pixel
 
     'page-error-handling' => 'show-default', // how should errors of pages be handled
 

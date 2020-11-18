@@ -30,17 +30,17 @@ p.wiki-usage span.bold-teletyper {
     text-align: center;
 }
 
-#wiki-urls-table .row1 {
+#wiki-urls-table .col1 {
     text-align: center;
     width: 100px;
 }
 
-#wiki-urls-table .row5 {
+#wiki-urls-table .col5 {
     text-align: center;
     width: 130px;
 }
 
-#wiki-urls-table .row6 {
+#wiki-urls-table .col6 {
     text-align: center;
     width: 130px;
 }

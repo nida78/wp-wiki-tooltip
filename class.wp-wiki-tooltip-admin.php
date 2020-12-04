@@ -394,7 +394,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                     <td class="col2"><input id="txt-site-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][<?php echo $num; ?>][sitename]" value="<?php echo $url[ 'sitename' ]; ?>" class="regular-text"/></td>
                     <td class="col3"><input id="txt-id-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][<?php echo $num; ?>][id]" value="<?php echo $url[ 'id' ]; ?>" class="narrow"/></td>
                     <td class="col4"><input id="txt-url-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][<?php echo $num; ?>][url]" value="<?php echo $url[ 'url' ]; ?>" class="regular-text"/></td>
-                    <td class="col5"><input id="btn-test-wiki-url-row-<?php echo $num; ?>" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
+                    <td class="col5"><input id="btn-test-wiki-url-row-<?php echo $num; ?>" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/><img src="<?php echo plugins_url( 'static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
                     <td class="col6"><input type="button" value="<?php _ex( 'remove', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/></td>
                 </tr>
             <?php
@@ -409,7 +409,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 <td class="col2"><input id="txt-site-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][###NEWID###][sitename]" value="" class="regular-text"/></td>
                 <td class="col3"><input id="txt-id-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][###NEWID###][id]" value="" class="narrow"/></td>
                 <td class="col4"><input id="txt-url-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][###NEWID###][url]" value="" class="regular-text"/></td>
-                <td class="col5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( '/static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
+                <td class="col5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( 'static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
                 <td class="col6"><input type="button" value="<?php _ex( 'remove', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-###NEWID###' );"/></td>
             </tr>
             <tr>
@@ -429,7 +429,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function print_trigger_fields( $args ) {
 	    $used_trigger = isset( $this->options_base[ 'trigger' ] ) ? $this->options_base[ 'trigger' ] : $args[ 'trigger' ];
-	    $used_action = isset( $this->options_base[ 'trigger-hover-action' ] ) ? $this->options_base[ 'trigger-hover-action' ] : $args[ 'trigger-hover-action' ];
+	    $used_action = ( ( 'hover' == $this->options_base[ 'trigger' ] ) && isset( $this->options_base[ 'trigger-hover-action' ] ) ) ? $this->options_base[ 'trigger-hover-action' ] : '';
 
 	    echo '<p><label><input type="radio" id="rdo-a-trigger-click" name="wp-wiki-tooltip-settings-base[trigger]" value="click" ' . checked( $used_trigger, 'click', false ) . ' onclick="disable_trigger_hover_action( true );" />' . _x( 'click', 'option trigger', 'wp-wiki-tooltip' ) . '</label></p>';
         echo '<p><label><input type="radio" id="rdo-a-trigger-hover" name="wp-wiki-tooltip-settings-base[trigger]" value="hover"' . checked( $used_trigger, 'hover', false ) . ' onclick="disable_trigger_hover_action( false );" />' . _x( 'hover', 'option trigger', 'wp-wiki-tooltip' ) . '</label></p>';

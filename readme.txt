@@ -64,8 +64,9 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 The last three major releases are listed here, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
 = 1.10.0 - C6H13NO2 | Leucine =
-*Release Date - November 15th, 2020*
+*Release Date - December 5th, 2020*
 
+* the backend page is splitted into several tabs to have more space for some new settings in the future
 * all dynamic JavaScript code that was printed in HTML is moved into static JS files to avoid problems with other plugins
 * all JavaScript is improved by removing small mistakes and minor hitches
 * the used Tooltipster plugin is updated to its version 4.2.8

@@ -152,7 +152,7 @@ function create_tooltip_message( type, title, section, message, url, thumb, w, h
     tooltip_html += '</div><div class="body"><p>';
 
     if( type === 'init' ) {
-        tooltip_html += '<img alt="" src="' + wp_wiki_tooltip.wiki_plugin_url + '/static/images/loadingAnimationBar.gif" />';
+        tooltip_html += '<img alt="" src="' + wp_wiki_tooltip.wiki_plugin_url + 'static/images/loadingAnimationBar.gif" />';
     } else {
         if( ( type !== 'err' ) && ( thumb !== '-1' ) ) {
             tooltip_html += '<img alt="" src="' + thumb + '" style="float:' + wp_wiki_tooltip.thumb_align + ';" class="thumb" width="' + w + '" height="' + h + '" />';

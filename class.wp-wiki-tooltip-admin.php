@@ -11,6 +11,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     public function __construct( $name='' ) {
         add_filter( 'plugin_action_links_' . $name, array( $this, 'add_action_links' ) );
         add_action( 'admin_menu', array( $this, 'init' ) );
+        add_action( 'admin_init', array( $this, 'load_all_options' ) );
         add_action( 'admin_init', array( $this, 'register_base_settings' ) );
         add_action( 'admin_init', array( $this, 'register_error_settings' ) );
         add_action( 'admin_init', array( $this, 'register_design_settings' ) );
@@ -117,20 +118,6 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function register_base_settings() {
-        global $wp_wiki_tooltip_default_options;
-
-        $old_options = get_option( 'wp-wiki-tooltip-settings' );
-        $this->options_base = get_option( 'wp-wiki-tooltip-settings-base' );
-
-        if( false == $this->options_base ) {
-            if( false != $old_options ) {
-                foreach( array( 'wiki-urls', 'a-target', 'trigger', 'trigger-hover-action', 'min-screen-width' ) as $key ) {
-                    $this->options_base[ $key ] = $old_options[ $key ];
-                }
-            } else {
-                $this->options_base = $wp_wiki_tooltip_default_options[ 'base' ];
-            }
-        }
 
         add_settings_section(
             'wp-wiki-tooltip-settings-base',
@@ -179,20 +166,6 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function register_error_settings() {
-        global $wp_wiki_tooltip_default_options;
-
-        $old_options = get_option( 'wp-wiki-tooltip-settings' );
-        $this->options_error = get_option( 'wp-wiki-tooltip-settings-error' );
-
-        if( false == $this->options_error ) {
-            if( false != $old_options ) {
-                foreach( array( 'page-error-handling', 'own-error-title', 'own-error-message', 'section-error-handling' ) as $key ) {
-                    $this->options_error[ $key ] = $old_options[ $key ];
-                }
-            } else {
-                $this->options_error = $wp_wiki_tooltip_default_options[ 'error' ];
-            }
-        }
 
         add_settings_section(
             'wp-wiki-tooltip-settings-error',
@@ -225,20 +198,6 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function register_design_settings() {
-        global $wp_wiki_tooltip_default_options;
-
-        $old_options = get_option( 'wp-wiki-tooltip-settings' );
-        $this->options_design = get_option( 'wp-wiki-tooltip-settings-design' );
-
-        if( false == $this->options_design ) {
-            if( false != $old_options ) {
-                foreach( array( 'theme', 'animation', 'tooltip-head', 'tooltip-body', 'tooltip-foot', 'a-style' ) as $key) {
-                    $this->options_design[ $key ] = $old_options[ $key ];
-                }
-            } else {
-                $this->options_design = $wp_wiki_tooltip_default_options[ 'design' ];
-            }
-        }
 
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
@@ -315,20 +274,6 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function register_thumb_settings() {
-        global $wp_wiki_tooltip_default_options;
-
-        $old_options = get_option( 'wp-wiki-tooltip-settings' );
-        $this->options_thumb = get_option( 'wp-wiki-tooltip-settings-thumb' );
-
-        if( false == $this->options_thumb ) {
-            if( false != $old_options ) {
-                foreach( array( 'thumb-enable', 'thumb-align', 'thumb-width', 'thumb-style' ) as $key) {
-                    $this->options_thumb[ $key ] = $old_options[ $key ];
-                }
-            } else {
-                $this->options_thumb = $wp_wiki_tooltip_default_options[ 'thumb' ];
-            }
-        }
 
         add_settings_section(
             'wp-wiki-tooltip-settings-thumb',
@@ -519,12 +464,12 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<ul class="wiki-form-indent-left wiki-page-error-handling-list">';
 	    printf(
 		    '<li><label for="own-error-title">' . _x( 'Title:', 'error message', 'wp-wiki-tooltip' ) . '</label><input type="text" id="own-error-title" name="wp-wiki-tooltip-settings-error[own-error-title]" value="%s" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' /></li>',
-		    isset( $this->options_error['own-error-title'] ) ? esc_attr( $this->options_error[ 'own-error-title' ] ) : $args[ 'own-error-title' ]
+            ( ( 'show-own' == $used_error_handling ) && isset( $this->options_error[ 'own-error-title' ] ) ) ? esc_attr( $this->options_error[ 'own-error-title' ] ) : ''
 	    );
 	    printf(
 		    '<li><label for="own-error-message">' . _x( 'Message:', 'error message', 'wp-wiki-tooltip' ) . '</label><textarea id="own-error-message" name="wp-wiki-tooltip-settings-error[own-error-message]" class="regular-text" ' . disabled( true, $not_used_show_own, false ) . ' >%s</textarea><br /><span id="own-error-message-desc" class="description">' . __( 'You can enter HTML here!', 'wp-wiki-tooltip' ) . '</span></span></li>',
-		    isset( $this->options_error['own-error-message'] ) ? esc_attr( $this->options_error[ 'own-error-message' ] ) : $args[ 'own-error-message' ]
-	    );
+            ( ( 'show-own' == $used_error_handling ) && isset( $this->options_error['own-error-message'] ) ) ? esc_attr( $this->options_error[ 'own-error-message' ] ) : ''
+        );
         echo '</ul>';
 	    echo '<p><label><input type="radio" id="rdo-page-error-handling-remove-link" name="wp-wiki-tooltip-settings-error[page-error-handling]" value="remove-link" ' . checked( $used_error_handling, 'remove-link', false ) . ' onclick="disable_page_error_handling_fields( true, true );" />' . __( 'remove the link completely', 'wp-wiki-tooltip' ) . ' (' . __( 'does not work for section errors', 'wp-wiki-tooltip' ) . ')</label></p>';
     }

@@ -15,15 +15,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		add_action( 'wp_footer', array( $this, 'add_wiki_container' ) );
 		add_shortcode( 'wiki', array( $this, 'do_wiki_shortcode' ) );
 
-		// TODO: full implementation
-        $this->options_base = get_option( 'wp-wiki-tooltip-settings-base' );
-        $this->options_error = get_option( 'wp-wiki-tooltip-settings-error' );
-        $this->options_design = get_option( 'wp-wiki-tooltip-settings-design' );
-        $this->options_thumb = get_option( 'wp-wiki-tooltip-settings-thumb' );
-/*		if( $this->options == false ) {
-			global $wp_wiki_tooltip_default_options;
-			$this->options = $wp_wiki_tooltip_default_options;
-		}*/
+		$this->load_all_options();
 		$this->shortcode_count = 1;
 	}
 
@@ -38,11 +30,11 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		wp_enqueue_style( 'wp-wiki-tooltip-css', plugins_url( 'static/css/wp-wiki-tooltip.css', __FILE__ ), array( 'tooltipster-css' ), $this->version, 'all' );
 		wp_add_inline_style(
 			'wp-wiki-tooltip-css',
-			'a.wiki-tooltip { ' . $this->options[ 'a-style' ] . ' }' . "\n" .
-			'div.wiki-tooltip-balloon div.head { ' . $this->options[ 'tooltip-head' ] . ' }' . "\n" .
-			'div.wiki-tooltip-balloon div.body { ' . $this->options[ 'tooltip-body' ] . ' }' . "\n" .
-			'div.wiki-tooltip-balloon div.foot a { ' . $this->options[ 'tooltip-foot' ] . ' }' . "\n" .
-			'div.wiki-tooltip-balloon img.thumb { ' . $this->options[ 'thumb-style' ] . ' }'
+			'a.wiki-tooltip { ' . $this->options_design[ 'a-style' ] . ' }' . "\n" .
+			'div.wiki-tooltip-balloon div.head { ' . $this->options_design[ 'tooltip-head' ] . ' }' . "\n" .
+			'div.wiki-tooltip-balloon div.body { ' . $this->options_design[ 'tooltip-body' ] . ' }' . "\n" .
+			'div.wiki-tooltip-balloon div.foot a { ' . $this->options_design[ 'tooltip-foot' ] . ' }' . "\n" .
+			'div.wiki-tooltip-balloon img.thumb { ' . $this->options_thumb[ 'thumb-style' ] . ' }'
 		);
 
 		wp_enqueue_script( 'tooltipster-js', plugins_url( $tooltipster_base_dir . '/js/tooltipster.bundle.min.js', __FILE__ ), array( 'jquery' ), $this->tooltipster_version, false );
@@ -73,22 +65,22 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
                      ></div>',
             admin_url( 'admin-ajax.php' ),
 			plugin_dir_url( __FILE__ ),
-			$this->options[ 'theme' ],
-			$this->options[ 'animation' ],
+			$this->options_design[ 'theme' ],
+			$this->options_design[ 'animation' ],
 			__( 'Click here to open Wiki page&hellip;', 'wp-wiki-tooltip' ),
-			( $this->options[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off',
-			$this->options[ 'thumb-width' ],
-            $this->options[ 'thumb-align' ],
-			$this->options[ 'trigger' ],
-			$this->options[ 'trigger-hover-action' ],
-            $this->options[ 'a-target' ],
-			$this->options[ 'min-screen-width' ],
-			$this->options[ 'page-error-handling' ],
+			( $this->options_thumb[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off',
+			$this->options_thumb[ 'thumb-width' ],
+            $this->options_thumb[ 'thumb-align' ],
+			$this->options_base[ 'trigger' ],
+			$this->options_base[ 'trigger-hover-action' ],
+            $this->options_base[ 'a-target' ],
+			$this->options_base[ 'min-screen-width' ],
+			$this->options_error[ 'page-error-handling' ],
 			__( 'Error!', 'wp-wiki-tooltip' ),
 			__( 'Sorry, but we were not able to find this page :(', 'wp-wiki-tooltip' ),
-            ( $this->options[ 'page-error-handling' ] == 'show-own' ) ? $this->options[ 'own-error-title' ] : '',
-            ( $this->options[ 'page-error-handling' ] == 'show-own' ) ? $this->options[ 'own-error-message' ] : '',
-			$this->options[ 'section-error-handling' ]
+            ( $this->options_error[ 'page-error-handling' ] == 'show-own' ) ? $this->options_error[ 'own-error-title' ] : '',
+            ( $this->options_error[ 'page-error-handling' ] == 'show-own' ) ? $this->options_error[ 'own-error-message' ] : '',
+			$this->options_error[ 'section-error-handling' ]
         );
 	}
 
@@ -103,7 +95,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		$title = ( $params[ 'title' ] == '' ) ? $content : $params[ 'title' ];
 
 		$wiki_base_id = $params[ 'base' ];
-		$wiki_urls = $this->options[ 'wiki-urls' ];
+		$wiki_urls = $this->options_base[ 'wiki-urls' ];
 
 		if( $wiki_base_id == '' ) {
 			$std_num = $wiki_urls[ 'standard' ];
@@ -129,14 +121,36 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			set_transient( $trans_wiki_key, $trans_wiki_data, WEEK_IN_SECONDS );
 		}
 
-        $output  = 'data-wiki_num="' . $num . '" data-wiki_id="' . $trans_wiki_data[ 'wiki-id' ] . '" data-wiki_title="' . $trans_wiki_data[ 'wiki-title' ] . '" data-wiki_section="' . $params[ 'section' ] . '" data-wiki_base_url="' . $trans_wiki_data[ 'wiki-base-url' ] . '" data-wiki_url="' . $trans_wiki_data[ 'wiki-url' ] . '" data-wiki_thumbnail="' . $params[ 'thumbnail' ] . '"';
+        // $output  = 'data-wiki_num="' . $num . '" data-wiki_id="' . $trans_wiki_data[ 'wiki-id' ] . '" data-wiki_title="' . $trans_wiki_data[ 'wiki-title' ] . '" data-wiki_section="' . $params[ 'section' ] . '" data-wiki_base_url="' . $trans_wiki_data[ 'wiki-base-url' ] . '" data-wiki_url="' . $trans_wiki_data[ 'wiki-url' ] . '" data-wiki_thumbnail="' . $params[ 'thumbnail' ] . '"';
+        $output  = sprintf(
+            'data-wiki_num="%1$s" data-wiki_id="%2$s" data-wiki_title="%3$s" data-wiki_section="%4$s" data-wiki_base_url="%5$s" data-wiki_url="%6$s" data-wiki_thumbnail="%7$s"',
+            $num,
+            $trans_wiki_data[ 'wiki-id' ],
+            $trans_wiki_data[ 'wiki-title' ],
+            $params[ 'section' ],
+            $trans_wiki_data[ 'wiki-base-url' ],
+            $trans_wiki_data[ 'wiki-url' ],
+            $params[ 'thumbnail' ]
+        );
 
-		$relno = ( $this->options[ 'a-target' ] == '_blank' ) ? ' rel="noopener noreferrer"' : '';
+		$relno = ( $this->options_base[ 'a-target' ] == '_blank' ) ? ' rel="noopener noreferrer"' : '';
 
-        if( ( $trans_wiki_data[ 'wiki-id' ] == '-1' ) && ( $this->options[ 'page-error-handling' ] == 'remove-link' ) ) {
+        if( ( $trans_wiki_data[ 'wiki-id' ] == '-1' ) && ( $this->options_error[ 'page-error-handling' ] == 'remove-link' ) ) {
 	        $output = $content;
         } else {
-	        $output = '<span id="wiki-tooltip-' . $num . '" data-tooltip-content="#wiki-tooltip-box-' . $num . '" ' . $output . '><a class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . ( ( $params[ 'section' ] != '' ) ? ( '#' . $params[ 'section' ] ) : '' ) . '" target="' . $this->options['a-target'] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options['trigger'] . '\', \'' . $this->options['trigger-hover-action'] . '\' );">' . $content . '</a></span>';
+            // $output = '<span id="wiki-tooltip-' . $num . '" data-tooltip-content="#wiki-tooltip-box-' . $num . '" ' . $output . '><a class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . ( ( $params[ 'section' ] != '' ) ? ( '#' . $params[ 'section' ] ) : '' ) . '" target="' . $this->options_base[ 'a-target' ] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options_base[ 'trigger' ] . '\', \'' . $this->options_base[ 'trigger-hover-action' ] . '\' );">' . $content . '</a></span>';
+            $output = sprintf(
+                '<span id="wiki-tooltip-%1$s" data-tooltip-content="#wiki-tooltip-box-%1$s" %2$s><a class="wiki-tooltip" href="%3$s%4$s" target="%5$s"%6$s onclick="return isClickEnabled( \'%7$s\', \'%8$s\' );">%9$s</a></span>',
+                $num,
+                $output,
+                $trans_wiki_data['wiki-url'],
+                ( ( '' != $params[ 'section' ] ) ? ( '#' . $params[ 'section' ] ) : '' ),
+                $this->options_base[ 'a-target' ],
+                $relno,
+                $this->options_base[ 'trigger' ],
+                ( 'hover' == $this->options_base[ 'trigger' ] ) ? $this->options_base[ 'trigger-hover-action' ] : '',
+                $content
+            );
         }
 
 		return $output;

@@ -30,12 +30,13 @@ class WP_Wiki_Tooltip_MCE extends WP_Wiki_Tooltip_Base {
     }
 
     public function mce_admin_head() {
-        $this->options = get_option( 'wp-wiki-tooltip-settings' );
+        //$this->options = get_option( 'wp-wiki-tooltip-settings' );
+        $this->load_all_options();
 
         ?><script type='text/javascript'>
             var wwtj_strings;
             var wp_wiki_tooltip_mce = {
-                'wiki_urls': <?php echo wp_json_encode( $this->options[ 'wiki-urls' ] ); ?>,
+                'wiki_urls': <?php echo wp_json_encode( $this->options_base[ 'wiki-urls' ] ); ?>,
             };
         </script><?php
 

@@ -43,7 +43,7 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 
 == Installation ==
 
-1. Upload the Wiki tooltip plugin to your blog,
+1. Find Wiki tooltip plugin in the "Add Plugins" page within your WordPress installation or Upload the Wiki tooltip plugin to your blog,
 2. Activate it,
 3. Create at least one Wiki base and review the global options on the settings page
 4. Add some shortcodes to your Posts and Pages, and
@@ -51,13 +51,13 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 
 == Screenshots ==
 
-1. Options and Settings page: manage several Wiki URLs
-2. Options and Settings page: set some options how to show tooltips
-3. Options and Settings page: set some Error Handling options
-4. Options and Settings page: set styling of tooltips
-5. Options and Settings page: enable and style thumbnails
+1. Wiki-Tooltips Settings - Base Settings (top): manage several Wiki URLs
+2. Wiki-Tooltips Settings - Base Settings (bottom): set some options how to show tooltips
+3. Wiki-Tooltips Settings - Error Handling: set some Error Handling options
+4. Wiki-Tooltips Settings - Designs: set designs, stylings, and animations of tooltips
+5. Wiki-Tooltips Settings - Thumbnails: enable and style thumbnails
 6. Integrate the plugin by shortcodes in Posts and Pages
-7. Use the [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin to get help by a popup form - also available in the Gutenberg Classic Block
+7. Use the [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin to get help by a popup form - also available in the Gutenberg's Classic Block
 8. See nice and helpful tooltips
 
 == Changelog ==
@@ -92,6 +92,9 @@ The last three major releases are listed here, only. Find complete log of all ch
 
 = General =
 You should review the settings page after every update
+
+= Upgrade to 1.10.0 =
+Due to the introduction of the tabbed settings page you have to review all settings after update!
 
 = Upgrade to 1.4.0 =
 The former Wiki URL is not transferred into this version. Review the settings page after update to insert the wanted Wiki URL again!

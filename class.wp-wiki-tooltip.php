@@ -72,7 +72,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			$this->options_thumb[ 'thumb-width' ],
             $this->options_thumb[ 'thumb-align' ],
 			$this->options_base[ 'trigger' ],
-			$this->options_base[ 'trigger-hover-action' ],
+            ( $this->options_base[ 'trigger' ] == 'hover' ) ? $this->options_base[ 'trigger-hover-action' ] : '',
             $this->options_base[ 'a-target' ],
 			$this->options_base[ 'min-screen-width' ],
 			$this->options_error[ 'page-error-handling' ],
@@ -95,6 +95,8 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		$title = ( $params[ 'title' ] == '' ) ? $content : $params[ 'title' ];
 
 		$wiki_base_id = $params[ 'base' ];
+
+        $this->load_all_options();
 		$wiki_urls = $this->options_base[ 'wiki-urls' ];
 
 		if( $wiki_base_id == '' ) {

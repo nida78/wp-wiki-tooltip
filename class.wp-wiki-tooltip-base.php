@@ -21,7 +21,9 @@ class WP_Wiki_Tooltip_Base {
         if( false == $new_options ) {
             if( false != $old_options ) {
                 foreach( $keys as $key ) {
-                    $options_to_load[ $key ] = $old_options[ $key ];
+                    if( isset( $old_options[ $key ] ) ) {
+                        $new_options[ $key ] = $old_options[ $key ];
+                    }
                 }
             } else {
                 $new_options = $default_options[ $default_key ];

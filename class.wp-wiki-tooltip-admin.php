@@ -169,7 +169,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
         add_settings_section(
             'wp-wiki-tooltip-settings-error',
-            _x( 'Error handling', 'settings section headline', 'wp-wiki-tooltip' ),
+            _x( 'Error Handling', 'settings section headline', 'wp-wiki-tooltip' ),
             array( $this, 'print_error_handling_section_info' ),
             'wp-wiki-tooltip-settings-error'
         );
@@ -634,7 +634,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
             <h2 class="nav-tab-wrapper">
                 <a href="?page=wp-wiki-tooltip-settings&tab=base" class="nav-tab <?php echo $active_tab == 'base' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Base Settings', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
-                <a href="?page=wp-wiki-tooltip-settings&tab=error" class="nav-tab <?php echo $active_tab == 'error' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Error handling', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
+                <a href="?page=wp-wiki-tooltip-settings&tab=error" class="nav-tab <?php echo $active_tab == 'error' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Error Handling', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
                 <a href="?page=wp-wiki-tooltip-settings&tab=design" class="nav-tab <?php echo $active_tab == 'design' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Designs', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
                 <a href="?page=wp-wiki-tooltip-settings&tab=thumb" class="nav-tab <?php echo $active_tab == 'thumb' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Thumbnails', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
             </h2>

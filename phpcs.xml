@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards based custom ruleset for your plugin">
+    <arg value="ps"/>
+    <arg name="extensions" value="php"/>
+    <file>.</file>
+    <rule ref="WordPress.Security" />
+</ruleset>

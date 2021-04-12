@@ -51,7 +51,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             _x( 'Wiki-Tooltips', 'menu title', 'wp-wiki-tooltip' ),
             'manage_options',
             'wp-wiki-tooltip-settings',
-            array( $this, 'settings_page' )
+            array( $this, 'settings_page_base' )
         );
 
         add_submenu_page(
@@ -80,6 +80,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             'wp-wiki-tooltip-settings-thumb',
             array( $this, 'settings_page_thumb' )
         );
+
+        error_log( 'all request params: ' . print_r( $_REQUEST, true ) );
 
         if( array_key_exists( 'btn_reset', $_REQUEST ) && $_REQUEST[ 'btn_reset' ] == __( 'Reset', 'wp-wiki-tooltip' ) ) {
             delete_option( 'wp-wiki-tooltip-settings' ); // the single-admin-page option has to be deleted anyway
@@ -118,6 +120,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
     }
 
     public function register_base_settings() {
+        global $wp_wiki_tooltip_default_options;
 
         add_settings_section(
             'wp-wiki-tooltip-settings-base',
@@ -161,11 +164,18 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         register_setting(
             'wp-wiki-tooltip-settings-base',
             'wp-wiki-tooltip-settings-base',
-            array( $this, 'sanitize' )
+            array(
+                'type' => 'array',
+                'description' => _x( 'WP Wiki Tooltip Base Settings', 'register setting description', 'wp-wiki-tooltip' ),
+                'sanitize_callback' => array( $this, 'sanitize_base_settings' ),
+                'show_in_rest' => false,
+                'default' => $wp_wiki_tooltip_default_options
+            )
         );
     }
 
     public function register_error_settings() {
+        global $wp_wiki_tooltip_default_options;
 
         add_settings_section(
             'wp-wiki-tooltip-settings-error',
@@ -193,11 +203,18 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         register_setting(
             'wp-wiki-tooltip-settings-error',
             'wp-wiki-tooltip-settings-error',
-            array( $this, 'sanitize' )
+            array(
+                'type' => 'array',
+                'description' => _x( 'WP Wiki Tooltip Error Settings', 'register setting description', 'wp-wiki-tooltip' ),
+                'sanitize_callback' => array( $this, 'sanitize_error_settings' ),
+                'show_in_rest' => false,
+                'default' => $wp_wiki_tooltip_default_options
+            )
         );
     }
 
     public function register_design_settings() {
+        global $wp_wiki_tooltip_default_options;
 
         add_settings_section(
             'wp-wiki-tooltip-settings-design',
@@ -269,11 +286,18 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         register_setting(
             'wp-wiki-tooltip-settings-design',
             'wp-wiki-tooltip-settings-design',
-            array( $this, 'sanitize' )
+            array(
+                'type' => 'array',
+                'description' => _x( 'WP Wiki Tooltip Design Settings', 'register setting description', 'wp-wiki-tooltip' ),
+                'sanitize_callback' => array( $this, 'sanitize_design_settings' ),
+                'show_in_rest' => false,
+                'default' => $wp_wiki_tooltip_default_options
+            )
         );
     }
 
     public function register_thumb_settings() {
+        global $wp_wiki_tooltip_default_options;
 
         add_settings_section(
             'wp-wiki-tooltip-settings-thumb',
@@ -317,7 +341,13 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         register_setting(
             'wp-wiki-tooltip-settings-thumb',
             'wp-wiki-tooltip-settings-thumb',
-            array( $this, 'sanitize' )
+            array(
+                'type' => 'array',
+                'description' => _x( 'WP Wiki Tooltip Thumb Settings', 'register setting description', 'wp-wiki-tooltip' ),
+                'sanitize_callback' => array( $this, 'sanitize_thumb_settings' ),
+                'show_in_rest' => false,
+                'default' => $wp_wiki_tooltip_default_options
+            )
         );
     }
 
@@ -613,18 +643,162 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the thumbnail in the tooltip.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
-    public function sanitize( $input ) {
+    public function sanitize_base_settings( $input ) {
+        global $wp_wiki_tooltip_default_options;
+        error_log( 'Input for BASE => <' . print_r( $input, true ) . '>' );
+
+        if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-base-submit' ) ) {
+            $this->sanitize_stop();
+        }
+
+        // check wiki-urls
+        if( isset( $input[ 'wiki-urls' ] ) && isset( $input[ 'wiki-urls' ][ 'data' ] ) ) {
+
+            // just check if the URLs are valid
+            $urls = $input[ 'wiki-urls' ][ 'data' ];
+            if( is_array( $urls ) ) {
+                foreach( $urls as $num => $url ) {
+                    if( $num != '###NEWID###' ) {
+
+                        // check the URL of wiki
+                        if( false == wp_http_validate_url( $url[ 'url' ] ) ) {
+                            $input[ 'wiki-urls' ][ 'data' ][ $num ][ 'url' ] = '';
+                        }
+
+                        // sanitize ID and SiteName of wiki
+                        $url[ 'id' ] = sanitize_text_field( $url[ 'id' ] );
+                        $url[ 'sitename' ] = sanitize_text_field( $url[ 'sitename' ] );
+                    }
+                }
+            }
+
+            // standard ID has to be numeric and less than the count of URLs
+            $input[ 'wiki-urls' ][ 'standard' ] = ( int ) $input[ 'wiki-urls' ][ 'standard' ];
+            if( $input[ 'wiki-urls' ][ 'standard' ] > count( $input[ 'wiki-urls' ][ 'data' ] ) - 1 ) {
+                $input[ 'wiki-urls' ][ 'standard' ] = $wp_wiki_tooltip_default_options[ 'base' ][ 'wiki-urls' ][ 'standard' ];
+            }
+        } else {
+            $input[ 'wiki-urls' ] = $wp_wiki_tooltip_default_options[ 'base' ][ 'wiki-urls' ];
+        }
+
+        // check a-target
+        if( ( ! isset( $input[ 'a-target' ] ) ) || ( ! in_array( $input[ 'a-target' ], $wp_wiki_tooltip_default_options[ 'base' ][ 'a-target-range' ] ) ) ) {
+            $input[ 'a-target' ] = $wp_wiki_tooltip_default_options[ 'base' ][ 'a-target' ];
+        }
+
+        // check trigger
+        if( ( ! isset( $input[ 'trigger' ] ) ) || ( ! in_array( $input[ 'trigger' ], $wp_wiki_tooltip_default_options[ 'base' ][ 'trigger-range' ] ) ) ) {
+            $input[ 'trigger' ] = $wp_wiki_tooltip_default_options[ 'base' ][ 'trigger' ];
+        }
+
+        // check trigger hover action
+        if( 'hover' == $input[ 'trigger' ] ) {
+            if( ( ! isset( $input[ 'trigger-hover-action' ] ) ) || ( ! in_array( $input[ 'trigger-hover-action' ], $wp_wiki_tooltip_default_options[ 'base' ][ 'trigger-hover-action-range' ] ) ) ) {
+                $input[ 'trigger-hover-action' ] = $wp_wiki_tooltip_default_options[ 'base' ][ 'trigger-hover-action' ];
+            }
+        }
+
+        // check min screen width
+        $input[ 'min-screen-width' ] = ( int ) $input[ 'min-screen-width' ];
+        if( 0 > $input[ 'min-screen-width' ] ) {
+            $input[ 'min-screen-width' ] = $wp_wiki_tooltip_default_options[ 'base' ][ 'min-screen-width' ];
+        }
+
         return $input;
     }
 
-    public function settings_page( $active_tab = '' ) {
+    public function sanitize_error_settings( $input ) {
+        global $wp_wiki_tooltip_default_options;
+        error_log( 'Input for ERROR => <' . print_r( $input, true ) . '>' );
 
-        if( isset( $_GET[ 'tab' ] ) ) {
-            $active_tab = $_GET['tab'];
+        if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-error-submit' ) ) {
+            $this->sanitize_stop();
         }
 
-        if( ! in_array( $active_tab, array( 'base', 'error', 'design', 'thumb' ) ) ) {
-            $active_tab = 'base';
+        // check page error handling
+        if( ( ! isset( $input[ 'page-error-handling' ] ) ) || ( ! in_array( $input[ 'page-error-handling' ], $wp_wiki_tooltip_default_options[ 'error' ][ 'page-error-handling-range' ] ) ) ) {
+            $input[ 'page-error-handling' ] = $wp_wiki_tooltip_default_options[ 'error' ][ 'page-error-handling-range' ];
+        }
+
+        // sanitize own error title and message
+        if( 'show-own' == $input[ 'page-error-handling' ] ) {
+            $input[ 'own-error-title' ] = sanitize_text_field( $input[ 'own-error-title' ] );
+            $input[ 'own-error-message' ] = esc_html( $input[ 'own-error-message' ] );
+        }
+
+        // check section error handling
+        if( ( ! isset( $input[ 'section-error-handling' ] ) ) || ( ! in_array( $input[ 'section-error-handling' ], $wp_wiki_tooltip_default_options[ 'error' ][ 'section-error-handling-range' ] ) ) ) {
+            $input[ 'section-error-handling' ] = $wp_wiki_tooltip_default_options[ 'error' ][ 'section-error-handling-range' ];
+        }
+
+        return $input;
+    }
+
+    public function sanitize_design_settings( $input ) {
+        global $wp_wiki_tooltip_default_options;
+        error_log( 'Input for DESIGN => <' . print_r( $input, true ) . '>' );
+
+        if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-design-submit' ) ) {
+            $this->sanitize_stop();
+        }
+
+        // check tooltip's design
+        if( ( ! isset( $input[ 'theme' ] ) ) || ( ! in_array( $input[ 'theme' ], $wp_wiki_tooltip_default_options[ 'design' ][ 'theme-range' ] ) ) ) {
+            $input[ 'theme' ] = $wp_wiki_tooltip_default_options[ 'design' ][ 'theme' ];
+        }
+
+        // check tooltip's animation
+        if( ( ! isset( $input[ 'animation' ] ) ) || ( ! in_array( $input[ 'animation' ], $wp_wiki_tooltip_default_options[ 'design' ][ 'animation-range' ] ) ) ) {
+            $input[ 'animation' ] = $wp_wiki_tooltip_default_options[ 'design' ][ 'animation' ];
+        }
+
+        // sanitize all style inputs
+        $input[ 'tooltip-head' ] = sanitize_text_field( $input[ 'tooltip-head' ] );
+        $input[ 'tooltip-body' ] = sanitize_text_field( $input[ 'tooltip-body' ] );
+        $input[ 'tooltip-foot' ] = sanitize_text_field( $input[ 'tooltip-foot' ] );
+        $input[ 'a-style' ] = sanitize_text_field( $input[ 'a-style' ] );
+
+        return $input;
+    }
+
+    public function sanitize_thumb_settings( $input ) {
+        global $wp_wiki_tooltip_default_options;
+        error_log( 'Input for THUMB => <' . print_r( $input, true ) . '>' );
+
+        if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-thumb-submit' ) ) {
+            $this->sanitize_stop();
+        }
+
+        // check tooltip's enabling
+        if( ( ! isset( $input[ 'thumb-enable' ] ) ) || ( ! in_array( $input[ 'thumb-enable' ], $wp_wiki_tooltip_default_options[ 'thumb' ][ 'thumb-enable-range' ] ) ) ) {
+            $input[ 'thumb-enable' ] = $wp_wiki_tooltip_default_options[ 'thumb' ][ 'thumb-enable' ];
+        }
+
+        // check tooltip's alignment
+        if( ( ! isset( $input[ 'thumb-align' ] ) ) || ( ! in_array( $input[ 'thumb-align' ], $wp_wiki_tooltip_default_options[ 'thumb' ][ 'thumb-align-range' ] ) ) ) {
+            $input[ 'thumb-align' ] = $wp_wiki_tooltip_default_options[ 'thumb' ][ 'thumb-align' ];
+        }
+
+        // check thumbnail's width
+        $input[ 'thumb-width' ] = ( int ) $input[ 'thumb-width' ];
+        if( 0 > $input[ 'thumb-width' ] ) {
+            $input[ 'thumb-width' ] = $wp_wiki_tooltip_default_options[ 'thumb' ][ 'thumb-width' ];
+        }
+
+        // sanitize thumbnail's style
+        $input[ 'thumb-style' ] = sanitize_text_field( $input[ 'thumb-style' ] );
+
+        return $input;
+    }
+
+    public function sanitize_stop() {
+        wp_die( _x( 'Sorry, but this request seems to be invalid!', 'nonce check invalid', 'wp-wiki-tooltip' ) );
+    }
+
+    public function settings_page( $active_tab = 'base' ) {
+
+        if( isset( $_GET[ 'tab' ] ) && in_array( $_GET[ 'tab' ], array( 'base', 'error', 'design', 'thumb' ) ) ) {
+            $active_tab = $_GET[ 'tab' ];
         }
 
         ?>
@@ -641,26 +815,30 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
             <form method="post" action="options.php">
                 <?php
+
                 if( $active_tab == 'error' ) {
 
+                    wp_nonce_field('wp-wiki-tooltip-settings-error-submit', 'wp-wiki-tooltip-settings-error[nonce]' );
                     settings_fields( 'wp-wiki-tooltip-settings-error' );
                     do_settings_sections( 'wp-wiki-tooltip-settings-error' );
 
                 } elseif( $active_tab == 'design' ) {
 
+                    wp_nonce_field('wp-wiki-tooltip-settings-design-submit', 'wp-wiki-tooltip-settings-design[nonce]' );
                     settings_fields( 'wp-wiki-tooltip-settings-design' );
                     do_settings_sections( 'wp-wiki-tooltip-settings-design' );
 
                 } elseif( $active_tab == 'thumb' ) {
 
+                    wp_nonce_field('wp-wiki-tooltip-settings-thumb-submit', 'wp-wiki-tooltip-settings-thumb[nonce]' );
                     settings_fields('wp-wiki-tooltip-settings-thumb' );
                     do_settings_sections('wp-wiki-tooltip-settings-thumb' );
 
                 } else {
 
+                    wp_nonce_field('wp-wiki-tooltip-settings-base-submit', 'wp-wiki-tooltip-settings-base[nonce]' );
                     settings_fields( 'wp-wiki-tooltip-settings-base' );
                     do_settings_sections( 'wp-wiki-tooltip-settings-base' );
-
                 }
 
                 submit_button( __( 'Submit', 'wp-wiki-tooltip' ), 'primary', 'btn_submit', false );
@@ -670,6 +848,10 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             </form>
         </div>
         <?php
+    }
+
+    public function settings_page_base() {
+        $this->settings_page( 'base');
     }
 
     public function settings_page_error() {

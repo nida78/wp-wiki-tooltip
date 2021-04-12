@@ -22,9 +22,15 @@ $wp_wiki_tooltip_default_options = [
             'unit' => 'week' // what
         ],
 
+        'a-target-range' => [ '_blank', '_self' ],
+
         'a-target' => '_blank', // where to open links to wiki pages
 
-        'trigger' => 'hover', // what triggers the tooltip
+        'trigger-range' => [ 'click', 'hover' ],
+
+        'trigger' => 'click', // what triggers the tooltip
+
+        'trigger-hover-action-range' => [ 'none', 'open' ],
 
         'trigger-hover-action' => 'none', // how does the link work if trigger is "hover"
 
@@ -33,18 +39,26 @@ $wp_wiki_tooltip_default_options = [
 
     'error' => [
 
+        'page-error-handling-range' => [ 'show-default', 'show-own', 'remove-link' ],
+
         'page-error-handling' => 'show-default', // how should errors of pages be handled
 
         'own-error-title' => '', // the self-defined title of the error message
 
         'own-error-message' => '', // the self-defined message of the error message
 
+        'section-error-handling-range' => [ 'show-page', 'use-page-settings' ],
+
         'section-error-handling' => 'show-page', // how should errors of sections be handled
     ],
 
     'design' => [
 
+        'theme-range' => [ 'default', 'light', 'borderless', 'noir', 'punk', 'shadow' ],
+
         'theme' => 'default', // use default theme of Tooltipster
+
+        'animation-range' => [ 'fade', 'grow', 'swing', 'slide', 'fall' ],
 
         'animation' => 'fade', // use standard animation when a tooltip appears
 
@@ -59,7 +73,11 @@ $wp_wiki_tooltip_default_options = [
 
     'thumb' => [
 
+        'thumb-enable-range' => [ 'off', 'on' ],
+
         'thumb-enable' => 'off', // enable thumbnails in tooltips
+
+        'thumb-align-range' => [ 'left', 'right' ],
 
         'thumb-align' => 'right', // alignment of the thumbnails
 

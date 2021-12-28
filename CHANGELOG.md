@@ -1,5 +1,10 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.10.1]
+*Release Date - December 28th, 2021*
+
+* sanitation has been implemented for both, backend and all AJAX frontend actions
+
 ## [1.10.0 - C6H13NO2 | Leucine ]
 *Release Date -  December 5th, 2020*
 

@@ -7,6 +7,8 @@ include_once('class.wp-wiki-tooltip-base.php');
  */
 class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 
+    private $allowed_content_tags = '<b><em><i><strong><sub><sup>';
+
     private $image_query_args = array(
         'action' => 'query',
         'prop' => 'pageimages',
@@ -97,36 +99,36 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
                 $content = $wiki_data[ 'parse' ][ 'text' ][ '*' ];
 
                 // remove all html tables because there can be paragraphs in
-                $content = preg_replace('/<table.*<\/table>/is', '', $content);
+                $content = preg_replace('/<table.*<\/table>/is', '', $content );
 
                 // find the content of the first paragraph
-                $content = substr($content, stripos($content, '<p>') + 3);
-                $content = substr($content, 0, stripos($content, '</p>'));
+                $content = substr( $content, stripos($content, '<p>') + 3 );
+                $content = substr( $content, 0, stripos( $content, '</p>' ) );
 
                 // delete all links (<a> tags) to avoid useless links in the tooltip
                 $content = preg_replace('/<\/?a[^>]*>/', '', $content);
 
                 $result = array(
                     'code' => '1',
-                    'title' => $wiki_data['parse']['title'],
+                    'title' => esc_html( $wiki_data[ 'parse' ][ 'title' ] ),
                     'section' => ( $section_id > -1 ) ? $section : '',
-                    'content' => $content,
+                    'content' => strip_tags( $content, $this->allowed_content_tags ),
                     'url' => $page_url,
                     'thumb' => '-1'
                 );
 
                 /*** Request the page thumbnail ***/
                 if( $thumb_enable == 'on' ) {
-                    $this->image_query_args['pageids'] = $wiki_id;
-                    $this->image_query_args['pithumbsize'] = $thumb_width;
-                    $response = wp_remote_get($wiki_url . '?' . http_build_query($this->image_query_args));
-                    if (is_array($response) && !is_wp_error($response)) {
-                        $image_data = json_decode($response['body'], true);
-                        if (isset($image_data['query']['pages'][$wiki_id]["thumbnail"])) {
-                            $thumb = $image_data['query']['pages'][$wiki_id]["thumbnail"];
-                            $result['thumb'] = $thumb["source"];
-                            $result['thumb-width'] = $thumb["width"];
-                            $result['thumb-height'] = $thumb["height"];
+                    $this->image_query_args[ 'pageids' ] = $wiki_id;
+                    $this->image_query_args[ 'pithumbsize' ] = $thumb_width;
+                    $response = wp_remote_get($wiki_url . '?' . http_build_query( $this->image_query_args ) );
+                    if( is_array( $response ) && ! is_wp_error( $response ) ) {
+                        $image_data = json_decode( $response[ 'body' ], true );
+                        if( isset( $image_data[ 'query' ][ 'pages' ][ $wiki_id ][ 'thumbnail' ] ) ) {
+                            $thumb = $image_data[ 'query' ][ 'pages' ][ $wiki_id ][ 'thumbnail' ];
+                            $result[ 'thumb' ] = esc_url( $thumb[ 'source' ] );
+                            $result[ 'thumb-width' ] = ( int ) $thumb[ 'width' ];
+                            $result[ 'thumb-height' ] = ( int ) $thumb[ 'height' ];
                         }
                     }
                 }
@@ -154,7 +156,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 					$result = array(
 						'code' => 1,
 						'url' => $wurl,
-						'name' => $wiki_data['query']['general']['sitename']
+						'name' => esc_html( $wiki_data['query']['general']['sitename'] )
 					);
 					echo json_encode($result);
 					wp_die();
@@ -205,8 +207,8 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         if( $wiki_page_id > -1 ) {
             $result = array(
                 'wiki-id' => $wiki_page_id,
-                'wiki-title' => $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'title' ],
-                'wiki-url' => $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'fullurl' ]
+                'wiki-title' => esc_html( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'title' ] ),
+                'wiki-url' => esc_url( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'fullurl' ] )
             );
         }
 

@@ -142,6 +142,7 @@
 
 * Initial release
 
+[1.10.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.1
 [1.10.0 - C6H13NO2 | Leucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.0
 [1.9.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.2
 [1.9.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.1

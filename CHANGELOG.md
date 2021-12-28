@@ -1,5 +1,10 @@
 # Changelog of WP Wiki Tooltip
 
+## [1.10.2]
+*Release Date - December 28th, 2021*
+
+* wording / translation improved
+
 ## [1.10.1]
 *Release Date - December 28th, 2021*
 
@@ -142,6 +147,7 @@
 
 * Initial release
 
+[1.10.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.2
 [1.10.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.1
 [1.10.0 - C6H13NO2 | Leucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.0
 [1.9.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.2

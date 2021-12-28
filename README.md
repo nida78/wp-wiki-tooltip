@@ -5,9 +5,9 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 5.5.3
+Tested up to: 5.8.2
 
-Stable tag: 1.10.0
+Stable tag: 1.10.1
 
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 

@@ -4,7 +4,7 @@
  */
 class WP_Wiki_Tooltip_Base {
 
-    protected $version = '1.10.5';
+    protected $version = '1.10.1';
 
     protected $tooltipster_version = '4.2.8';
 

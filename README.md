@@ -5,7 +5,7 @@ Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 
 Requires at least: 3.0
 
-Tested up to: 5.8.2
+Tested up to: 6.1.1
 
 Stable tag: 1.10.2
 

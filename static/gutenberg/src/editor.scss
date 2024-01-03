@@ -1,0 +1,45 @@
+.wiki-tooltip-data-popover {
+
+  p.wiki-tooltip-head {
+    font-weight: bold;
+  }
+
+  .components-popover__content {
+    padding: 0px 13px;
+  }
+
+  .components-base-control {
+    margin-bottom: 5px;
+  }
+
+  .wiki-tooltip-head,
+  .wiki-tooltip-input-title,
+  .wiki-tooltip-input-section,
+  .wiki-tooltip-input-base,
+  .wiki-tooltip-input-thumbnail {
+    width: 250px;
+  }
+
+  label.components-base-control__label {
+    margin-bottom: 5px;
+  }
+
+  label.components-input-control__label {
+    margin-bottom: -5px;
+  }
+
+  input.components-text-control__input {
+    margin-left: 0px;
+  }
+
+  p.components-base-control__help {
+    margin-top: -5px;
+  }
+}
+
+.wiki-tooltip-has-data {
+  background-color: #aaa;
+  border: 1px dashed #333;
+  border-radius: 5px;
+  padding: 0px 3px
+}

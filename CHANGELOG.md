@@ -1,5 +1,11 @@
 # Changelog of WP Wiki Tooltip
 
+## [2.0.0 - C6H14N2O2 | Lysine]
+*Release Date - January 3rd, 2023*
+
+* finally, the Gutenberg editor is supported, tooltips can easily be created in every rich-text component
+* content filtering of tooltips is improved especially for removing inline stylesheets
+
 ## [1.10.2]
 *Release Date - December 28th, 2021*
 
@@ -10,7 +16,7 @@
 
 * sanitation has been implemented for both, backend and all AJAX frontend actions
 
-## [1.10.0 - C6H13NO2 | Leucine ]
+## [1.10.0 - C6H13NO2 | Leucine]
 *Release Date -  December 5th, 2020*
 
 * the backend page is splitted into several tabs to have more space for some new settings in the future
@@ -30,7 +36,7 @@
 * small fixes for the content parser to handle tables and other HTML tags better
 * improved language support
 
-## [1.9.0 - C6H13NO2 | Isoleucine ]
+## [1.9.0 - C6H13NO2 | Isoleucine]
 *Release Date - January 1st, 2019*
 
 * sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="anchor-of-section"```)
@@ -147,12 +153,13 @@
 
 * Initial release
 
+[2.0.0 - C6H14N2O2 | Lysine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.0
 [1.10.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.2
 [1.10.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.1
-[1.10.0 - C6H13NO2 | Leucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.0
+[1.10.0 - C6H13NO2 | Leucine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.0
 [1.9.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.2
 [1.9.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.1
-[1.9.0 - C6H13NO2 | Isoleucine ]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0
+[1.9.0 - C6H13NO2 | Isoleucine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0
 [1.8.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.1
 [1.8.0 - C6H9N3O2 | Histidine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.8.0
 [1.7.4]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.7.4

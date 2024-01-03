@@ -1,0 +1,40 @@
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/editor.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+.wiki-tooltip-data-popover p.wiki-tooltip-head {
+  font-weight: bold;
+}
+.wiki-tooltip-data-popover .components-popover__content {
+  padding: 0px 13px;
+}
+.wiki-tooltip-data-popover .components-base-control {
+  margin-bottom: 5px;
+}
+.wiki-tooltip-data-popover .wiki-tooltip-head,
+.wiki-tooltip-data-popover .wiki-tooltip-input-title,
+.wiki-tooltip-data-popover .wiki-tooltip-input-section,
+.wiki-tooltip-data-popover .wiki-tooltip-input-base,
+.wiki-tooltip-data-popover .wiki-tooltip-input-thumbnail {
+  width: 250px;
+}
+.wiki-tooltip-data-popover label.components-base-control__label {
+  margin-bottom: 5px;
+}
+.wiki-tooltip-data-popover label.components-input-control__label {
+  margin-bottom: -5px;
+}
+.wiki-tooltip-data-popover input.components-text-control__input {
+  margin-left: 0px;
+}
+.wiki-tooltip-data-popover p.components-base-control__help {
+  margin-top: -5px;
+}
+
+.wiki-tooltip-has-data {
+  background-color: #aaa;
+  border: 1px dashed #333;
+  border-radius: 5px;
+  padding: 0px 3px;
+}
+
+/*# sourceMappingURL=index.css.map*/

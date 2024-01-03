@@ -1,19 +1,19 @@
-const { __ } = wp.i18n;
+const { __, _x } = wp.i18n;
 
 wwtj_strings = {
-    'title': __('WP Wiki Tooltip', 'wp-wiki-tooltip'),
-    'link_label': __('Link text', 'wp-wiki-tooltip'),
-    'link_tooltip': __('Set the text that will be the link to the Wiki page.', 'wp-wiki-tooltip'),
-    'title_label': __('Wiki page title', 'wp-wiki-tooltip'),
-    'title_tooltip': __('Set the title of the requested Wiki page.', 'wp-wiki-tooltip'),
-    'section_label': __('Section title', 'wp-wiki-tooltip'),
-    'section_tooltip': __('Set the title (anchor) of the requested section in Wiki page.', 'wp-wiki-tooltip'),
-    'base_standard': __('Standard base', 'wp-wiki-tooltip'),
-    'base_label': __('Wiki base', 'wp-wiki-tooltip'),
-    'base_tooltip': __('Select one of the defined Wiki bases. Visit the settings page to create a new one.', 'wp-wiki-tooltip'),
-    'thumb_default': __('use plugin default value', 'wp-wiki-tooltip'),
-    'thumb_label': __('Show thumbnail', 'wp-wiki-tooltip'),
-    'thumb_tooltip': __('Show a thumbnail in the tooltip?', 'wp-wiki-tooltip'),
-    'thumb_yes': __('yes', 'wp-wiki-tooltip'),
-    'thumb_no': __('no', 'wp-wiki-tooltip')
+    'title': _x( 'WP Wiki Tooltip', 'editor popup', 'wp-wiki-tooltip' ),
+    'link_label': _x( 'Link text', 'editor popup', 'wp-wiki-tooltip' ),
+    'link_tooltip': _x( 'Set the text that will be the link to the Wiki page.', 'editor popup', 'wp-wiki-tooltip' ),
+    'title_label': _x( 'Different Wiki page title', 'editor popup', 'wp-wiki-tooltip' ),
+    'title_tooltip': _x( 'Enter the title of the requested Wiki page if it differs from the selected text.', 'editor popup', 'wp-wiki-tooltip' ),
+    'section_label': _x( 'Section title', 'editor popup', 'wp-wiki-tooltip' ),
+    'section_tooltip': _x( 'Enter the title (anchor) of the requested section in Wiki page.', 'editor popup', 'wp-wiki-tooltip' ),
+    'base_standard': _x( 'Standard base', 'editor popup', 'wp-wiki-tooltip' ),
+    'base_label': _x( 'Wiki base', 'editor popup', 'wp-wiki-tooltip' ),
+    'base_tooltip': _x( 'Select one of the defined Wiki bases. Visit the settings page to create a new one.', 'editor popup', 'wp-wiki-tooltip' ),
+    'thumb_default': _x( 'use plugin default value', 'editor popup', 'wp-wiki-tooltip' ),
+    'thumb_label': _x( 'Show thumbnail', 'editor popup', 'wp-wiki-tooltip' ),
+    'thumb_tooltip': _x( 'Show a thumbnail in the tooltip?', 'editor popup', 'wp-wiki-tooltip' ),
+    'thumb_yes': _x( 'yes', 'editor popup', 'wp-wiki-tooltip' ),
+    'thumb_no': _x( 'no', 'editor popup', 'wp-wiki-tooltip' )
 };

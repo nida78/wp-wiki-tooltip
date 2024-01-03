@@ -9,6 +9,8 @@ include_once('class.wp-wiki-tooltip-comm.php');
 class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function __construct( $name='' ) {
+        add_action( 'enqueue_block_editor_assets', array( $this, 'init_gutenberg' ) );
+
         add_filter( 'plugin_action_links_' . $name, array( $this, 'add_action_links' ) );
         add_action( 'admin_menu', array( $this, 'init' ) );
         add_action( 'admin_init', array( $this, 'load_all_options' ) );
@@ -110,6 +112,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 );
             }
         }
+    }
+
+    public function init_gutenberg() {
+        $asset = include_once( 'static/gutenberg/build/index.asset.php' );
+        $asset[ 'dependencies' ][] = 'wp-wiki-tooltip-mce-lang-js';
+
+        wp_enqueue_script( 'wp-wiki-tooltip-gutenberg-script', plugins_url( 'static/gutenberg/build/index.js', __FILE__ ), $asset[ 'dependencies' ], $asset[ 'version' ] );
+        wp_enqueue_style( 'wp-wiki-tooltip-gutenberg-style', plugins_url( 'static/gutenberg/build/index.css', __FILE__ ), '', $asset[ 'version' ] );
     }
 
     public function add_action_links( $links ) {

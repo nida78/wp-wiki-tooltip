@@ -1,0 +1,22 @@
+{
+  "name": "wp-wiki-tooltip",
+  "version": "1.0.0",
+  "description": "Gutenberg support for WP Wiki Tooltip plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "author": "Nico Danneberg",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.19.0"
+  },
+  "dependencies": {
+    "@wordpress/block-editor": "^12.16.0",
+    "@wordpress/components": "^25.14.0",
+    "@wordpress/i18n": "^4.48.0",
+    "@wordpress/rich-text": "^6.25.0"
+  }
+}

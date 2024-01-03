@@ -99,7 +99,7 @@ function getLangString( editor, key ) {
         getInfo : function() {
             return {
                 longname : 'WP Wiki Tooltip Buttons',
-                author : 'nida78',
+                author : 'Nico Danneberg',
                 authorurl : 'https://n1da.net',
                 infourl : 'https://n1da.net/specials/wp-wiki-tooltip/',
                 version : "1.2"

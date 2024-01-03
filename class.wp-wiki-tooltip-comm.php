@@ -108,6 +108,10 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
                 // delete all links (<a> tags) to avoid useless links in the tooltip
                 $content = preg_replace('/<\/?a[^>]*>/', '', $content);
 
+                // delete all inline styles (<style> tags) to avoid useless printed css content in tooltip
+                // solves issue https://wordpress.org/support/topic/strip-css-etc/
+                $content = preg_replace('/<style.*?<\/style>/', '', $content);
+
                 $result = array(
                     'code' => '1',
                     'title' => esc_html( $wiki_data[ 'parse' ][ 'title' ] ),

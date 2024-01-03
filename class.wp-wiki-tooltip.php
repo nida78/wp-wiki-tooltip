@@ -14,8 +14,9 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		add_action( 'wp_enqueue_scripts', array( $this, 'init' ) );
 		add_action( 'wp_footer', array( $this, 'add_wiki_container' ) );
 		add_shortcode( 'wiki', array( $this, 'do_wiki_shortcode' ) );
+        add_filter( 'the_content', array( $this, 'filter_the_content_for_wiki_tags' ) );
 
-		$this->load_all_options();
+        $this->load_all_options();
 		$this->shortcode_count = 1;
 	}
 
@@ -157,4 +158,23 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 
 		return $output;
 	}
+
+    public function filter_the_content_for_wiki_tags( $content ) {
+        // check if we're inside the main loop in a single post
+        if( in_the_loop() && is_main_query() ) {
+            // search for all <wiki>-tags
+            $content = preg_replace_callback(
+                '/<wiki.*?\/wiki>/',
+                array( $this, 'convert_wiki_tag' ),
+                $content
+            );
+        }
+
+        return $content;
+    }
+
+    private function convert_wiki_tag( $tag_content ) {
+        // need this function only for probably more complex replacements
+        return preg_replace( '/<(\/?)wiki([^>]*)>/', '[$1wiki$2]', $tag_content[ 0 ] );
+    }
 }

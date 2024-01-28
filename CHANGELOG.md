@@ -1,7 +1,12 @@
 # Changelog of WP Wiki Tooltip
 
+## [2.0.1]
+*Release Date - January 28th, 2024*
+
+* fixed some small typos
+
 ## [2.0.0 - C6H14N2O2 | Lysine]
-*Release Date - January 3rd, 2023*
+*Release Date - January 3rd, 2024*
 
 * finally, the Gutenberg editor is supported, tooltips can easily be created in every rich-text component
 * content filtering of tooltips is improved especially for removing inline stylesheets

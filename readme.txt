@@ -3,7 +3,7 @@ Contributors: nida78
 Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
 Requires at least: 3.0
 Tested up to: 6.4.2
-Stable tag: 2.0
+Stable tag: 2.0.1
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 License: GPLv2 or later
 
@@ -56,7 +56,7 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 3. Wiki Tooltips Settings - Error Handling: set some Error Handling options
 4. Wiki Tooltips Settings - Designs: set designs, stylings, and animations of tooltips
 5. Wiki Tooltips Settings - Thumbnails: enable and style thumbnails
-6. Create tooltip in all Gutenberg rich-text components
+6. Create tooltips in all Gutenberg rich-text components
 7. Integrate the plugin by shortcodes in posts and pages, too
 8. Use the [TinyMCE](https://codex.wordpress.org/TinyMCE) plugin to get help by a popup form - also available in the Gutenberg's Classic Block
 9. See nice and helpful tooltips
@@ -65,7 +65,7 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 The last three major releases are listed here, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
 = 2.0.0 - C6H14N2O2 | Lysine =
-*Release Date - January 3rd, 2023*
+*Release Date - January 3rd, 2024*
 
 * finally, the Gutenberg editor is supported, tooltips can easily be created in every rich-text component
 * content filtering of tooltips is improved especially for removing inline stylesheets

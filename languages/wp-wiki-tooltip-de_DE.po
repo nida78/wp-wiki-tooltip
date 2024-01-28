@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Wiki Tooltip 2.0\n"
-"POT-Creation-Date: 2024-01-03 13:28+0100\n"
+"POT-Creation-Date: 2024-01-28 18:16+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Nico Danneberg <nico@danneberg.de>\n"
 "Language-Team: Nico Danneberg (nida78)\n"
@@ -652,7 +652,9 @@ msgctxt "editor popup"
 msgid ""
 "Enter the title of the requested Wiki page if it differs from the selected "
 "text."
-msgstr "Gib hier den Titel der gewünschten Wiki-Seite ein."
+msgstr ""
+"Gib hier den Titel der gewünschten Wiki-Seite ein, wenn dieser von "
+"ausgewählten Text abweicht."
 
 #: static/gutenberg/src/index.js:185 static/js/wp-wiki-tooltip-mce-lang.js:9
 #: wp-wiki-tooltip-mce-langs.php:16
@@ -664,7 +666,8 @@ msgstr "Titel des Kapitels"
 #: wp-wiki-tooltip-mce-langs.php:17
 msgctxt "editor popup"
 msgid "Enter the title (anchor) of the requested section in Wiki page."
-msgstr "Trage den Titel (Anker) des gewünschten Kapitels ein."
+msgstr ""
+"Trage den Titel (Anker) des gewünschten Kapitels in der Wiki-Seite ein."
 
 #: static/gutenberg/src/index.js:192 static/js/wp-wiki-tooltip-mce-lang.js:12
 #: wp-wiki-tooltip-mce-langs.php:19

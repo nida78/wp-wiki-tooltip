@@ -653,7 +653,9 @@ msgctxt "editor popup"
 msgid ""
 "Enter the title of the requested Wiki page if it differs from the selected "
 "text."
-msgstr "Geben Sie hier den Titel der gewünschten Wiki-Seite ein."
+msgstr ""
+"Geben Sie hier den Titel der gewünschten Wiki-Seite ein, wenn dieser von "
+"ausgewählten Text abweicht."
 
 #: static/gutenberg/src/index.js:185 static/js/wp-wiki-tooltip-mce-lang.js:9
 #: wp-wiki-tooltip-mce-langs.php:16
@@ -665,7 +667,8 @@ msgstr "Titel des Kapitels"
 #: wp-wiki-tooltip-mce-langs.php:17
 msgctxt "editor popup"
 msgid "Enter the title (anchor) of the requested section in Wiki page."
-msgstr "Geben Sie hier den Titel (Anker) des gewünschten Kapitels ein."
+msgstr ""
+"Tragen Sie den Titel (Anker) des gewünschten Kapitels in der Wiki-Seite ein."
 
 #: static/gutenberg/src/index.js:192 static/js/wp-wiki-tooltip-mce-lang.js:12
 #: wp-wiki-tooltip-mce-langs.php:19

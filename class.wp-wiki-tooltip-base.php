@@ -4,7 +4,7 @@
  */
 class WP_Wiki_Tooltip_Base {
 
-    protected $version = '2.0.1';
+    protected $version = '2.0.2';
 
     protected $tooltipster_version = '4.2.8';
 
@@ -68,5 +68,15 @@ class WP_Wiki_Tooltip_Base {
             $wp_wiki_tooltip_default_options,
             array( 'thumb-enable', 'thumb-align', 'thumb-width', 'thumb-style' )
         );
+    }
+
+    public static function log( $msg = '' ) {
+        if ( true === WP_DEBUG ) {
+            if ( is_array( $msg ) || is_object( $msg ) ) {
+                error_log( print_r( $msg, true ) );
+            } else {
+                error_log( $msg );
+            }
+        }
     }
 }

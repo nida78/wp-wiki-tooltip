@@ -142,13 +142,13 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
             }
         }
 
-        echo json_encode( $result );
+        echo wp_json_encode( $result );
         wp_die();
     }
 
 	public function ajax_test_wiki_url() {
 
-		$wurl = ( parse_url( $_REQUEST[ 'wurl' ], PHP_URL_SCHEME ) === null ) ? "http://" . $_REQUEST[ 'wurl' ] : $_REQUEST[ 'wurl' ];
+		$wurl = ( wp_parse_url( $_REQUEST[ 'wurl' ], PHP_URL_SCHEME ) === null ) ? 'http://' . $_REQUEST[ 'wurl' ] : $_REQUEST[ 'wurl' ];
 		$wiki_urls = array( $wurl, $wurl . '/api.php', $wurl . '/w/api.php' );
 
 		foreach( $wiki_urls as $wurl ) {
@@ -162,14 +162,14 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 						'url' => $wurl,
 						'name' => esc_html( $wiki_data['query']['general']['sitename'] )
 					);
-					echo json_encode($result);
+					echo wp_json_encode($result);
 					wp_die();
 				}
 			}
 		}
 
 		$result = array( 'code' => -1 );
-		echo json_encode( $result );
+		echo wp_json_encode( $result );
 		wp_die();
 	}
 

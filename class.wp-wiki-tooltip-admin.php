@@ -83,7 +83,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             array( $this, 'settings_page_thumb' )
         );
 
-        error_log( 'all request params: ' . print_r( $_REQUEST, true ) );
+        $this->log( 'all request params: ' . print_r( $_REQUEST, true ) );
 
         if( array_key_exists( 'btn_reset', $_REQUEST ) && $_REQUEST[ 'btn_reset' ] == __( 'Reset', 'wp-wiki-tooltip' ) ) {
             delete_option( 'wp-wiki-tooltip-settings' ); // the single-admin-page option has to be deleted anyway
@@ -434,7 +434,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                     <td class="col2"><input id="txt-site-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][<?php echo $num; ?>][sitename]" value="<?php echo $url[ 'sitename' ]; ?>" class="regular-text"/></td>
                     <td class="col3"><input id="txt-id-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][<?php echo $num; ?>][id]" value="<?php echo $url[ 'id' ]; ?>" class="narrow"/></td>
                     <td class="col4"><input id="txt-url-wiki-url-row-<?php echo $num; ?>" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][<?php echo $num; ?>][url]" value="<?php echo $url[ 'url' ]; ?>" class="regular-text"/></td>
-                    <td class="col5"><input id="btn-test-wiki-url-row-<?php echo $num; ?>" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/><img src="<?php echo plugins_url( 'static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
+                    <td class="col5"><input id="btn-test-wiki-url-row-<?php echo $num; ?>" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/><img src="<?php echo plugins_url( 'static/images/loadingAnimationBar.gif', __FILE__ ); ?>" alt="loading animation bar" class="loadingAnimationBar" /></td>
                     <td class="col6"><input type="button" value="<?php _ex( 'remove', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-<?php echo $num; ?>' );"/></td>
                 </tr>
             <?php
@@ -449,7 +449,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 <td class="col2"><input id="txt-site-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][###NEWID###][sitename]" value="" class="regular-text"/></td>
                 <td class="col3"><input id="txt-id-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][###NEWID###][id]" value="" class="narrow"/></td>
                 <td class="col4"><input id="txt-url-wiki-url-row-###NEWID###" type="text" name="wp-wiki-tooltip-settings-base[wiki-urls][data][###NEWID###][url]" value="" class="regular-text"/></td>
-                <td class="col5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( 'static/images/loadingAnimationBar.gif', __FILE__ ); ?>" class="loadingAnimationBar" /></td>
+                <td class="col5"><input id="btn-test-wiki-url-row-###NEWID###" type="button" value="<?php _ex( 'test', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="test_wiki_url_row( 'wiki-url-row-###NEWID###' );"/><img src="<?php echo plugins_url( 'static/images/loadingAnimationBar.gif', __FILE__ ); ?>" alt="loading animation bar" class="loadingAnimationBar" /></td>
                 <td class="col6"><input type="button" value="<?php _ex( 'remove', 'button', 'wp-wiki-tooltip' ); ?>" class="button" onclick="remove_wiki_url_row( 'wiki-url-row-###NEWID###' );"/></td>
             </tr>
             <tr>
@@ -655,7 +655,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function sanitize_base_settings( $input ) {
         global $wp_wiki_tooltip_default_options;
-        error_log( 'Input for BASE => <' . print_r( $input, true ) . '>' );
+        $this->log( 'Input for BASE => <' . print_r( $input, true ) . '>' );
 
         if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-base-submit' ) ) {
             $this->sanitize_stop();
@@ -719,7 +719,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function sanitize_error_settings( $input ) {
         global $wp_wiki_tooltip_default_options;
-        error_log( 'Input for ERROR => <' . print_r( $input, true ) . '>' );
+        $this->log( 'Input for ERROR => <' . print_r( $input, true ) . '>' );
 
         if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-error-submit' ) ) {
             $this->sanitize_stop();
@@ -746,7 +746,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function sanitize_design_settings( $input ) {
         global $wp_wiki_tooltip_default_options;
-        error_log( 'Input for DESIGN => <' . print_r( $input, true ) . '>' );
+        $this->log( 'Input for DESIGN => <' . print_r( $input, true ) . '>' );
 
         if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-design-submit' ) ) {
             $this->sanitize_stop();
@@ -773,7 +773,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function sanitize_thumb_settings( $input ) {
         global $wp_wiki_tooltip_default_options;
-        error_log( 'Input for THUMB => <' . print_r( $input, true ) . '>' );
+        $this->log( 'Input for THUMB => <' . print_r( $input, true ) . '>' );
 
         if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-thumb-submit' ) ) {
             $this->sanitize_stop();

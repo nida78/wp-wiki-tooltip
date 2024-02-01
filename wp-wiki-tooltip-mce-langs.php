@@ -26,7 +26,7 @@ function wp_wiki_tooltip_mce_translation() {
     );
 
     $locale = _WP_Editors::$mce_locale;
-    $translated = 'tinyMCE.addI18n("' . $locale . '.wp_wiki_tooltip", ' . json_encode( $strings ) . ");\n";
+    $translated = 'tinyMCE.addI18n("' . $locale . '.wp_wiki_tooltip", ' . wp_json_encode( $strings ) . ");\n";
 
     return $translated;
 }

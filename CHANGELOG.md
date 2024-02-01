@@ -1,5 +1,11 @@
 # Changelog of WP Wiki Tooltip
 
+## [2.0.2]
+*Release Date - February 1st, 2024*
+
+* improved logging by checking WP_DEBUG right
+* improved function usage
+
 ## [2.0.1]
 *Release Date - January 28th, 2024*
 
@@ -158,6 +164,8 @@
 
 * Initial release
 
+[2.0.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.2
+[2.0.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.1
 [2.0.0 - C6H14N2O2 | Lysine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.0
 [1.10.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.2
 [1.10.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.1

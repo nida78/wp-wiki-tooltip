@@ -53,6 +53,28 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         'format' => 'json',
         'siprop' => 'general'
     );
+	
+	private $timeout_value = -1;
+	
+	private function get_url_with_timeout($url)
+	{
+		if( $this->timeout_value == -1 )
+		{
+			$option=get_option('wp-wiki-tooltip-settings-tweaks');
+			if( is_array( $option ) && isset( $option[ 'wiki_request_timeout' ])) {
+				$this->timeout_value = $option[ 'wiki_request_timeout' ];
+			}
+			else {
+				$this->timeout_value = 5;
+			}
+		}
+		
+		$args=array(
+			'timeout' => $this->timeout_value 
+		);
+
+		return wp_remote_get( $url, $args );
+	}
 
     public function ajax_get_wiki_page() {
 
@@ -90,7 +112,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 	        }
 
 	        $this->page_query_args[ 'pageid' ] = $wiki_id;
-            $response = wp_remote_get( $wiki_url . '?' . http_build_query( $this->page_query_args ) );
+            $response = $this->get_url_with_timeout( $wiki_url . '?' . http_build_query( $this->page_query_args ) );
 
             if ( is_array( $response ) && ! is_wp_error( $response ) && ! $section_error ) {
                 $wiki_data = json_decode( $response['body'], true );
@@ -125,7 +147,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
                 if( $thumb_enable == 'on' ) {
                     $this->image_query_args[ 'pageids' ] = $wiki_id;
                     $this->image_query_args[ 'pithumbsize' ] = $thumb_width;
-                    $response = wp_remote_get($wiki_url . '?' . http_build_query( $this->image_query_args ) );
+                    $response = $this->get_url_with_timeout($wiki_url . '?' . http_build_query( $this->image_query_args ) );
                     if( is_array( $response ) && ! is_wp_error( $response ) ) {
                         $image_data = json_decode( $response[ 'body' ], true );
                         if( isset( $image_data[ 'query' ][ 'pages' ][ $wiki_id ][ 'thumbnail' ] ) ) {
@@ -152,7 +174,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 		$wiki_urls = array( $wurl, $wurl . '/api.php', $wurl . '/w/api.php' );
 
 		foreach( $wiki_urls as $wurl ) {
-			$response = wp_remote_get( $wurl . '?' . http_build_query( $this->test_query_args ) );
+			$response = $this->get_url_with_timeout( $wurl . '?' . http_build_query( $this->test_query_args ) );
 
 			if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 				$wiki_data = json_decode( $response[ 'body' ], true );
@@ -175,7 +197,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 
 	private function get_section_id_by_name( $wiki_url = '', $page_id = -1, $section_title = '' ) {
 		$this->sections_query_args[ 'pageid' ] = $page_id;
-		$response = wp_remote_get( $wiki_url . '?' . http_build_query( $this->sections_query_args ) );
+		$response = $this->get_url_with_timeout( $wiki_url . '?' . http_build_query( $this->sections_query_args ) );
 
 		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 			$wiki_data = json_decode( $response[ 'body' ], true );
@@ -192,7 +214,7 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 
     public function get_wiki_page_info( $title = '', $wiki_url = '' ) {
         $this->info_query_args[ 'titles' ] = $title;
-        $response = wp_remote_get( $wiki_url . '?' . http_build_query( $this->info_query_args ) );
+        $response = $this->get_url_with_timeout( $wiki_url . '?' . http_build_query( $this->info_query_args ) );
 
         if ( is_array( $response ) && ! is_wp_error( $response ) ) {
             $wiki_data = json_decode( $response['body'], true );

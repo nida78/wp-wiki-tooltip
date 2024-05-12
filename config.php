@@ -15,13 +15,6 @@ $wp_wiki_tooltip_default_options = [
             ]
         ],
 
-        'cache' => [ // NOT USED: cache settings - default "1 week"
-
-            'count' => 1, // how many
-
-            'unit' => 'week' // what
-        ],
-
         'a-target-range' => [ '_blank', '_self' ],
 
         'a-target' => '_blank', // where to open links to wiki pages
@@ -84,5 +77,14 @@ $wp_wiki_tooltip_default_options = [
         'thumb-width' => '200', // standard width of the thumbnails
 
         'thumb-style' => '', // stylesheets for thumbnail images
-    ]
+    ],
+	
+	'tweaks' => [
+	
+		'cache-hit-days' => 7, // cache TTL when article exists
+
+		'cache-miss-days' => 7, // cache TTL when article doesn't exist
+
+		'wiki_request_timeout' => 5, // timeout to use when askong Wiki API
+	]
 ];

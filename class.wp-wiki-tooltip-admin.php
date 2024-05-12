@@ -717,26 +717,26 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function print_cache_hit_days_field( $args ) {
         printf(
-            '<p><label><input type="text" id="cache-hit-days" name="wp-wiki-tooltip-settings-tweaks[cache-hit-days]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            '<p><label><input type="text" id="cache-hit-days" name="wp-wiki-tooltip-settings-tweaks[cache-hit-days]" value="%s" class="small-text" style="text-align:right;" /> ' . __( 'days', 'wp-wiki-tooltip' ) . '</label></p>',
             isset( $this->options_tweaks['cache-hit-days'] ) ? esc_attr( $this->options_tweaks[ 'cache-hit-days' ] ) : $args[ 'cache-hit-days' ]
         );
-        echo '<p class="description">' . __( 'When article exists, how many days it should be stored in cache. Zero turns off cache.', 'wp-wiki-tooltip' ) . '</p>';
+        echo '<p class="description">' . __( 'When article exists, how many days it should be stored in cache. Zero turns off this cache.', 'wp-wiki-tooltip' ) . '</p>';
     }
 	
 	public function print_cache_miss_days_field( $args ) {
         printf(
-            '<p><label><input type="text" id="cache-miss-days" name="wp-wiki-tooltip-settings-tweaks[cache-miss-days]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            '<p><label><input type="text" id="cache-miss-days" name="wp-wiki-tooltip-settings-tweaks[cache-miss-days]" value="%s" class="small-text" style="text-align:right;" /> ' . __( 'days', 'wp-wiki-tooltip' ) . '</label></p>',
             isset( $this->options_tweaks['cache-miss-days'] ) ? esc_attr( $this->options_tweaks[ 'cache-miss-days' ] ) : $args[ 'cache-miss-days' ]
         );
-        echo '<p class="description">' . __( 'When article doesn\'t exist, how many days it should be stored in cache. Zero turns off cache.', 'wp-wiki-tooltip' ) . '</p>';
+        echo '<p class="description">' . __( 'When article doesn\'t exist, how many days it should be stored in cache. Zero turns off this cache.', 'wp-wiki-tooltip' ) . '</p>';
     }
 	
 	public function print_request_timeout_field( $args ) {
         printf(
-            '<p><label><input type="text" id="wiki_request_timeout" name="wp-wiki-tooltip-settings-tweaks[wiki_request_timeout]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            '<p><label><input type="text" id="wiki_request_timeout" name="wp-wiki-tooltip-settings-tweaks[wiki_request_timeout]" value="%s" class="small-text" style="text-align:right;" /> ' . __( 'seconds', 'wp-wiki-tooltip' ) . '</label></p>',
             isset( $this->options_tweaks['wiki_request_timeout'] ) ? esc_attr( $this->options_tweaks[ 'wiki_request_timeout' ] ) : $args[ 'wiki_request_timeout' ]
         );
-        echo '<p class="description">' . __( 'Timeout value when asking Wiki for info about article.', 'wp-wiki-tooltip' ) . '</p>';
+        echo '<p class="description">' . __( 'Timeout value (in seconds) when asking Wiki for info about article.', 'wp-wiki-tooltip' ) . '</p>';
     }
 			
     public function sanitize_base_settings( $input ) {
@@ -895,21 +895,21 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             $this->sanitize_stop();
         }
 
-        // check min screen width
+        // check cache-hit-days
         $input[ 'cache-hit-days' ] = ( int ) $input[ 'cache-hit-days' ];
         if( 0 > $input[ 'cache-hit-days' ] ) {
             $input[ 'cache-hit-days' ] = $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'cache-hit-days' ];
         }
 
-        // check min screen width
+        // check cache-miss-days
         $input[ 'cache-miss-days' ] = ( int ) $input[ 'cache-miss-days' ];
         if( 0 > $input[ 'cache-miss-days' ] ) {
             $input[ 'cache-miss-days' ] = $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'cache-miss-days' ];
         }
 
-        // check min screen width
+        // check timeout, it shouldn't be less than default
         $input[ 'wiki_request_timeout' ] = ( int ) $input[ 'wiki_request_timeout' ];
-        if( 0 >= $input[ 'wiki_request_timeout' ] ) {
+        if( $input[ 'wiki_request_timeout' ] < $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'wiki_request_timeout' ] ) {
             $input[ 'wiki_request_timeout' ] = $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'wiki_request_timeout' ];
         }
 

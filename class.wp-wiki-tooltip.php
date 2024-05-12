@@ -43,6 +43,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 	}
 
 	public function add_wiki_container() {
+
         echo sprintf(
             '<div id="wiki-container"
                         data-wp_ajax_url="%s"
@@ -115,13 +116,26 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		$num = $this->shortcode_count++;
 
 		$trans_wiki_key = urlencode( $wiki_base_id . "-" . $wiki_url . '-' . $title . '-' . $this->version );
-		if( ( $trans_wiki_data = get_transient( $trans_wiki_key ) ) === false ) {
+		if( ( $trans_wiki_data = get_transient( $trans_wiki_key ) ) === false || // if there is no transient
+			( $this->options_tweaks[ 'cache-miss-days' ] == 0 && $trans_wiki_data[ 'wiki-id' ] == '-1') // if there is an "empty" transient and caching of misses is disabled
+		  ) {
 
 			$comm = new WP_Wiki_Tooltip_Comm();
 			$trans_wiki_data = $comm->get_wiki_page_info( $title, $wiki_url );
 			$trans_wiki_data[ 'wiki-base-url' ] = $wiki_url;
 
-			set_transient( $trans_wiki_key, $trans_wiki_data, WEEK_IN_SECONDS );
+			if( $trans_wiki_data[ 'wiki-id' ] == -1) {
+				// if there is a miss, set transient only when and cache-miss-days > 0
+				if( $this->options_tweaks[ 'cache-miss-days' ] > 0 ) {
+					set_transient( $trans_wiki_key, $trans_wiki_data, $this->options_tweaks[ 'cache-miss-days' ] * DAY_IN_SECONDS );
+				}
+			}
+			else {
+				// if there is a hit, set transient only when and cache-hit-days > 0
+				if( $this->options_tweaks[ 'cache-hit-days' ] > 0 ) {
+					set_transient( $trans_wiki_key, $trans_wiki_data, $this->options_tweaks[ 'cache-hit-days' ] * DAY_IN_SECONDS );
+				}
+			}
 		}
 
         // $output  = 'data-wiki_num="' . $num . '" data-wiki_id="' . $trans_wiki_data[ 'wiki-id' ] . '" data-wiki_title="' . $trans_wiki_data[ 'wiki-title' ] . '" data-wiki_section="' . $params[ 'section' ] . '" data-wiki_base_url="' . $trans_wiki_data[ 'wiki-base-url' ] . '" data-wiki_url="' . $trans_wiki_data[ 'wiki-url' ] . '" data-wiki_thumbnail="' . $params[ 'thumbnail' ] . '"';

@@ -58,7 +58,7 @@ class WP_Wiki_Tooltip_Base {
             $old_options,
             get_option( 'wp-wiki-tooltip-settings-design' ),
             $wp_wiki_tooltip_default_options,
-            array( 'theme', 'animation', 'tooltip-head', 'tooltip-body', 'tooltip-foot', 'a-style' )
+            array( 'theme', 'animation', 'tooltip-head', 'tooltip-body', 'tooltip-foot', 'a-style', 'custom-go-to-wiki-link' )
         );
 
         $this->options_thumb = $this->load_single_option(

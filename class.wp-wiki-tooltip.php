@@ -43,6 +43,12 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 	}
 
 	public function add_wiki_container() {
+		$goto_wiki_link = $this->options_design[ 'custom-go-to-wiki-link' ];
+		if($goto_wiki_link == "")
+		{
+			$goto_wiki_link = __( 'Click here to open Wiki page&hellip;', 'wp-wiki-tooltip' );
+		}
+		
         echo sprintf(
             '<div id="wiki-container"
                         data-wp_ajax_url="%s"
@@ -68,7 +74,7 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			plugin_dir_url( __FILE__ ),
 			$this->options_design[ 'theme' ],
 			$this->options_design[ 'animation' ],
-			__( 'Click here to open Wiki page&hellip;', 'wp-wiki-tooltip' ),
+			$goto_wiki_link,
 			( $this->options_thumb[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off',
 			$this->options_thumb[ 'thumb-width' ],
             $this->options_thumb[ 'thumb-align' ],

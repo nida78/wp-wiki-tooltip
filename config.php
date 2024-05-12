@@ -84,5 +84,14 @@ $wp_wiki_tooltip_default_options = [
         'thumb-width' => '200', // standard width of the thumbnails
 
         'thumb-style' => '', // stylesheets for thumbnail images
-    ]
+    ],
+	
+	'tweaks' => [
+	
+		'cache-hit-days' => 7, // cache TTL when article exists
+
+		'cache-miss-days' => 7, // cache TTL when article doesn't exist
+
+		'wiki_request_timeout' => 15, // timeout to use when askong Wiki API
+	]
 ];

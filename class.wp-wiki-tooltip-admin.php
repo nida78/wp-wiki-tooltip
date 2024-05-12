@@ -18,6 +18,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         add_action( 'admin_init', array( $this, 'register_error_settings' ) );
         add_action( 'admin_init', array( $this, 'register_design_settings' ) );
         add_action( 'admin_init', array( $this, 'register_thumb_settings' ) );
+        add_action( 'admin_init', array( $this, 'register_tweaks_settings' ) );
 
         $comm = new WP_Wiki_Tooltip_Comm();
         add_action( 'wp_ajax_get_wiki_page', array( $comm, 'ajax_get_wiki_page' ) );
@@ -82,6 +83,15 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             'wp-wiki-tooltip-settings-thumb',
             array( $this, 'settings_page_thumb' )
         );
+		
+		add_submenu_page(
+            'wp-wiki-tooltip-settings',
+            _x( 'Wiki Tooltips Advanced Settings', 'page title', 'wp-wiki-tooltip' ),
+            _x( 'Advanced', 'menu title', 'wp-wiki-tooltip' ),
+            'manage_options',
+            'wp-wiki-tooltip-settings-tweaks',
+            array( $this, 'settings_page_tweaks' )
+        );
 
         $this->log( 'all request params: ' . print_r( $_REQUEST, true ) );
 
@@ -90,7 +100,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             $result = ( delete_option( 'wp-wiki-tooltip-settings-base' ) &&
                         delete_option( 'wp-wiki-tooltip-settings-error' ) &&
                         delete_option( 'wp-wiki-tooltip-settings-design' ) &&
-                        delete_option( 'wp-wiki-tooltip-settings-thumb' ) ) ? 'true' : 'false';
+                        delete_option( 'wp-wiki-tooltip-settings-thumb' )  &&
+                        delete_option( 'wp-wiki-tooltip-settings-tweaks' ) ) ? 'true' : 'false';
             header( 'Location: options-general.php?page=wp-wiki-tooltip-settings&settings-updated=reset-' . $result );
             die();
         }
@@ -361,6 +372,53 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         );
     }
 
+	public function register_tweaks_settings() {
+		global $wp_wiki_tooltip_default_options;
+
+        add_settings_section(
+            'wp-wiki-tooltip-settings-tweaks',
+            _x( 'Advanced', 'settings section headline', 'wp-wiki-tooltip' ),
+            array( $this, 'print_tweaks_section_info' ),
+            'wp-wiki-tooltip-settings-tweaks'
+        );
+
+        add_settings_field(
+            'cache-hit-days',
+            _x( 'Cache existing articles', 'settings field label', 'wp-wiki-tooltip' ),
+            array( $this, 'print_cache_hit_days_field' ),
+            'wp-wiki-tooltip-settings-tweaks',
+            'wp-wiki-tooltip-settings-tweaks'
+        );
+
+        add_settings_field(
+            'cache-miss-days',
+            _x( 'Cache non-existing articles', 'settings field label', 'wp-wiki-tooltip' ),
+            array( $this, 'print_cache_miss_days_field' ),
+            'wp-wiki-tooltip-settings-tweaks',
+            'wp-wiki-tooltip-settings-tweaks'
+        );
+
+        add_settings_field(
+            'wiki_request_timeout',
+            _x( 'Wiki request timeout', 'settings field label', 'wp-wiki-tooltip' ),
+            array( $this, 'print_request_timeout_field' ),
+            'wp-wiki-tooltip-settings-tweaks',
+            'wp-wiki-tooltip-settings-tweaks'
+        );
+
+        register_setting(
+            'wp-wiki-tooltip-settings-tweaks',
+            'wp-wiki-tooltip-settings-tweaks',
+            array(
+                'type' => 'array',
+                'description' => _x( 'Wiki Tooltips Advanced Settings', 'register setting description', 'wp-wiki-tooltip' ),
+                'sanitize_callback' => array( $this, 'sanitize_tweaks_settings' ),
+                'show_in_rest' => false,
+                'default' => $wp_wiki_tooltip_default_options
+            )
+        );
+	}
+	
     /********************************************************
      * Sections
      *******************************************************/
@@ -385,6 +443,10 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             '</strong>'
         );
         echo '&nbsp;<span class="bold-teletyper">[wiki thumbnail="on"]WordPress[/wiki]</span>&nbsp;' . __( 'or', 'wp-wiki-tooltip' ) . '&nbsp;<span class="bold-teletyper">[wiki thumbnail="off" title="WordPress"]a nice blogging software[/wiki]</span></p>';
+    }
+
+    public function print_tweaks_section_info() {
+        echo '<p>' . __( 'Some advanced settings to ensure smooth operation.' , 'wp-wiki-tooltip' ) . '</p>';
     }
 
     /********************************************************
@@ -653,6 +715,30 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the thumbnail in the tooltip.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
+    public function print_cache_hit_days_field( $args ) {
+        printf(
+            '<p><label><input type="text" id="cache-hit-days" name="wp-wiki-tooltip-settings-tweaks[cache-hit-days]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            isset( $this->options_tweaks['cache-hit-days'] ) ? esc_attr( $this->options_tweaks[ 'cache-hit-days' ] ) : $args[ 'cache-hit-days' ]
+        );
+        echo '<p class="description">' . __( 'When article exists, how many days it should be stored in cache. Zero turns off cache.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+	
+	public function print_cache_miss_days_field( $args ) {
+        printf(
+            '<p><label><input type="text" id="cache-miss-days" name="wp-wiki-tooltip-settings-tweaks[cache-miss-days]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            isset( $this->options_tweaks['cache-miss-days'] ) ? esc_attr( $this->options_tweaks[ 'cache-miss-days' ] ) : $args[ 'cache-miss-days' ]
+        );
+        echo '<p class="description">' . __( 'When article doesn\'t exist, how many days it should be stored in cache. Zero turns off cache.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+	
+	public function print_request_timeout_field( $args ) {
+        printf(
+            '<p><label><input type="text" id="wiki_request_timeout" name="wp-wiki-tooltip-settings-tweaks[wiki_request_timeout]" value="%s" class="small-text" style="text-align:right;" />' . __( 'px', 'wp-wiki-tooltip' ) . '</label></p>',
+            isset( $this->options_tweaks['wiki_request_timeout'] ) ? esc_attr( $this->options_tweaks[ 'wiki_request_timeout' ] ) : $args[ 'wiki_request_timeout' ]
+        );
+        echo '<p class="description">' . __( 'Timeout value when asking Wiki for info about article.', 'wp-wiki-tooltip' ) . '</p>';
+    }
+			
     public function sanitize_base_settings( $input ) {
         global $wp_wiki_tooltip_default_options;
         $this->log( 'Input for BASE => <' . print_r( $input, true ) . '>' );
@@ -801,13 +887,42 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         return $input;
     }
 
+    public function sanitize_tweaks_settings( $input ) {
+        global $wp_wiki_tooltip_default_options;
+        $this->log( 'Input for TWEAKS => <' . print_r( $input, true ) . '>' );
+
+        if( ! isset( $input[ 'nonce' ] ) || ! wp_verify_nonce( $input[ 'nonce' ], 'wp-wiki-tooltip-settings-tweaks-submit' ) ) {
+            $this->sanitize_stop();
+        }
+
+        // check min screen width
+        $input[ 'cache-hit-days' ] = ( int ) $input[ 'cache-hit-days' ];
+        if( 0 > $input[ 'cache-hit-days' ] ) {
+            $input[ 'cache-hit-days' ] = $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'cache-hit-days' ];
+        }
+
+        // check min screen width
+        $input[ 'cache-miss-days' ] = ( int ) $input[ 'cache-miss-days' ];
+        if( 0 > $input[ 'cache-miss-days' ] ) {
+            $input[ 'cache-miss-days' ] = $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'cache-miss-days' ];
+        }
+
+        // check min screen width
+        $input[ 'wiki_request_timeout' ] = ( int ) $input[ 'wiki_request_timeout' ];
+        if( 0 >= $input[ 'wiki_request_timeout' ] ) {
+            $input[ 'wiki_request_timeout' ] = $wp_wiki_tooltip_default_options[ 'tweaks' ][ 'wiki_request_timeout' ];
+        }
+
+        return $input;
+    }
+
     public function sanitize_stop() {
         wp_die( _x( 'Sorry, but this request seems to be invalid!', 'nonce check invalid', 'wp-wiki-tooltip' ) );
     }
 
     public function settings_page( $active_tab = 'base' ) {
 
-        if( isset( $_GET[ 'tab' ] ) && in_array( $_GET[ 'tab' ], array( 'base', 'error', 'design', 'thumb' ) ) ) {
+        if( isset( $_GET[ 'tab' ] ) && in_array( $_GET[ 'tab' ], array( 'base', 'error', 'design', 'thumb', 'tweaks' ) ) ) {
             $active_tab = $_GET[ 'tab' ];
         }
 
@@ -821,6 +936,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                 <a href="?page=wp-wiki-tooltip-settings&tab=error" class="nav-tab <?php echo $active_tab == 'error' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Error Handling', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
                 <a href="?page=wp-wiki-tooltip-settings&tab=design" class="nav-tab <?php echo $active_tab == 'design' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Design', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
                 <a href="?page=wp-wiki-tooltip-settings&tab=thumb" class="nav-tab <?php echo $active_tab == 'thumb' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Thumbnail', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
+                <a href="?page=wp-wiki-tooltip-settings&tab=tweaks" class="nav-tab <?php echo $active_tab == 'tweaks' ? 'nav-tab-active' : ''; ?>"><?php _ex( 'Advanced', 'settings tab title', 'wp-wiki-tooltip' ); ?></a>
             </h2>
 
             <form method="post" action="options.php">
@@ -843,6 +959,12 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
                     wp_nonce_field('wp-wiki-tooltip-settings-thumb-submit', 'wp-wiki-tooltip-settings-thumb[nonce]' );
                     settings_fields('wp-wiki-tooltip-settings-thumb' );
                     do_settings_sections('wp-wiki-tooltip-settings-thumb' );
+
+                } elseif( $active_tab == 'tweaks' ) {
+
+                    wp_nonce_field('wp-wiki-tooltip-settings-tweaks-submit', 'wp-wiki-tooltip-settings-tweaks[nonce]' );
+                    settings_fields('wp-wiki-tooltip-settings-tweaks' );
+                    do_settings_sections('wp-wiki-tooltip-settings-tweaks' );
 
                 } else {
 
@@ -874,5 +996,9 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
 
     public function settings_page_thumb() {
         $this->settings_page( 'thumb' );
+    }
+
+    public function settings_page_tweaks() {
+        $this->settings_page( 'tweaks' );
     }
 }

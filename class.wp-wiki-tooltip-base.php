@@ -68,6 +68,14 @@ class WP_Wiki_Tooltip_Base {
             $wp_wiki_tooltip_default_options,
             array( 'thumb-enable', 'thumb-align', 'thumb-width', 'thumb-style' )
         );
+		
+		$this->options_tweaks = $this->load_single_option(
+			'tweaks',
+			$old_options,
+			get_option( 'wp-wiki-tooltip-settings-tweaks' ),
+			$wp_wiki_tooltip_default_options,
+			array( 'cache-hit-days', 'cache-miss-days', 'wiki_request_timeout' )
+		);
     }
 
     public static function log( $msg = '' ) {

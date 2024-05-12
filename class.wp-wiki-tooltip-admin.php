@@ -292,6 +292,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
             'wp-wiki-tooltip-settings-design',
             'wp-wiki-tooltip-settings-design'
         );
+		
+		add_settings_field(
+            'custom-go-to-wiki-link',
+            _x( 'Custom "go to Wiki" link text', 'settings field label', 'wp-wiki-tooltip' ),
+            array( $this, 'print_custom_link_field' ),
+            'wp-wiki-tooltip-settings-design',
+            'wp-wiki-tooltip-settings-design'
+        );
 
         register_setting(
             'wp-wiki-tooltip-settings-design',
@@ -620,6 +628,14 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         echo '<p class="description">' . __( 'All entered CSS settings will be put into the CSS class of the links to Wiki pages.', 'wp-wiki-tooltip' ) . '</p>';
     }
 
+	public function print_custom_link_field( $args ) {
+		printf(
+            '<p><input type="text" id="custom-go-to-wiki-link" name="wp-wiki-tooltip-settings-design[custom-go-to-wiki-link]" value="%s" class="regular-text" /></p>',
+            isset( $this->options_design['custom-go-to-wiki-link'] ) ? esc_attr( $this->options_design[ 'custom-go-to-wiki-link' ] ) : $args[ 'custom-go-to-wiki-link' ]
+        );
+        echo '<p class="description">' . __( 'If you want to change the default "Click here to open Wiki page…" link. Empty = default.', 'wp-wiki-tooltip' ) . '</p>';
+	}
+	
     /********************************************************
      * Thumbnail Settings Fields
      *******************************************************/
@@ -767,6 +783,7 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         $input[ 'tooltip-body' ] = sanitize_text_field( $input[ 'tooltip-body' ] );
         $input[ 'tooltip-foot' ] = sanitize_text_field( $input[ 'tooltip-foot' ] );
         $input[ 'a-style' ] = sanitize_text_field( $input[ 'a-style' ] );
+        $input[ 'custom-go-to-wiki-link' ] = sanitize_text_field( $input[ 'custom-go-to-wiki-link' ] );
 
         return $input;
     }

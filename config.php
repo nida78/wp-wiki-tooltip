@@ -69,6 +69,8 @@ $wp_wiki_tooltip_default_options = [
         'tooltip-foot' => 'font-style: italic; font-weight: bold;', // make the footer link somehow nicer
 
         'a-style' => 'font-style: italic;',  // line of css for the style attribute
+		
+		'custom-go-to-wiki-link' => '',
     ],
 
     'thumb' => [

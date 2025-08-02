@@ -1,13 +1,13 @@
 # WP Wiki Tooltip
 Contributors: nida78
 
-Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster, shortcode
+Tags: wiki, wikipedia, mediawiki, tooltip, tooltipster
 
 Requires at least: 3.0
 
-Tested up to: 6.4.3
+Tested up to: 6.8
 
-Stable tag: 2.0.2
+Stable tag: 2.1.0
 
 Donate link: https://n1da.net/specials/wp-wiki-tooltip/spenden/
 
@@ -70,6 +70,12 @@ Since version 1.9.0 you can request a section by its title (anchor) using an ext
 # Changelog
 The last three major releases are listed here, only. Find complete log of all changes in the [extra changelog file](https://github.com/nida78/wp-wiki-tooltip/blob/master/CHANGELOG.md)!
 
+## [2.1.0 - C5H11NO2S | Methionine]
+*Release Date - August 2nd, 2025*
+
+* security issue is fixed that made it possible for authenticated attackers to inject arbitrary web scripts in pages by plugins shortcode
+* several warnings of WPCS are fixed, too by adding as much input sanitization and output escaping as possible
+
 ## [2.0.0 - C6H14N2O2 | Lysine]
 *Release Date - January 3rd, 2024*
 
@@ -77,21 +83,13 @@ The last three major releases are listed here, only. Find complete log of all ch
 * content filtering of tooltips is improved especially for removing inline stylesheets
 
 ## [1.10.0 - C6H13NO2 | Leucine]
-*Release Date -  December 5th, 2020*
+*Release Date - December 5th, 2020*
 
-* the backend page is splitted into several tabs to have more space for some new settings in the future
+* the backend page is split into several tabs to have more space for some new settings in the future
 * all dynamic JavaScript code that was printed in HTML is moved into static JS files to avoid problems with other plugins
 * all JavaScript is improved by removing small mistakes and minor hitches
 * the used Tooltipster plugin is updated to its version 4.2.8
 * some improvements for binding external resources
-
-## [1.9.0 - C6H13NO2 | Isoleucine]
-*Release Date - January 1st, 2019*
-
-* sections of Wiki pages can be used for tooltips, now (use shortcode attribute ```section="anchor-of-section"```)
-* the used Tooltipster plugin is updated to its version 4.2.6
-* a new option is available to set the animation how the tooltip appears
-* the new JavaScript I18N Support was implemented for the Classic-Block of Gutenberg
 
 # Upgrade Notice
 
@@ -107,6 +105,6 @@ The former Wiki URL is not transferred into this version. Review the settings pa
 ## Elder Upgrades
 Nothing special to consider.
 
+[2.1.0 - C5H11NO2S | Methionine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.1.0
 [2.0.0 - C6H14N2O2 | Lysine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.0
 [1.10.0 - C6H13NO2 | Leucine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.10.0
-[1.9.0 - C6H13NO2 | Isoleucine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/1.9.0

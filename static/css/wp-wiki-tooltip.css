@@ -1,7 +1,12 @@
 /**
- * Created by nida78 on 28.07.2015.
+ * Created by nida78 on 28.07.2015
+ * Modified by nida78 on 22.12.2024
  */
 a.wiki-tooltip {
+}
+
+.tooltipster-sidetip.tooltipster-noir .tooltipster-box {
+    background: #ecebeb;
 }
 
 div.wiki-tooltip-balloon div.head {
@@ -15,7 +20,13 @@ div.tooltipster-noir div.wiki-tooltip-balloon div.head { border-bottom: 1px soli
 div.tooltipster-punk div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #f71169; }
 div.tooltipster-shadow div.wiki-tooltip-balloon div.head { border-bottom: 1px solid #808080; }
 
-div.wiki-tooltip-balloon div.body {
+div.wiki-tooltip-balloon div.body p.loadingAnimation {
+    min-width: 220px;
+}
+
+div.wiki-tooltip-balloon div.body p.loadingAnimation img {
+    display: block;
+    margin: 15px auto 5px auto;
 }
 
 div.wiki-tooltip-balloon div.foot {

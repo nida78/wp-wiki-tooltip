@@ -55,16 +55,24 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
     );
 
     public function ajax_get_wiki_page() {
+        global $wp_wiki_tooltip_default_options;
 
-        $wiki_id = $_REQUEST[ 'wid' ];
-        $section = $_REQUEST[ 'section' ];
-        $section_errhdl = $_REQUEST[ 'serrhdl' ];
-        $wiki_url = $_REQUEST[ 'wurl' ];
-        $page_url = $_REQUEST[ 'purl' ];
-        $thumb_enable = $_REQUEST[ 'tenable' ];
-	    $thumb_width = $_REQUEST[ 'twidth' ];
-	    $error_title = $_REQUEST[ 'errtit' ];
-	    $error_message = $_REQUEST[ 'errmsg' ];
+        if ( isset( $_REQUEST[ 'nonce' ] ) && isset( $_REQUEST[ 'wid' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST[ 'nonce' ] ) ), 'wp-wiki-tooltip-nonce-' . ( int ) $_REQUEST[ 'wid' ] ) ) {
+            $wiki_id = ( int ) $_REQUEST[ 'wid' ];
+            $thumb_width = isset( $_REQUEST[ 'twidth' ] ) ? ( int ) $_REQUEST[ 'twidth' ] : 0;
+
+            $section = isset( $_REQUEST[ 'section' ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ 'section' ] ) ) : '';
+            $error_title = isset( $_REQUEST[ 'errtit' ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ 'errtit' ] ) ) : '';
+            $error_message = isset( $_REQUEST[ 'errmsg' ] ) ? sanitize_textarea_field( wp_unslash( $_REQUEST[ 'errmsg' ] ) ) : '';
+
+            $wiki_url = isset( $_REQUEST[ 'wurl' ] ) ? sanitize_url( wp_unslash( $_REQUEST[ 'wurl' ] ) ) : '';
+            $page_url = isset( $_REQUEST[ 'purl' ] ) ? sanitize_url( wp_unslash( $_REQUEST[ 'purl' ] ) ) : '';
+
+            $section_errhdl = ( isset( $_REQUEST[ 'serrhdl' ] ) && in_array( $_REQUEST[ 'serrhdl' ], $wp_wiki_tooltip_default_options[ 'error' ][ 'section-error-handling-range' ] ) ) ? sanitize_key( $_REQUEST[ 'serrhdl' ] ) : $this->options_error[ 'section-error-handling' ];
+            $thumb_enable = ( isset( $_REQUEST[ 'tenable' ] ) && in_array( $_REQUEST[ 'tenable' ], $wp_wiki_tooltip_default_options[ 'thumb' ][ 'thumb-enable-range' ] ) ) ? sanitize_key( $_REQUEST[ 'tenable' ] ) : $this->options_thumb[ 'thumb-enable' ];
+        } else {
+            $wiki_id = -1;
+        }
 
 	    $error_result = array(
 	    	'code' => -1,
@@ -148,25 +156,29 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
 
 	public function ajax_test_wiki_url() {
 
-		$wurl = ( wp_parse_url( $_REQUEST[ 'wurl' ], PHP_URL_SCHEME ) === null ) ? 'http://' . $_REQUEST[ 'wurl' ] : $_REQUEST[ 'wurl' ];
-		$wiki_urls = array( $wurl, $wurl . '/api.php', $wurl . '/w/api.php' );
+        if ( isset( $_REQUEST[ 'nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST[ 'nonce' ] ) ), 'wp-wiki-tooltip-settings-base-test-url' ) ) {
 
-		foreach( $wiki_urls as $wurl ) {
-			$response = wp_remote_get( $wurl . '?' . http_build_query( $this->test_query_args ) );
+            $wurl = isset($_REQUEST['wurl']) ? sanitize_url(wp_unslash($_REQUEST['wurl'])) : '';
+            $wurl = (wp_parse_url($wurl, PHP_URL_SCHEME) === null) ? 'http://' . $wurl : $wurl;
+            $wiki_urls = array($wurl, $wurl . '/api.php', $wurl . '/w/api.php');
 
-			if ( is_array( $response ) && ! is_wp_error( $response ) ) {
-				$wiki_data = json_decode( $response[ 'body' ], true );
-				if( ! empty( $wiki_data[ 'query' ][ 'general' ][ 'sitename' ] ) ) {
-					$result = array(
-						'code' => 1,
-						'url' => $wurl,
-						'name' => esc_html( $wiki_data['query']['general']['sitename'] )
-					);
-					echo wp_json_encode($result);
-					wp_die();
-				}
-			}
-		}
+            foreach ($wiki_urls as $wurl) {
+                $response = wp_remote_get($wurl . '?' . http_build_query($this->test_query_args));
+
+                if (is_array($response) && !is_wp_error($response)) {
+                    $wiki_data = json_decode($response['body'], true);
+                    if (!empty($wiki_data['query']['general']['sitename'])) {
+                        $result = array(
+                            'code' => 1,
+                            'url' => $wurl,
+                            'name' => esc_html($wiki_data['query']['general']['sitename'])
+                        );
+                        echo wp_json_encode($result);
+                        wp_die();
+                    }
+                }
+            }
+        } // end of nonce check
 
 		$result = array( 'code' => -1 );
 		echo wp_json_encode( $result );
@@ -194,6 +206,8 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         $this->info_query_args[ 'titles' ] = $title;
         $response = wp_remote_get( $wiki_url . '?' . http_build_query( $this->info_query_args ) );
 
+        $wiki_data = array();
+
         if ( is_array( $response ) && ! is_wp_error( $response ) ) {
             $wiki_data = json_decode( $response['body'], true );
             $wiki_pages = array_keys( $wiki_data[ 'query' ][ 'pages' ] );
@@ -203,14 +217,13 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         }
 
         $result = array(
-            'wiki-id' => -1,
+            'wiki-id' => $wiki_page_id,
             'wiki-title' => '',
             'wiki-url' => ''
         );
 
         if( $wiki_page_id > -1 ) {
             $result = array(
-                'wiki-id' => $wiki_page_id,
                 'wiki-title' => esc_html( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'title' ] ),
                 'wiki-url' => esc_url( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'fullurl' ] )
             );

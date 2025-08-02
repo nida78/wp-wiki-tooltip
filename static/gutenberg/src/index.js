@@ -21,18 +21,16 @@ for( let elem in wp_wiki_tooltip_mce.wiki_urls.data ) {
 
 const WikiTooltipEdit = ( props ) => {
 
-    const settings = {
-        name: WikiFormatName,
-        tagName: WikiFormatTag,
-        className: WikiFormatClass,
-    };
+    const { contentRef, isActive } = props;
 
-    const { contentRef, isActive, value } = props;
+    const getTag = ( current ) => {
+        return ( ( current !== undefined ) && ( current.tagName !== undefined ) ) ? current.tagName : 'UNDEF';
+    }
 
     const getAnchor = () => {
-        let newAnchor = useAnchor( { editableContentElement: contentRef.current, value: value, settings: settings } );
+        let newAnchor = useAnchor( { editableContentElement: contentRef.current, settings: WikiTooltipFormat } );
 
-        if( isActive && ! ( newAnchor instanceof HTMLUnknownElement )  ) {
+        if( isActive && ( 'WIKI' !== getTag( newAnchor ) )  ) {
             // try to get text selection
             const selection = document.defaultView.getSelection();
             newAnchor = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
@@ -158,21 +156,16 @@ const WikiTooltipEdit = ( props ) => {
                             />
                         </ToolbarGroup>
                     </BlockControls>
-                    <Popover
-                        headerTitle={ _x('WP Wiki Tooltip', 'editor popup', 'wp-wiki-tooltip' ) }
-                        className={ 'wiki-tooltip-data-popover' }
-                        anchor={ anchorRef }
-                        placement={ 'bottom-center' }
-                        noArrow={ false }
-                        offset={ 5 }
-                    >
-                        { ! ( anchorRef instanceof HTMLUnknownElement ) && (
-                            <>
-                                <p className={ 'wiki-tooltip-head' }>{ _x( 'New tooltip has been created. Click element again to modify its settings.', 'editor popup', 'wp-wiki-tooltip' ) }</p>
-                            </>
-                        ) }
-                        { ( anchorRef instanceof HTMLUnknownElement ) && (
-                            <>
+                    { ( 'WIKI' === getTag( anchorRef ) ) && (
+                        <>
+                            <Popover
+                                headerTitle={ _x('WP Wiki Tooltip', 'editor popup', 'wp-wiki-tooltip' ) }
+                                className={ 'wiki-tooltip-data-popover' }
+                                anchor={ anchorRef }
+                                placement={ 'bottom-center' }
+                                noArrow={ false }
+                                offset={ 5 }
+                            >
                                 <p className={ 'wiki-tooltip-head' }>{ _x( 'Change tooltip settings here. Changes are stored immediately.', 'editor popup', 'wp-wiki-tooltip' ) }</p>
                                 <TextControl
                                     label={ _x('Different Wiki page title', 'editor popup', 'wp-wiki-tooltip' ) }
@@ -211,16 +204,16 @@ const WikiTooltipEdit = ( props ) => {
                                     ] }
 
                                 />
-                            </>
-                        ) }
-                    </Popover>
+                            </Popover>
+                        </>
+                    ) }
                 </>
             ) }
         </>
     );
 };
 
-registerFormatType(
+let WikiTooltipFormat = registerFormatType(
     WikiFormatName,
     {
         attributes: {

@@ -1,5 +1,11 @@
 # Changelog of WP Wiki Tooltip
 
+## [2.1.0 - C5H11NO2S | Methionine]
+*Release Date - August 2nd, 2025*
+
+* security issue is fixed that made it possible for authenticated attackers to inject arbitrary web scripts in pages by plugins shortcode
+* several warnings of WPCS are fixed, too by adding as much input sanitization and output escaping as possible
+
 ## [2.0.2]
 *Release Date - February 1st, 2024*
 
@@ -164,6 +170,7 @@
 
 * Initial release
 
+[2.1.0 - C5H11NO2S | Methionine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.1.0
 [2.0.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.2
 [2.0.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.1
 [2.0.0 - C6H14N2O2 | Lysine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.0

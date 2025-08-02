@@ -14,16 +14,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = window["React"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -41,6 +31,16 @@ module.exports = window["wp"]["blockEditor"];
 /***/ ((module) => {
 
 module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["element"];
 
 /***/ }),
 
@@ -133,14 +133,14 @@ module.exports = window["wp"]["richText"];
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/rich-text */ "@wordpress/rich-text");
 /* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -179,23 +179,19 @@ for (let elem in wp_wiki_tooltip_mce.wiki_urls.data) {
   }
 }
 const WikiTooltipEdit = props => {
-  const settings = {
-    name: WikiFormatName,
-    tagName: WikiFormatTag,
-    className: WikiFormatClass
-  };
   const {
     contentRef,
-    isActive,
-    value
+    isActive
   } = props;
+  const getTag = current => {
+    return current !== undefined && current.tagName !== undefined ? current.tagName : 'UNDEF';
+  };
   const getAnchor = () => {
     let newAnchor = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.useAnchor)({
       editableContentElement: contentRef.current,
-      value: value,
-      settings: settings
+      settings: WikiTooltipFormat
     });
-    if (isActive && !(newAnchor instanceof HTMLUnknownElement)) {
+    if (isActive && 'WIKI' !== getTag(newAnchor)) {
       // try to get text selection
       const selection = document.defaultView.getSelection();
       newAnchor = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
@@ -277,47 +273,45 @@ const WikiTooltipEdit = props => {
       type: WikiFormatName
     }));
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !isActive && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !isActive && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
     icon: 'admin-comments',
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('add Wiki Tooltip', 'editor popup', 'wp-wiki-tooltip'),
     onClick: onClickToolbarButton,
     isActive: isActive
-  }))), isActive && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+  }))), isActive && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
     icon: 'welcome-comments',
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('remove Wiki Tooltip', 'editor popup', 'wp-wiki-tooltip'),
     onClick: onClickToolbarButton,
     isActive: isActive
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+  }))), 'WIKI' === getTag(anchorRef) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
     headerTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('WP Wiki Tooltip', 'editor popup', 'wp-wiki-tooltip'),
     className: 'wiki-tooltip-data-popover',
     anchor: anchorRef,
     placement: 'bottom-center',
     noArrow: false,
     offset: 5
-  }, !(anchorRef instanceof HTMLUnknownElement) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: 'wiki-tooltip-head'
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('New tooltip has been created. Click element again to modify its settings.', 'editor popup', 'wp-wiki-tooltip'))), anchorRef instanceof HTMLUnknownElement && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: 'wiki-tooltip-head'
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Change tooltip settings here. Changes are stored immediately.', 'editor popup', 'wp-wiki-tooltip')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Change tooltip settings here. Changes are stored immediately.', 'editor popup', 'wp-wiki-tooltip')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Different Wiki page title', 'editor popup', 'wp-wiki-tooltip'),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Enter the title of the requested Wiki page if it differs from the selected text.', 'editor popup', 'wp-wiki-tooltip'),
     className: 'wiki-tooltip-input-title',
     value: tooltipValue.title,
     onChange: onChangeTitle
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Section title', 'editor popup', 'wp-wiki-tooltip'),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Enter the title (anchor) of the requested section in Wiki page.', 'editor popup', 'wp-wiki-tooltip'),
     className: 'wiki-tooltip-input-section',
     value: tooltipValue.section,
     onChange: onChangeSection
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Wiki base', 'editor popup', 'wp-wiki-tooltip'),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Select one of the defined Wiki bases. Visit the settings page to create a new one.', 'editor popup', 'wp-wiki-tooltip'),
     className: 'wiki-tooltip-input-base',
     value: tooltipValue.base,
     onChange: onChangeBase,
     options: BaseList
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Show thumbnail', 'editor popup', 'wp-wiki-tooltip'),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__._x)('Show a thumbnail in the tooltip?', 'editor popup', 'wp-wiki-tooltip'),
     className: 'wiki-tooltip-input-thumbnail',
@@ -339,7 +333,7 @@ const WikiTooltipEdit = props => {
     }]
   })))));
 };
-(0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.registerFormatType)(WikiFormatName, {
+let WikiTooltipFormat = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.registerFormatType)(WikiFormatName, {
   attributes: {
     title: 'title',
     section: 'section',

@@ -35,7 +35,7 @@ function remove_wiki_url_row( RowId ) {
     }
 }
 
-function test_wiki_url_row( RowId ) {
+function test_wiki_url_row( RowId, Nonce ) {
 
     ActiveWikiRow[ 'ID'] = $wwtj( '#' + RowId );
     ActiveWikiRow[ 'txtSite' ] = $wwtj( '#txt-site-' + RowId );
@@ -44,6 +44,7 @@ function test_wiki_url_row( RowId ) {
 
     var request_data = {
         'action': 'test_wiki_url',
+        'nonce': Nonce,
         'wurl': $wwtj( ActiveWikiRow[ 'txtUrl' ] ).val()
     };
 

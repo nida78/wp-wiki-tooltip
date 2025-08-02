@@ -11,7 +11,7 @@
   "author": "Nico Danneberg",
   "license": "GPL-2.0",
   "devDependencies": {
-    "@wordpress/scripts": "^26.19.0"
+    "@wordpress/scripts": "^19.2.4"
   },
   "dependencies": {
     "@wordpress/block-editor": "^12.16.0",

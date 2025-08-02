@@ -64,24 +64,24 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
                         data-own_error_message="%s"
                         data-section_error_handling="%s"
                      ></div>',
-            admin_url( 'admin-ajax.php' ),
-			plugin_dir_url( __FILE__ ),
-			$this->options_design[ 'theme' ],
-			$this->options_design[ 'animation' ],
-			__( 'Click here to open Wiki page&hellip;', 'wp-wiki-tooltip' ),
-			( $this->options_thumb[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off',
-			$this->options_thumb[ 'thumb-width' ],
-            $this->options_thumb[ 'thumb-align' ],
-			$this->options_base[ 'trigger' ],
-            ( $this->options_base[ 'trigger' ] == 'hover' ) ? $this->options_base[ 'trigger-hover-action' ] : '',
-            $this->options_base[ 'a-target' ],
-			$this->options_base[ 'min-screen-width' ],
-			$this->options_error[ 'page-error-handling' ],
-			__( 'Error!', 'wp-wiki-tooltip' ),
-			__( 'Sorry, but we were not able to find this page :(', 'wp-wiki-tooltip' ),
-            ( $this->options_error[ 'page-error-handling' ] == 'show-own' ) ? $this->options_error[ 'own-error-title' ] : '',
-            ( $this->options_error[ 'page-error-handling' ] == 'show-own' ) ? $this->options_error[ 'own-error-message' ] : '',
-			$this->options_error[ 'section-error-handling' ]
+            esc_attr( admin_url( 'admin-ajax.php' ) ),
+			esc_attr( plugin_dir_url( __FILE__ ) ),
+			esc_attr( $this->options_design[ 'theme' ] ),
+            esc_attr($this->options_design[ 'animation' ] ),
+            esc_attr__( 'Click here to open Wiki page&hellip;', 'wp-wiki-tooltip' ),
+            esc_attr( ( $this->options_thumb[ 'thumb-enable' ] == 'on' ) ? 'on' : 'off' ),
+            esc_attr( $this->options_thumb[ 'thumb-width' ] ),
+            esc_attr( $this->options_thumb[ 'thumb-align' ] ),
+            esc_attr( $this->options_base[ 'trigger' ] ),
+            esc_attr( ( $this->options_base[ 'trigger' ] == 'hover' ) ? $this->options_base[ 'trigger-hover-action' ] : '' ),
+            esc_attr( $this->options_base[ 'a-target' ] ),
+            esc_attr( $this->options_base[ 'min-screen-width' ] ),
+            esc_attr( $this->options_error[ 'page-error-handling' ] ),
+            esc_attr__( 'Error!', 'wp-wiki-tooltip' ),
+            esc_attr__( 'Sorry, but we were not able to find this page :(', 'wp-wiki-tooltip' ),
+            esc_attr( ( $this->options_error[ 'page-error-handling' ] == 'show-own' ) ? $this->options_error[ 'own-error-title' ] : '' ),
+            esc_attr( ( $this->options_error[ 'page-error-handling' ] == 'show-own' ) ? $this->options_error[ 'own-error-message' ] : '' ),
+            esc_attr( $this->options_error[ 'section-error-handling' ] )
         );
 	}
 
@@ -92,6 +92,12 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 			'section' => '',
 			'thumbnail' => 'default'
 		), $atts );
+
+        // sanitize all incoming parameters
+        $params[ 'base' ] = sanitize_text_field( $params[ 'base' ] );
+        $params[ 'title' ] = sanitize_text_field( $params[ 'title' ] );
+        $params[ 'section' ] = sanitize_text_field( $params[ 'section' ] );
+        $params[ 'thumbnail' ] = sanitize_text_field( $params[ 'thumbnail' ] );
 
 		$title = ( $params[ 'title' ] == '' ) ? $content : $params[ 'title' ];
 
@@ -126,14 +132,15 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 
         // $output  = 'data-wiki_num="' . $num . '" data-wiki_id="' . $trans_wiki_data[ 'wiki-id' ] . '" data-wiki_title="' . $trans_wiki_data[ 'wiki-title' ] . '" data-wiki_section="' . $params[ 'section' ] . '" data-wiki_base_url="' . $trans_wiki_data[ 'wiki-base-url' ] . '" data-wiki_url="' . $trans_wiki_data[ 'wiki-url' ] . '" data-wiki_thumbnail="' . $params[ 'thumbnail' ] . '"';
         $output  = sprintf(
-            'data-wiki_num="%1$s" data-wiki_id="%2$s" data-wiki_title="%3$s" data-wiki_section="%4$s" data-wiki_base_url="%5$s" data-wiki_url="%6$s" data-wiki_thumbnail="%7$s"',
+            'data-wiki_num="%1$s" data-wiki_id="%2$s" data-wiki_title="%3$s" data-wiki_section="%4$s" data-wiki_base_url="%5$s" data-wiki_url="%6$s" data-wiki_thumbnail="%7$s" data-wiki_nonce="%8$s"',
             $num,
-            $trans_wiki_data[ 'wiki-id' ],
-            $trans_wiki_data[ 'wiki-title' ],
-            $params[ 'section' ],
-            $trans_wiki_data[ 'wiki-base-url' ],
-            $trans_wiki_data[ 'wiki-url' ],
-            $params[ 'thumbnail' ]
+            esc_attr( $trans_wiki_data[ 'wiki-id' ] ),
+            esc_attr( $trans_wiki_data[ 'wiki-title' ] ),
+            esc_attr( $params[ 'section' ] ),
+            esc_attr( $trans_wiki_data[ 'wiki-base-url' ] ),
+            esc_attr( $trans_wiki_data[ 'wiki-url' ] ),
+            esc_attr( $params[ 'thumbnail' ] ),
+            esc_attr( wp_create_nonce( 'wp-wiki-tooltip-nonce-' . $trans_wiki_data[ 'wiki-id' ] ) )
         );
 
 		$relno = ( $this->options_base[ 'a-target' ] == '_blank' ) ? ' rel="noopener noreferrer"' : '';
@@ -143,11 +150,10 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
         } else {
             // $output = '<span id="wiki-tooltip-' . $num . '" data-tooltip-content="#wiki-tooltip-box-' . $num . '" ' . $output . '><a class="wiki-tooltip" href="' . $trans_wiki_data['wiki-url'] . ( ( $params[ 'section' ] != '' ) ? ( '#' . $params[ 'section' ] ) : '' ) . '" target="' . $this->options_base[ 'a-target' ] . '"' . $relno . ' onclick="return isClickEnabled( \'' . $this->options_base[ 'trigger' ] . '\', \'' . $this->options_base[ 'trigger-hover-action' ] . '\' );">' . $content . '</a></span>';
             $output = sprintf(
-                '<span id="wiki-tooltip-%1$s" data-tooltip-content="#wiki-tooltip-box-%1$s" %2$s><a class="wiki-tooltip" href="%3$s%4$s" target="%5$s"%6$s onclick="return isClickEnabled( \'%7$s\', \'%8$s\' );">%9$s</a></span>',
+                '<span id="wiki-tooltip-%1$s" data-tooltip-content="#wiki-tooltip-box-%1$s" %2$s><a class="wiki-tooltip" href="%3$s" target="%4$s"%5$s onclick="return isClickEnabled( \'%6$s\', \'%7$s\' );">%8$s</a></span>',
                 $num,
                 $output,
-                $trans_wiki_data['wiki-url'],
-                ( ( '' != $params[ 'section' ] ) ? ( '#' . $params[ 'section' ] ) : '' ),
+                esc_url( $trans_wiki_data['wiki-url'] . ( ( '' != $params[ 'section' ] ) ? ( '#' . $params[ 'section' ] ) : '' ) ),
                 $this->options_base[ 'a-target' ],
                 $relno,
                 $this->options_base[ 'trigger' ],

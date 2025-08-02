@@ -42,7 +42,8 @@ $wwtj( document ).ready(
                     $wwtj( this ).attr( 'data-wiki_section' ),
                     $wwtj( this ).attr( 'data-wiki_base_url' ),
                     $wwtj( this ).attr( 'data-wiki_url' ),
-                    $wwtj( this ).attr( 'data-wiki_thumbnail' )
+                    $wwtj( this ).attr( 'data-wiki_thumbnail' ),
+                    $wwtj( this ).attr( 'data-wiki_nonce' )
                 );
             }
         );
@@ -61,8 +62,8 @@ function isClickEnabled( trig, trighovact ) {
     return trig === 'hover' && trighovact === 'open';
 }
 
-function add_wiki_box( id, wid, title, section, wurl, purl, thumb ) {
-    $wwtj( '#wiki-container' ).append( '<div id="wiki-tooltip-box-' + id + '" class="wiki-tooltip-box" data-wiki_id="' + wid + '" title="' + title + '"></div>' );
+function add_wiki_box( id, wid, title, section, wurl, purl, thumb, nonce ) {
+    $wwtj( '#wiki-container' ).append( '<div id="wiki-tooltip-box-' + id + '" class="wiki-tooltip-box" data-wiki_id="' + wid + '" title="' + title + '" nonce="' + nonce + '"></div>' );
 
     let open_options, close_options;
 
@@ -122,7 +123,8 @@ function add_wiki_box( id, wid, title, section, wurl, purl, thumb ) {
                     'tenable': (thumb === 'default') ? wp_wiki_tooltip.thumb_enable : thumb,
                     'twidth': wp_wiki_tooltip.thumb_width,
                     'errtit': (wp_wiki_tooltip.error_handling === 'show-own') ? wp_wiki_tooltip.own_error_title : wp_wiki_tooltip.default_error_title,
-                    'errmsg': (wp_wiki_tooltip.error_handling === 'show-own') ? wp_wiki_tooltip.own_error_message : wp_wiki_tooltip.default_error_message
+                    'errmsg': (wp_wiki_tooltip.error_handling === 'show-own') ? wp_wiki_tooltip.own_error_message : wp_wiki_tooltip.default_error_message,
+                    'nonce': nonce
                 };
 
                 $wwtj.post( wp_wiki_tooltip.wp_ajax_url, request_data, function( response_data ) {
@@ -149,13 +151,13 @@ function write_tooltip_message( instance, data ) {
 function create_tooltip_message( type, title, section, message, url, thumb, w, h ) {
     let tooltip_html = '<div class="wiki-tooltip-balloon"><div class="head">' + title;
     tooltip_html += ( section !== '' ) ? ( ' &raquo; ' + section ) : '';
-    tooltip_html += '</div><div class="body"><p>';
+    tooltip_html += '</div><div class="body">';
 
     if( type === 'init' ) {
-        tooltip_html += '<img alt="" src="' + wp_wiki_tooltip.wiki_plugin_url + 'static/images/loadingAnimationBar.gif" />';
+        tooltip_html += '<p class="loadingAnimation"><img alt="loading animation" src="' + wp_wiki_tooltip.wiki_plugin_url + 'static/images/loadingAnimationBar.gif" />';
     } else {
         if( ( type !== 'err' ) && ( thumb !== '-1' ) ) {
-            tooltip_html += '<img alt="" src="' + thumb + '" style="float:' + wp_wiki_tooltip.thumb_align + ';" class="thumb" width="' + w + '" height="' + h + '" />';
+            tooltip_html += '<p><img alt="" src="' + thumb + '" style="float:' + wp_wiki_tooltip.thumb_align + ';" class="thumb" width="' + w + '" height="' + h + '" />';
         }
         tooltip_html += message;
     }

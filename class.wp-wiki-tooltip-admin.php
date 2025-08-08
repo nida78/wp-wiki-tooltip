@@ -145,6 +145,8 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
         $asset['dependencies'][] = 'wp-wiki-tooltip-mce-lang-js';
         wp_enqueue_script('wp-wiki-tooltip-gutenberg-script', plugins_url('static/gutenberg/build/index.js', __FILE__), $asset['dependencies'], $asset['version'], false );
         wp_enqueue_style('wp-wiki-tooltip-gutenberg-style', plugins_url('static/gutenberg/build/index.css', __FILE__), '', $asset['version']);
+        // need to load translation for JS script explicitly
+        wp_set_script_translations( 'wp-wiki-tooltip-gutenberg-script', 'wp-wiki-tooltip', plugin_dir_path( __FILE__ ) . 'languages' );
     }
 
     public function add_action_links( $links ) {

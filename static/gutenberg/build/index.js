@@ -184,7 +184,15 @@ const WikiTooltipEdit = props => {
     isActive
   } = props;
   const getTag = current => {
-    return current !== undefined && current.tagName !== undefined ? current.tagName : 'UNDEF';
+    let result = 'UNDEF';
+    if (current != null && 'tagName' in current) {
+      try {
+        result = current.tagName;
+      } catch (e) {
+        // nothing to do in case of an error
+      }
+    }
+    return result;
   };
   const getAnchor = () => {
     let newAnchor = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.useAnchor)({

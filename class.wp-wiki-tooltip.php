@@ -121,12 +121,11 @@ class WP_Wiki_Tooltip extends WP_Wiki_Tooltip_Base {
 		$num = $this->shortcode_count++;
 
 		$trans_wiki_key = urlencode( $wiki_base_id . "-" . $wiki_url . '-' . $title . '-' . $this->version );
-		if( ( $trans_wiki_data = get_transient( $trans_wiki_key ) ) === false ) {
 
+		if( ( $trans_wiki_data = get_transient( $trans_wiki_key ) ) === false ) {
 			$comm = new WP_Wiki_Tooltip_Comm();
 			$trans_wiki_data = $comm->get_wiki_page_info( $title, $wiki_url );
 			$trans_wiki_data[ 'wiki-base-url' ] = $wiki_url;
-
 			set_transient( $trans_wiki_key, $trans_wiki_data, WEEK_IN_SECONDS );
 		}
 

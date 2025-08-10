@@ -21,6 +21,16 @@ function load_wiki_translation() {
 }
 add_action( 'plugins_loaded', 'load_wiki_translation' );
 
+function save_wiki_standard_options() {
+    WP_Wiki_Tooltip_Base::save_standard_options();
+}
+register_activation_hook( __FILE__, 'save_wiki_standard_options' );
+
+function delete_all_wiki_options() {
+    WP_Wiki_Tooltip_Base::delete_all_options();
+}
+register_uninstall_hook( __FILE__, 'delete_all_wiki_options' );
+
 if( is_admin() ) {
 	/*** backend usage ***/
 	new WP_Wiki_Tooltip_Admin( plugin_basename( __FILE__ ) );

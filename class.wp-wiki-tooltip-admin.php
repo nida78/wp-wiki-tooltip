@@ -90,22 +90,11 @@ class WP_Wiki_Tooltip_Admin extends WP_Wiki_Tooltip_Base {
           || ( isset( $_REQUEST[ 'wp-wiki-tooltip-settings-thumb' ][ 'nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST[ 'wp-wiki-tooltip-settings-thumb' ][ 'nonce' ] ) ), 'wp-wiki-tooltip-settings-thumb-submit' ) )) {
 
             if ( isset( $_REQUEST['btn_reset'] ) && ( $_REQUEST['btn_reset'] == __('Reset', 'wp-wiki-tooltip')  ) ) {
-                $result = 0;
+                // first delete all existing options
+                $result = WP_Wiki_Tooltip_Base::delete_all_options();
 
-                if (delete_option('wp-wiki-tooltip-settings')) // the single-admin-page option has to be deleted anyway
-                    $result++;
-
-                if (delete_option('wp-wiki-tooltip-settings-base'))
-                    $result++;
-
-                if (delete_option('wp-wiki-tooltip-settings-error'))
-                    $result++;
-
-                if (delete_option('wp-wiki-tooltip-settings-design'))
-                    $result++;
-
-                if (delete_option('wp-wiki-tooltip-settings-thumb'))
-                    $result++;
+                // restore standard settings
+                WP_Wiki_Tooltip_Base::save_standard_options();
 
                 $redir_url = add_query_arg(array(
                     'page' => 'wp-wiki-tooltip-settings',

@@ -223,10 +223,8 @@ class WP_Wiki_Tooltip_Comm extends WP_Wiki_Tooltip_Base {
         );
 
         if( $wiki_page_id > -1 ) {
-            $result = array(
-                'wiki-title' => esc_html( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'title' ] ),
-                'wiki-url' => esc_url( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'fullurl' ] )
-            );
+            $result[ 'wiki-title' ] = esc_html( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'title' ] );
+            $result[ 'wiki-url' ] = esc_url( $wiki_data[ 'query' ][ 'pages' ][ $wiki_page_id ][ 'fullurl' ] );
         }
 
         return $result;

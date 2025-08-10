@@ -1,5 +1,7 @@
 <?php
 
+global $wp_wiki_tooltip_default_options;
+
 $wp_wiki_tooltip_default_options = [
 
     'base' => [

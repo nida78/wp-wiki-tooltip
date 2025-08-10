@@ -4,7 +4,7 @@
  */
 class WP_Wiki_Tooltip_Base {
 
-    protected $version = '2.1.0';
+    protected $version = '2.1.1';
 
     protected $tooltipster_version = '4.2.8';
 
@@ -69,4 +69,34 @@ class WP_Wiki_Tooltip_Base {
             array( 'thumb-enable', 'thumb-align', 'thumb-width', 'thumb-style' )
         );
     }
+
+    public static function save_standard_options() {
+        global $wp_wiki_tooltip_default_options;
+        update_option( 'wp-wiki-tooltip-settings-base', $wp_wiki_tooltip_default_options[ 'base'] );
+        update_option( 'wp-wiki-tooltip-settings-error', $wp_wiki_tooltip_default_options[ 'error'] );
+        update_option( 'wp-wiki-tooltip-settings-design', $wp_wiki_tooltip_default_options[ 'design'] );
+        update_option( 'wp-wiki-tooltip-settings-thumb', $wp_wiki_tooltip_default_options[ 'thumb'] );
+    }
+
+    public static function delete_all_options() {
+        $result = 0;
+
+        if (delete_option('wp-wiki-tooltip-settings')) // the single-admin-page option has to be deleted anyway
+            $result++;
+
+        if (delete_option('wp-wiki-tooltip-settings-base'))
+            $result++;
+
+        if (delete_option('wp-wiki-tooltip-settings-error'))
+            $result++;
+
+        if (delete_option('wp-wiki-tooltip-settings-design'))
+            $result++;
+
+        if (delete_option('wp-wiki-tooltip-settings-thumb'))
+            $result++;
+
+        return $result;
+    }
+
 }

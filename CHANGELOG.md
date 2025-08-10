@@ -1,5 +1,12 @@
 # Changelog of WP Wiki Tooltip
 
+## [2.1.1]
+*Release Date - August 10th, 2025*
+
+* bug-fix in JS when adding the first wiki-tag
+* bug-fix to load translation for JS script explicitly
+* bug-fix to use plugin directly after activation without storing options manually
+
 ## [2.1.0 - C5H11NO2S | Methionine]
 *Release Date - August 2nd, 2025*
 
@@ -170,6 +177,7 @@
 
 * Initial release
 
+[2.1.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.1.1
 [2.1.0 - C5H11NO2S | Methionine]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.1.0
 [2.0.2]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.2
 [2.0.1]: https://github.com/nida78/wp-wiki-tooltip/releases/tag/2.0.1
